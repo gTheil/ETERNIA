@@ -14,8 +14,6 @@ public class NPC : Actor
     void FixedUpdate()
     {
         // NPC movement test
-        moveX = 1;
-        moveY = -1;
 
         base.FixedUpdate();
     }
