@@ -11,20 +11,25 @@ public class Actor : MonoBehaviour
     public float moveX; // a direção no eixo X que o ator está tentando se mover (-1 = esquerda, 1 = direita)
     public float moveY; // a direção no eixo Y que o ator está tentando se mover (-1 = baixo, 1 = cima)
     protected LayerMask collisionMask; // a lista de layers com os quais o ator deve colidir
+    protected Animator anim;
 
     public float speed; // a velocidade na qual o ator se move
     
-    public virtual void Start()
+    protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         collisionMask = LayerMask.GetMask("Actor", "Solid"); // determina que o ator irá colidir com outros atores e com elementos sólidos do cenário
+        anim = GetComponent<Animator>();
     }
 
-    public virtual void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         SetMoveDelta();
-        if (moveDelta.x != 0 || moveDelta.y != 0) // caso haja intenção de movimento, chama a função que move o ator
+
+        // caso haja intenção de movimento, chama a função que move o ator
+        if (moveDelta.x != 0 || moveDelta.y != 0) {
             Movement();
+        } 
     }
     
     protected void SetMoveDelta()
