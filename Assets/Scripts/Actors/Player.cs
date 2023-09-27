@@ -20,6 +20,35 @@ public class Player : CombatActor
         meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
     }
 
+    // Update is called once per frame
+    protected override void FixedUpdate()
+    {
+        // o jogador não pode alterar sua direção de movimento durante a execução do dash
+        if (playerState == "idle") {
+            moveX = Input.GetAxisRaw("Horizontal");
+            moveY = Input.GetAxisRaw("Vertical");
+        }
+    
+        base.FixedUpdate();
+
+        if (anim != null) {
+            if (playerState != "dash" && (moveX != 0 || moveY != 0)) {
+                anim.SetFloat("x", moveX);
+                anim.SetFloat("y", moveY);
+                ActiveAnimatorLayer("Walk");
+            } else {
+                switch (playerState) {
+                    case "idle":
+                        ActiveAnimatorLayer("Idle");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        
+    }
+
     private void Update() {
         switch (playerState) {
             case "dash":
@@ -49,35 +78,6 @@ public class Player : CombatActor
 
         if (actionAllowed)
             TryBufferedAction();
-    }
-
-    // Update is called once per frame
-    protected override void FixedUpdate()
-    {
-        // o jogador não pode alterar sua direção de movimento durante a execução do dash
-        if (playerState == "idle") {
-            moveX = Input.GetAxisRaw("Horizontal");
-            moveY = Input.GetAxisRaw("Vertical");
-        }
-    
-        base.FixedUpdate();
-
-        if (anim != null) {
-            if (playerState != "dash" && (moveX != 0 || moveY != 0)) {
-                anim.SetFloat("x", moveX);
-                anim.SetFloat("y", moveY);
-                ActiveAnimatorLayer("Walk");
-            } else {
-                switch (playerState) {
-                    case "idle":
-                        ActiveAnimatorLayer("Idle");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        
     }
 
     private void CheckInput() {
