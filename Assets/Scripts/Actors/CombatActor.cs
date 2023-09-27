@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class CombatActor : Actor
 {
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        base.Start();
-    }
+    public Transform projectilePrefab;
 
-    protected virtual void Update() {
-        
-    }
-
-    // Update is called once per frame
-    protected virtual void FixedUpdate()
-    {
-        base.FixedUpdate();
+    public void SpawnProjectile(Transform projectileToSpawn) {
+        Transform projectile = Instantiate(projectileToSpawn, transform.position, Quaternion.identity);
+        Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), boxCollider);
+        projectile.GetComponent<Projectile>().moveX = anim.GetFloat("x");
+        projectile.GetComponent<Projectile>().moveY = anim.GetFloat("y");
     }
 }

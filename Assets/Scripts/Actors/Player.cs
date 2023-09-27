@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : CombatActor
 {
     public string playerState;
+    public GameObject meleeAttack;
 
-    //private Animator anim;
-    private Animator meleeAttackAnim;
+    private Collider2D meleeAttackCollider;
+    private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
+    private bool actionAllowed; //set to true whenever we want to process actions from the input buffer, set to false when an action has to wait in the buffer
 
     // Start is called before the first frame update
     protected override void Start()
@@ -15,36 +17,45 @@ public class Player : CombatActor
         base.Start();
 
         playerState = "idle"; // inicializa o jogador no estado "idle"
-        //anim = GetComponent<Animator>();
-        meleeAttackAnim = transform.GetChild(0).GetComponent<Animator>();
+        meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
     }
 
-    protected override void Update() {
-        base.Update();
+    private void Update() {
+        switch (playerState) {
+            case "dash":
+                currentSpeed = baseSpeed * 2;
+                break;
+            case "meleeAttack":
+                currentSpeed = baseSpeed / 2;
+                break;
+            case "rangedAttack":
+                currentSpeed = 0;
+                break;
+            default:
+                currentSpeed = baseSpeed;
+                break;
+        }
 
-        // durante o estado de dash, a velocidade do jogador e a lista de layers com os quais ele colide são alteradas
         if (playerState == "dash") {
             collisionMask = LayerMask.GetMask("Solid");
-            speed = 10;
         } else {
             collisionMask = LayerMask.GetMask("Actor", "Solid");
-            speed = 5;
         }
 
-        // caso o jogador aperte a tecla de dash enquanto se movimenta e não está já executando um dash, ele entrará no estado de dash
-        if (playerState == "idle" ) {
-            if (Input.GetKeyDown(KeyCode.LeftShift) && (moveX != 0 || moveY != 0))
-                Dash();
-            if (Input.GetKeyDown(KeyCode.Z))
-                MeleeAttack();
-        }
+        CheckInput();
+
+        if (playerState == "idle")
+            actionAllowed = true;
+
+        if (actionAllowed)
+            TryBufferedAction();
     }
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         // o jogador não pode alterar sua direção de movimento durante a execução do dash
-        if (playerState != "dash") {
+        if (playerState == "idle") {
             moveX = Input.GetAxisRaw("Horizontal");
             moveY = Input.GetAxisRaw("Vertical");
         }
@@ -69,6 +80,46 @@ public class Player : CombatActor
         
     }
 
+    private void CheckInput() {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && (moveX != 0 || moveY != 0))
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Dash, Time.time));
+        if (Input.GetKeyDown(KeyCode.Z))
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.MeleeAttack, Time.time));
+        if (Input.GetKeyDown(KeyCode.X))
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));    
+    }
+
+    private void TryBufferedAction() {
+        if (inputBuffer.Count > 0) {
+            foreach (ActionItem ai in inputBuffer.ToArray()) {  //Using ToArray so we iterate a copy of the list rather than the actual list, since we will be modifying the list in the loop
+                inputBuffer.Remove(ai);  //Remove it from the buffer
+                if (ai.CheckIfValid()) {
+                    //Means the action is still within the allowed time, so we do the action and then break from processing more of the buffer
+                    DoAction(ai);
+                    break;  //We probably only want to do 1 action at a time, so we just break here and don't process the rest of the inputBuffer
+                }
+            }
+        }
+    }
+
+    private void DoAction(ActionItem ai) {
+        switch (ai.action) {
+            case ActionItem.InputAction.Dash:
+                Dash();
+                break;
+            case ActionItem.InputAction.MeleeAttack:
+                MeleeAttack();
+                break;
+            case ActionItem.InputAction.RangedAttack:
+                RangedAttack();
+                break;
+            default:
+                break;
+        }
+
+        actionAllowed = false;
+    }
+
     // função utilizada para alterar o estado do player
     public void SetPlayerState(string state) {
         playerState = state;
@@ -79,9 +130,12 @@ public class Player : CombatActor
     }
 
     private void MeleeAttack() {
-        meleeAttackAnim.SetTrigger("meleeAttackSide");
-        moveX = 0;
-        moveY = 0;
+        anim.SetTrigger("meleeAttack");
+    }
+
+    private void RangedAttack() {
+        anim.SetTrigger("rangedAttack");
+        SpawnProjectile(projectilePrefab);
     }
 
     public void ActiveAnimatorLayer(string layerName) {
