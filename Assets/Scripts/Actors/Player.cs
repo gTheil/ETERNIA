@@ -6,6 +6,9 @@ public class Player : CombatActor
 {
     public string playerState;
     public GameObject meleeAttack;
+    public AudioSource meleeAttackSound;
+    public AudioSource rangedAttackSound;
+    public AudioSource dashSound;
 
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
@@ -127,15 +130,18 @@ public class Player : CombatActor
 
     private void Dash() {
         anim.SetTrigger("dash");
+        dashSound.Play();
     }
 
     private void MeleeAttack() {
         anim.SetTrigger("meleeAttack");
+        meleeAttackSound.Play();
     }
 
     private void RangedAttack() {
         anim.SetTrigger("rangedAttack");
         SpawnProjectile(projectilePrefab);
+        rangedAttackSound.Play();
     }
 
     public void ActiveAnimatorLayer(string layerName) {

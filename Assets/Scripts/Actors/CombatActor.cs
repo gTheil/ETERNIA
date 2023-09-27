@@ -9,6 +9,7 @@ public class CombatActor : Actor
     public float pushRecoverySpeed = 0.2f;
 
     public Transform projectilePrefab;
+    public AudioSource damageSound;
 
     protected float immuneTime = 0.5f;
     protected float lastImmune;
@@ -19,7 +20,6 @@ public class CombatActor : Actor
         base.FixedUpdate();
 
         pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
-        Debug.Log(moveDelta);
     }
 
     public void SpawnProjectile(Transform projectileToSpawn) {
@@ -40,6 +40,7 @@ public class CombatActor : Actor
             hitPoint -= dmg.damageAmount;
             pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
+            damageSound.Play();
             GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
 
             if (hitPoint <= 0) {

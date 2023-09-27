@@ -6,6 +6,7 @@ public class Attack : MonoBehaviour
 {
     public int attackDamage;
     public float attackPush;
+    public AudioSource attackHitSound;
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "CombatActor") {
@@ -16,6 +17,7 @@ public class Attack : MonoBehaviour
             };
 
             col.SendMessage("TakeDamage", dmg);
+            attackHitSound.Play();
         }
     }
 }

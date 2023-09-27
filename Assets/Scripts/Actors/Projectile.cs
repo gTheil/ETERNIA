@@ -20,7 +20,9 @@ public class Projectile : Actor
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Actor")) {
             Debug.Log("Hit " + col.gameObject.name);
-            Destroy(gameObject);
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            Destroy(gameObject, 1f);
         } else if (col.gameObject.layer == LayerMask.NameToLayer("Solid")) {
             Debug.Log("Hit wall");
             Destroy(gameObject);
