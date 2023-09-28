@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Player : CombatActor
 {
-    public string playerState;
+    public float blockPoint;
+    public float maxBlockPoint;
+    public int blockFactor;
+    public int blockPushResistance;
+    public float blockRecoveryCooldown;
+    public float lastBlock;
+    public float blockRecoverySpeed;
+    public float blockRecoverySpeedBreakOffset;
+
     public GameObject meleeAttack;
     public AudioSource meleeAttackSound;
     public AudioSource rangedAttackSound;
@@ -13,21 +21,26 @@ public class Player : CombatActor
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
     private bool actionAllowed; //set to true whenever we want to process actions from the input buffer, set to false when an action has to wait in the buffer
+    private float blockBreakOffset;
+    private bool blockBroken;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
 
-        playerState = "idle"; // inicializa o jogador no estado "idle"
+        actorState = "idle"; // inicializa o jogador no estado "idle"
+        lastState = "idle";
         meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
+
+        GameManager.instance.UpdateHealthBar(hitPoint, maxHitPoint);
     }
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         // o jogador não pode alterar sua direção de movimento durante a execução do dash
-        if (playerState == "idle") {
+        if (actorState == "idle" || actorState == "block") {
             moveX = Input.GetAxisRaw("Horizontal");
             moveY = Input.GetAxisRaw("Vertical");
         }
@@ -35,14 +48,17 @@ public class Player : CombatActor
         base.FixedUpdate();
 
         if (anim != null) {
-            if (playerState != "dash" && (moveX != 0 || moveY != 0)) {
+            if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
                 anim.SetFloat("x", moveX);
                 anim.SetFloat("y", moveY);
                 ActiveAnimatorLayer("Walk");
             } else {
-                switch (playerState) {
+                switch (actorState) {
                     case "idle":
                         ActiveAnimatorLayer("Idle");
+                        break;
+                    case "block":
+                        ActiveAnimatorLayer("Block");
                         break;
                     default:
                         break;
@@ -53,7 +69,7 @@ public class Player : CombatActor
     }
 
     private void Update() {
-        switch (playerState) {
+        switch (actorState) {
             case "dash":
                 currentSpeed = baseSpeed * 2;
                 break;
@@ -61,14 +77,14 @@ public class Player : CombatActor
                 currentSpeed = baseSpeed / 2;
                 break;
             case "rangedAttack":
-                currentSpeed = 0;
+                currentSpeed = baseSpeed / 2;
                 break;
             default:
                 currentSpeed = baseSpeed;
                 break;
         }
 
-        if (playerState == "dash") {
+        if (actorState == "dash") {
             collisionMask = LayerMask.GetMask("Solid");
         } else {
             collisionMask = LayerMask.GetMask("Actor", "Solid");
@@ -76,11 +92,22 @@ public class Player : CombatActor
 
         CheckInput();
 
-        if (playerState == "idle")
+        if (actorState == "idle" || actorState == "block")
             actionAllowed = true;
 
         if (actionAllowed)
             TryBufferedAction();
+
+        GameManager.instance.UpdateBlockBar(blockPoint, maxBlockPoint);
+
+        if (blockPoint < maxBlockPoint && Time.time - lastBlock > blockRecoveryCooldown) {
+            blockPoint += (blockRecoverySpeed - blockBreakOffset) * Time.deltaTime;
+            if (blockPoint >= maxBlockPoint) {
+                blockPoint = maxBlockPoint;
+                blockBreakOffset = 0f;
+                blockBroken = false;
+            }
+        }
     }
 
     private void CheckInput() {
@@ -89,7 +116,9 @@ public class Player : CombatActor
         if (Input.GetKeyDown(KeyCode.Z))
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.MeleeAttack, Time.time));
         if (Input.GetKeyDown(KeyCode.X))
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));    
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));
+        if (Input.GetKeyDown(KeyCode.C) && !blockBroken)
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));    
     }
 
     private void TryBufferedAction() {
@@ -116,16 +145,14 @@ public class Player : CombatActor
             case ActionItem.InputAction.RangedAttack:
                 RangedAttack();
                 break;
+            case ActionItem.InputAction.Block:
+                ToggleBlock();
+                break;
             default:
                 break;
         }
 
         actionAllowed = false;
-    }
-
-    // função utilizada para alterar o estado do player
-    public void SetPlayerState(string state) {
-        playerState = state;
     }
 
     private void Dash() {
@@ -142,6 +169,63 @@ public class Player : CombatActor
         anim.SetTrigger("rangedAttack");
         SpawnProjectile(projectilePrefab);
         rangedAttackSound.Play();
+    }
+
+    private void ToggleBlock() {
+        if (actorState == "idle") {
+            actorState = "block";
+            lastState = "block";
+        } else {
+            actorState = "idle";
+            lastState = "idle";
+        }
+    }
+
+    protected override void TakeDamage(Damage dmg) {
+        switch (actorState) {
+            case "dash":
+                GameManager.instance.UpdateDebugUI("dodge");
+                break;
+            case "block":
+                lastBlock = Time.time;
+                GameManager.instance.UpdateDebugUI("block");
+                int blockToHitPoint = dmg.damageAmount - blockFactor;
+                if (blockToHitPoint < 1)
+                    blockToHitPoint = 1;
+                blockPoint -= blockToHitPoint;
+                pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+
+                if (blockPoint <= 0) {
+                    blockPoint = 0;
+                    BlockBreak();
+                }
+
+                break;
+            default:
+                if (Time.time - lastImmune > immuneTime) {
+                    lastImmune = Time.time;
+                    hitPoint -= dmg.damageAmount;
+                    pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+
+                    damageSound.Play();
+                    GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                    GameManager.instance.UpdateDebugUI("damage");
+                    GameManager.instance.UpdateHealthBar(hitPoint, maxHitPoint);
+
+                    if (hitPoint <= 0) {
+                        hitPoint = 0;
+                        Death();
+                    }
+                
+                }
+                break;
+        } 
+    }
+
+    protected virtual void BlockBreak() {
+        blockBroken = true;
+        blockBreakOffset = blockRecoverySpeedBreakOffset;
+        ToggleBlock();
     }
 
     public void ActiveAnimatorLayer(string layerName) {

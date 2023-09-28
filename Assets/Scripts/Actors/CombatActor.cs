@@ -13,6 +13,8 @@ public class CombatActor : Actor
 
     protected float immuneTime = 0.5f;
     protected float lastImmune;
+    public string actorState;
+    public string lastState;
 
     protected Vector3 pushDirection;
 
@@ -20,6 +22,11 @@ public class CombatActor : Actor
         base.FixedUpdate();
 
         pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
+    }
+
+    // função utilizada para alterar o estado do player
+    public void SetActorState(string state) {
+        actorState = state;
     }
 
     public void SpawnProjectile(Transform projectileToSpawn) {
@@ -42,11 +49,13 @@ public class CombatActor : Actor
 
             damageSound.Play();
             GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+            GameManager.instance.UpdateDebugUI("hit");
 
             if (hitPoint <= 0) {
                 hitPoint = 0;
                 Death();
             }
+                
         }
     }
 

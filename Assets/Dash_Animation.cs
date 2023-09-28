@@ -8,7 +8,7 @@ public class Dash_Animation : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Player player = animator.GetComponent<Player>();
-        player.SetPlayerState("dash");
+        player.SetActorState("dash");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,7 +21,7 @@ public class Dash_Animation : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Player player = animator.GetComponent<Player>();
-        player.SetPlayerState("idle");
+        player.SetActorState(player.lastState);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
