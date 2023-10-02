@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatActor : Actor
 {
     public int hitPoint;
-    public int maxHitPoint;
+    public int hitPointMax;
     public float pushRecoverySpeed = 0.2f;
 
     public Transform projectilePrefab;
@@ -17,6 +17,13 @@ public class CombatActor : Actor
     public string lastState;
 
     protected Vector3 pushDirection;
+
+    protected override void Start() {
+        base.Start();
+
+        actorState = "idle"; // inicializa o jogador no estado "idle"
+        lastState = "idle";
+    }
 
     protected override void FixedUpdate() {
         base.FixedUpdate();

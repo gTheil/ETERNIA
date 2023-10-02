@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : CombatActor
 {
     public float blockPoint;
-    public float maxBlockPoint;
+    public float blockPointMax;
     public int blockFactor;
     public int blockPushResistance;
     public float blockRecoveryCooldown;
     public float lastBlock;
     public float blockRecoverySpeed;
     public float blockRecoverySpeedBreakOffset;
+    public int gold;
 
     public GameObject meleeAttack;
     public AudioSource meleeAttackSound;
@@ -28,12 +30,9 @@ public class Player : CombatActor
     protected override void Start()
     {
         base.Start();
-
-        actorState = "idle"; // inicializa o jogador no estado "idle"
-        lastState = "idle";
         meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
 
-        GameManager.instance.UpdateHealthBar(hitPoint, maxHitPoint);
+        GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
     }
 
     // Update is called once per frame
@@ -98,12 +97,12 @@ public class Player : CombatActor
         if (actionAllowed)
             TryBufferedAction();
 
-        GameManager.instance.UpdateBlockBar(blockPoint, maxBlockPoint);
+        GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
 
-        if (blockPoint < maxBlockPoint && Time.time - lastBlock > blockRecoveryCooldown) {
+        if (blockPoint < blockPointMax && Time.time - lastBlock > blockRecoveryCooldown) {
             blockPoint += (blockRecoverySpeed - blockBreakOffset) * Time.deltaTime;
-            if (blockPoint >= maxBlockPoint) {
-                blockPoint = maxBlockPoint;
+            if (blockPoint >= blockPointMax) {
+                blockPoint = blockPointMax;
                 blockBreakOffset = 0f;
                 blockBroken = false;
             }
@@ -118,7 +117,14 @@ public class Player : CombatActor
         if (Input.GetKeyDown(KeyCode.X))
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));
         if (Input.GetKeyDown(KeyCode.C) && !blockBroken)
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));    
+            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));
+
+        // Debug
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        if (Input.GetKeyDown(KeyCode.L)) {
+            GameManager.instance.LoadGameData();
+        }    
     }
 
     private void TryBufferedAction() {
@@ -210,7 +216,7 @@ public class Player : CombatActor
                     damageSound.Play();
                     GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
                     GameManager.instance.UpdateDebugUI("damage");
-                    GameManager.instance.UpdateHealthBar(hitPoint, maxHitPoint);
+                    GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
 
                     if (hitPoint <= 0) {
                         hitPoint = 0;
