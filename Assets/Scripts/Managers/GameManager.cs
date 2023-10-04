@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         newPositionY = posY;
     }
 
+    public Transform GetPlayer() {
+        return player.transform;
+    }
+
     public void SaveGameData() {
         string gameData = "";
 

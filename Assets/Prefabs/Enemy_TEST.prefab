@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6167373928867787291}
   m_Layer: 6
   m_Name: Enemy_TEST
-  m_TagString: CombatActor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1331584282208526850}
+  - {fileID: 2980371871265871636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3254820333319315742
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 1185466451
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 755493159, guid: 96423fe271515374992fb0ab6f948d29, type: 3}
+  m_Sprite: {fileID: 1725973261, guid: 96423fe271515374992fb0ab6f948d29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,7 +90,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &633527862168067836
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,18 +123,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029865026, y: 0}
+  m_Offset: {x: -0.0010268688, y: -0.63083696}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.375}
+    oldSize: {x: 2, y: 2.75}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.46243048, y: 1}
+  m_Size: {x: 1.0103574, y: 1.0072093}
   m_EdgeRadius: 0
 --- !u!50 &2090831199872197321
 Rigidbody2D:
@@ -181,10 +182,15 @@ MonoBehaviour:
   hitPoint: 10
   hitPointMax: 0
   pushRecoverySpeed: 0.2
+  pushImmune: 0
   projectilePrefab: {fileID: 0}
   damageSound: {fileID: 4214522645765532264}
+  hurtbox: {fileID: 0}
   actorState: 
   lastState: 
+  triggerDistance: 0
+  chaseDistance: 0
+  chaseCooldown: 0
 --- !u!82 &4214522645765532264
 AudioSource:
   m_ObjectHideFlags: 0
@@ -289,7 +295,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450155235202384745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0b120d7a709fbbc42be7f068ab8da3d2, type: 2}
   m_CullingMode: 0
@@ -302,6 +308,83 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7277865580965195328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2980371871265871636}
+  - component: {fileID: 3814331763962730888}
+  m_Layer: 6
+  m_Name: Hurtbox
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2980371871265871636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277865580965195328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7176653421108676369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3814331763962730888
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277865580965195328}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 2.1}
+  m_EdgeRadius: 0
 --- !u!1001 &5574952309701522246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 5141505216774152775, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_Name
       value: MeleeAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141505216774152775, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -382,13 +469,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3270657044939395929, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5141505216774152775, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1002594501883867718}
+    - targetCorrespondingSourceObject: {fileID: 5141505216774152775, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1962488697184311361}
   m_SourcePrefab: {fileID: 100100000, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
 --- !u!1 &721840749781750017 stripped
 GameObject:
@@ -447,8 +538,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1962488697184311361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721840749781750017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf34c485debe0d7498ce995d421338fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 2
+  attackPush: 5
+  attackHitSound: {fileID: 9211515572647045018}
 --- !u!4 &1331584282208526850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+  m_PrefabInstance: {fileID: 5574952309701522246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &9211515572647045018 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3642238976898340060, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
   m_PrefabInstance: {fileID: 5574952309701522246}
   m_PrefabAsset: {fileID: 0}

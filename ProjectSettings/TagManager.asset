@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CombatActor
+  - Enemy
+  - Hurtbox
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - UI
   - Actor
   - Solid
-  - 
-  - 
+  - Hitbox
+  - Hurtbox
   - 
   - 
   - 

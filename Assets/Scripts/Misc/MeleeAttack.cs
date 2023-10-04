@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     public int attackDamage;
     public float attackPush;
     public AudioSource attackHitSound;
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.tag == "CombatActor") {
+        if (col.transform.parent.tag != transform.parent.tag) {
             Damage dmg = new Damage {
-                damageAmount = attackDamage,
-                origin = transform.position,
-                pushForce = attackPush
+            damageAmount = attackDamage,
+            origin = transform.position,
+            pushForce = attackPush
             };
-
-            col.SendMessage("TakeDamage", dmg);
+            col.transform.parent.SendMessage("TakeDamage", dmg);
             attackHitSound.Play();
         }
     }

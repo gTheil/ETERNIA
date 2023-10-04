@@ -10,11 +10,4 @@ public class NPC : Actor
         base.Start();
     }
 
-    // Update is called once per frame
-    protected override void FixedUpdate()
-    {
-        // NPC movement test
-
-        base.FixedUpdate();
-    }
 }

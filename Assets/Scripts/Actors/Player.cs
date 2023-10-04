@@ -36,15 +36,15 @@ public class Player : CombatActor
     }
 
     // Update is called once per frame
-    protected override void FixedUpdate()
+    private void FixedUpdate()
     {
         // o jogador não pode alterar sua direção de movimento durante a execução do dash
         if (actorState == "idle" || actorState == "block") {
             moveX = Input.GetAxisRaw("Horizontal");
             moveY = Input.GetAxisRaw("Vertical");
         }
-    
-        base.FixedUpdate();
+
+        UpdateMovement(new Vector3(moveX, moveY, 0));
 
         if (anim != null) {
             if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
@@ -173,7 +173,7 @@ public class Player : CombatActor
 
     private void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab);
+        SpawnProjectile(projectilePrefab, gameObject.tag);
         rangedAttackSound.Play();
     }
 
