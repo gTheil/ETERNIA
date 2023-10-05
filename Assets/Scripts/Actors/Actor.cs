@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Actor : MonoBehaviour
 {
-    public BoxCollider2D hitbox;
+    protected BoxCollider2D hitbox;
     protected Vector3 moveDelta; // determina a direção que o ator está tentando se mover
     private RaycastHit2D hit;
     
@@ -18,7 +18,7 @@ public abstract class Actor : MonoBehaviour
     
     protected virtual void Start()
     {
-        //hitbox = GetComponent<BoxCollider2D>();
+        hitbox = GetComponent<BoxCollider2D>();
         collisionMask = LayerMask.GetMask("Actor", "Solid"); // determina que o ator irá colidir com outros atores e com elementos sólidos do cenário
         anim = GetComponent<Animator>();
         currentSpeed = baseSpeed;

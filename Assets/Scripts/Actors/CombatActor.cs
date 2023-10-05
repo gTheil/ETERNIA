@@ -59,6 +59,10 @@ public abstract class CombatActor : Actor
         }
     }
 
+    protected virtual void OnDamageDealt() {
+
+    }
+
     protected virtual void Death() {
 
     }

@@ -1150,6 +1150,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695825890765346563, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.15
+      objectReference: {fileID: 0}
     - target: {fileID: 918881175258683444, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
       propertyPath: hitbox
       value: 
@@ -1168,11 +1172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3266841416676316367, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.05132222
+      value: -9.78
       objectReference: {fileID: 0}
     - target: {fileID: 3266841416676316367, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2752887
+      value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 3266841416676316367, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2212,6 +2216,34 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 721840749781750017, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002594501883867718, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331584282208526850, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331584282208526850, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.979448
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331584282208526850, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2980371871265871636, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775970752190382966, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
       propertyPath: hitbox
       value: 
@@ -2220,6 +2252,18 @@ PrefabInstance:
       propertyPath: hurtbox
       value: 
       objectReference: {fileID: 917706323}
+    - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: chaseCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: chaseDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: triggerDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7176653421108676369, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.48

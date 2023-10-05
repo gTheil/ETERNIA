@@ -15,6 +15,7 @@ public class MeleeAttack : MonoBehaviour
             origin = transform.position,
             pushForce = attackPush
             };
+            transform.parent.SendMessage("OnDamageDealt");
             col.transform.parent.SendMessage("TakeDamage", dmg);
             attackHitSound.Play();
         }
