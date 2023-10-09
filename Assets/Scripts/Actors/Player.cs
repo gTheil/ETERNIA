@@ -8,7 +8,7 @@ public class Player : CombatActor
     public float blockPoint;
     public float blockPointMax;
     public int blockFactor;
-    public int blockPushResistance;
+    public float blockPushResistance;
     public float blockRecoveryCooldown;
     public float lastBlock;
     public float blockRecoverySpeed;
@@ -38,6 +38,7 @@ public class Player : CombatActor
     // Update is called once per frame
     private void FixedUpdate()
     {
+
         // o jogador não pode alterar sua direção de movimento durante a execução do dash
         if (actorState == "idle" || actorState == "block") {
             moveX = Input.GetAxisRaw("Horizontal");
@@ -63,8 +64,7 @@ public class Player : CombatActor
                         break;
                 }
             }
-        }
-        
+        }     
     }
 
     private void Update() {
@@ -205,7 +205,6 @@ public class Player : CombatActor
                     blockPoint = 0;
                     BlockBreak();
                 }
-
                 break;
             default:
                 if (Time.time - lastImmune > immuneTime) {
@@ -226,6 +225,10 @@ public class Player : CombatActor
                 }
                 break;
         } 
+    }
+
+    protected override void OnDamageDealt() {
+
     }
 
     protected virtual void BlockBreak() {

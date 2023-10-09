@@ -6,7 +6,7 @@ public abstract class Actor : MonoBehaviour
 {
     protected BoxCollider2D hitbox;
     protected Vector3 moveDelta; // determina a direção que o ator está tentando se mover
-    private RaycastHit2D hit;
+    protected RaycastHit2D hit;
     
     public float moveX; // a direção no eixo X que o ator está tentando se mover (-1 = esquerda, 1 = direita)
     public float moveY; // a direção no eixo Y que o ator está tentando se mover (-1 = baixo, 1 = cima)

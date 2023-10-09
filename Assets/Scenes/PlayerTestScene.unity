@@ -1090,11 +1090,6 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 3814331763962730888, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
   m_PrefabInstance: {fileID: 8293123775626792734}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &988820339 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 47618669823849993, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-  m_PrefabInstance: {fileID: 1228204911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1099545974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,24 +1145,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 695825890765346563, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.15
+    - target: {fileID: 918881175258683444, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
+      propertyPath: blockPushResistance
+      value: 3.5
       objectReference: {fileID: 0}
-    - target: {fileID: 918881175258683444, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: hitbox
-      value: 
-      objectReference: {fileID: 1571884474}
-    - target: {fileID: 918881175258683444, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: hurtbox
-      value: 
-      objectReference: {fileID: 988820339}
     - target: {fileID: 1712244279126583637, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1712244279126583637, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3266841416676316367, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
@@ -1210,17 +1193,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5954177963394139688, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: m_Layer
-      value: 8
+    - target: {fileID: 9220095749507791645, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7438927320151230095, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7438927320151230095, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 9220095749507791645, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1432,11 +1411,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380149596}
   m_CullTransparentMesh: 1
---- !u!61 &1571884474 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6277184236512492769, guid: e8cbe72b7d313de448240aa63c5e360e, type: 3}
-  m_PrefabInstance: {fileID: 1228204911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!61 &1599568848 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 633527862168067836, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
@@ -2240,6 +2214,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3814331763962730888, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_Size.y
+      value: 2.2902267
+      objectReference: {fileID: 0}
+    - target: {fileID: 3814331763962730888, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0048867464
+      objectReference: {fileID: 0}
     - target: {fileID: 4775970752190382966, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2254,7 +2236,7 @@ PrefabInstance:
       objectReference: {fileID: 917706323}
     - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
       propertyPath: chaseCooldown
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6073665542197754410, guid: d1687a7a9b223c344b8428c0b7d3ee6a, type: 3}
       propertyPath: chaseDistance

@@ -26,10 +26,9 @@ public class Enemy : CombatActor
                 if (Vector3.Distance(playerTransform.position, transform.position) < triggerDistance)
                     SetActorState("chase");
             } else {
-                if (Vector3.Distance(transform.position, startingPosition) <= 1f)
-                    SetActorState("idle");
-                else
+                if (actorState == "chase") {
                     SetActorState("return");
+                }
             }
         } else {
             UpdateMovement(Vector3.zero);
@@ -44,6 +43,8 @@ public class Enemy : CombatActor
                 break;
             case "return":
                 UpdateMovement((startingPosition - transform.position).normalized);
+                if (Vector3.Distance(transform.position, startingPosition) <= 0.1f)
+                    SetActorState("idle");
                 break;
             case "cooldown":
                 if (Time.time - lastHit > chaseCooldown)
@@ -52,6 +53,7 @@ public class Enemy : CombatActor
             default:
                 break;
         }
+
     }
 
     protected override void OnDamageDealt() {
