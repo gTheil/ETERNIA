@@ -10,7 +10,7 @@ public class Enemy : CombatActor
 
     public bool chasing;
     private float lastHit;
-    private Transform playerTransform;
+    protected Transform playerTransform;
     public Vector3 startingPosition;
 
     protected override void Start() {
@@ -21,6 +21,9 @@ public class Enemy : CombatActor
     }
 
     protected virtual void FixedUpdate() {
+        moveX = Mathf.Round(moveDelta.x);
+        moveY = Mathf.Round(moveDelta.y);
+
         if (actorState != "cooldown") {
             if (Vector3.Distance(playerTransform.position, startingPosition) < chaseDistance) {
                 if (Vector3.Distance(playerTransform.position, transform.position) < triggerDistance)
@@ -50,8 +53,17 @@ public class Enemy : CombatActor
                 if (Time.time - lastHit > chaseCooldown)
                     SetActorState("chase");
                 break;
+            //case "meleeAttack":
+                
+               // break;
             default:
+            UpdateMovement(Vector3.zero);
                 break;
+        }
+
+        if ((moveX != 0 || moveY != 0) && Time.time - lastImmune > immuneTime) {
+            anim.SetFloat("x", moveX);
+            anim.SetFloat("y", moveY);
         }
 
     }

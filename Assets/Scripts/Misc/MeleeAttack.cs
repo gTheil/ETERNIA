@@ -9,10 +9,11 @@ public class MeleeAttack : MonoBehaviour
     public AudioSource attackHitSound;
 
     private void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log(col.gameObject.name);
         if (col.transform.parent.tag != transform.parent.tag) {
             Damage dmg = new Damage {
             damageAmount = attackDamage,
-            origin = transform.position,
+            origin = transform.parent.position,
             pushForce = attackPush
             };
             transform.parent.SendMessage("OnDamageDealt");

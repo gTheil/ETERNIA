@@ -16,8 +16,6 @@ public class Player : CombatActor
     public int gold;
 
     public GameObject meleeAttack;
-    public AudioSource meleeAttackSound;
-    public AudioSource rangedAttackSound;
     public AudioSource dashSound;
 
     private Collider2D meleeAttackCollider;
@@ -45,10 +43,13 @@ public class Player : CombatActor
             moveY = Input.GetAxisRaw("Vertical");
         }
 
-        UpdateMovement(new Vector3(moveX, moveY, 0));
+        if (Time.time - lastImmune > immuneTime)
+            UpdateMovement(new Vector3(moveX, moveY, 0));
+        else
+            UpdateMovement(Vector3.zero);
 
         if (anim != null) {
-            if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
+            if (actorState != "dash" && (moveX != 0 || moveY != 0) && Time.time - lastImmune > immuneTime) {
                 anim.SetFloat("x", moveX);
                 anim.SetFloat("y", moveY);
                 ActiveAnimatorLayer("Walk");
@@ -166,11 +167,6 @@ public class Player : CombatActor
         dashSound.Play();
     }
 
-    private void MeleeAttack() {
-        anim.SetTrigger("meleeAttack");
-        meleeAttackSound.Play();
-    }
-
     private void RangedAttack() {
         anim.SetTrigger("rangedAttack");
         SpawnProjectile(projectilePrefab, gameObject.tag);
@@ -185,6 +181,11 @@ public class Player : CombatActor
             actorState = "idle";
             lastState = "idle";
         }
+    }
+
+    protected override void MeleeAttack() {
+        base.MeleeAttack();
+        meleeAttackSound.Play();
     }
 
     protected override void TakeDamage(Damage dmg) {

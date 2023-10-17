@@ -7,8 +7,8 @@ public class MeleeAttack_Animation : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player player = animator.GetComponent<Player>();
-        player.SetActorState("meleeAttack");
+        CombatActor cActor = animator.GetComponent<CombatActor>();
+        cActor.SetActorState("meleeAttack");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,8 +20,8 @@ public class MeleeAttack_Animation : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Player player = animator.GetComponent<Player>();
-        player.SetActorState(player.lastState);
+        CombatActor cActor = animator.GetComponent<CombatActor>();
+        cActor.SetActorState(cActor.lastState);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

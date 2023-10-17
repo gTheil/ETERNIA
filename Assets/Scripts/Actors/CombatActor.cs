@@ -11,6 +11,8 @@ public abstract class CombatActor : Actor
 
     public Transform projectilePrefab;
     public AudioSource damageSound;
+    public AudioSource meleeAttackSound;
+    public AudioSource rangedAttackSound;
     public Collider2D hurtbox;
 
     protected float immuneTime = 0.5f;
@@ -37,6 +39,15 @@ public abstract class CombatActor : Actor
         projectile.GetComponent<Projectile>().moveX = anim.GetFloat("x");
         projectile.GetComponent<Projectile>().moveY = anim.GetFloat("y");
         projectile.GetComponent<Projectile>().originActor = firedBy;
+    }
+
+    public void PlaySound(string sound) {
+        if (sound == "meleeAttack")
+            meleeAttackSound.Play();
+    }
+
+    protected virtual void MeleeAttack() {
+        anim.SetTrigger("meleeAttack");
     }
 
     protected override void UpdateMovement(Vector3 input) {
