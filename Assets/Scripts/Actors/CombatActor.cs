@@ -33,11 +33,11 @@ public abstract class CombatActor : Actor
         actorState = state;
     }
 
-    public void SpawnProjectile(Transform projectileToSpawn, string firedBy) {
+    public void SpawnProjectile(Transform projectileToSpawn, float x, float y, string firedBy) {
         Transform projectile = Instantiate(projectileToSpawn, transform.position, Quaternion.identity);
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), hitbox);
-        projectile.GetComponent<Projectile>().moveX = anim.GetFloat("x");
-        projectile.GetComponent<Projectile>().moveY = anim.GetFloat("y");
+        projectile.GetComponent<Projectile>().moveX = x;
+        projectile.GetComponent<Projectile>().moveY = y;
         projectile.GetComponent<Projectile>().originActor = firedBy;
     }
 
@@ -52,7 +52,7 @@ public abstract class CombatActor : Actor
 
     protected virtual void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, gameObject.tag);
+        SpawnProjectile(projectilePrefab, moveX, moveY, gameObject.tag);
         rangedAttackSound.Play();
     }
 
@@ -87,7 +87,6 @@ public abstract class CombatActor : Actor
             damageSound.Play();
             GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
             GameManager.instance.UpdateDebugUI("hit");
-            SetActorState("chase");
 
             if (hitPoint <= 0) {
                 hitPoint = 0;

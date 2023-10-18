@@ -8,7 +8,6 @@ public class Projectile : Actor
 
     protected override void Start() {
         base.Start();
-        currentSpeed = baseSpeed;
     }
 
     private void FixedUpdate() {

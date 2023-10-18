@@ -226,6 +226,12 @@ public class Player : CombatActor
 
     }
 
+    protected override void Death() {
+        GetComponent<SpriteRenderer>().enabled = false;
+        hitbox.enabled = false;
+        StartCoroutine(ReloadScene());
+    }
+
     protected virtual void BlockBreak() {
         blockBroken = true;
         blockBreakOffset = blockRecoverySpeedBreakOffset;
@@ -238,5 +244,10 @@ public class Player : CombatActor
         }
 
         anim.SetLayerWeight(anim.GetLayerIndex(layerName), 1);
+    }
+
+    IEnumerator ReloadScene() {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 }
