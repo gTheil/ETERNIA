@@ -50,6 +50,12 @@ public abstract class CombatActor : Actor
         anim.SetTrigger("meleeAttack");
     }
 
+    protected virtual void RangedAttack() {
+        anim.SetTrigger("rangedAttack");
+        SpawnProjectile(projectilePrefab, gameObject.tag);
+        rangedAttackSound.Play();
+    }
+
     protected override void UpdateMovement(Vector3 input) {
         moveDelta = new Vector3(input.x, input.y, 0);
 

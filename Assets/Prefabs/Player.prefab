@@ -116,21 +116,21 @@ MonoBehaviour:
   pushRecoverySpeed: 0.2
   projectilePrefab: {fileID: 5651962481097589185, guid: e0f86f781ec517846b0637f65b27ce97, type: 3}
   damageSound: {fileID: 4847417488231775905}
+  meleeAttackSound: {fileID: 6335452772448061330}
+  rangedAttackSound: {fileID: 346580418545239642}
   hurtbox: {fileID: 47618669823849993}
   actorState: 
   lastState: 
   blockPoint: 5
   blockPointMax: 5
   blockFactor: 10
-  blockPushResistance: 2
+  blockPushResistance: 3.5
   blockRecoveryCooldown: 2
   lastBlock: 0
   blockRecoverySpeed: 1
   blockRecoverySpeedBreakOffset: 0.5
   gold: 0
   meleeAttack: {fileID: 5954177963394139688}
-  meleeAttackSound: {fileID: 6335452772448061330}
-  rangedAttackSound: {fileID: 346580418545239642}
   dashSound: {fileID: 6503354627115510046}
 --- !u!95 &2664035101389165395
 Animator:
@@ -213,7 +213,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

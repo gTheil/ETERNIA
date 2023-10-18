@@ -167,12 +167,6 @@ public class Player : CombatActor
         dashSound.Play();
     }
 
-    private void RangedAttack() {
-        anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, gameObject.tag);
-        rangedAttackSound.Play();
-    }
-
     private void ToggleBlock() {
         if (actorState == "idle") {
             actorState = "block";

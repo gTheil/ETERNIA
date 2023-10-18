@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayerTestScene.unity
     guid: 9a49e8b39da6f224a95cf7b033bdab7d
   - enabled: 1
+    path: Assets/Scenes/ForestTestScene.unity
+    guid: 72129b29b53d7024f885c0d495ab933e
+  - enabled: 1
+    path: Assets/Scenes/RuinTestScene.unity
+    guid: 96535d79dfd7a764a977ffd718e3eaa1
+  - enabled: 1
     path: Assets/Scenes/WarpTestScene.unity
     guid: 6cc2904e6cbd1864f89e0791afd54da6
   m_configObjects: {}
