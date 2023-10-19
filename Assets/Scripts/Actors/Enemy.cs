@@ -53,9 +53,6 @@ public class Enemy : CombatActor
                 if (Time.time - lastHit > chaseCooldown)
                     SetActorState("chase");
                 break;
-            //case "meleeAttack":
-                
-               // break;
             default:
             UpdateMovement(Vector3.zero);
                 break;
@@ -71,6 +68,12 @@ public class Enemy : CombatActor
     protected override void OnDamageDealt() {
         SetActorState("cooldown");
         lastHit = Time.time;
+    }
+
+    protected override void TakeDamage(Damage dmg) {
+        base.TakeDamage(dmg);
+        if (hitPoint > 0)
+            SetActorState("chase");
     }
 
     protected override void Death() {

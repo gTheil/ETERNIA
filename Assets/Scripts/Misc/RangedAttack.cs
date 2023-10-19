@@ -17,6 +17,7 @@ public class RangedAttack : MonoBehaviour
             };
             col.transform.parent.SendMessage("TakeDamage", dmg);
             attackHitSound.Play();
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }
