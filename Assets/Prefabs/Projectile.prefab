@@ -146,9 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c1529c2724f4f41821d3036e6c1cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 0}
   moveX: 0
   moveY: 0
+  actorState: 
+  lastState: 
   baseSpeed: 10
   currentSpeed: 0
   originActor: 
@@ -366,5 +367,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 1
-  attackPush: 2.5
+  attackPush: 3
   attackHitSound: {fileID: -7818776445328234772}

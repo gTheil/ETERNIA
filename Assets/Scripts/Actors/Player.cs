@@ -182,6 +182,12 @@ public class Player : CombatActor
         meleeAttackSound.Play();
     }
 
+    protected override void RangedAttack() {
+        anim.SetTrigger("rangedAttack");
+        SpawnProjectile(projectilePrefab, anim.GetFloat("x"), anim.GetFloat("y"), gameObject.tag);
+        rangedAttackSound.Play();
+    }
+
     protected override void TakeDamage(Damage dmg) {
         switch (actorState) {
             case "dash":
@@ -194,7 +200,8 @@ public class Player : CombatActor
                 if (blockToHitPoint < 1)
                     blockToHitPoint = 1;
                 blockPoint -= blockToHitPoint;
-                pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+                if (dmg.pushForce - blockPushResistance > 0f)
+                    pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
 
                 if (blockPoint <= 0) {
                     blockPoint = 0;
