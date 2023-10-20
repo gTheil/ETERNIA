@@ -17,20 +17,10 @@ public abstract class CombatActor : Actor
 
     protected float immuneTime = 0.5f;
     protected float lastImmune;
-    public string actorState;
-    public string lastState;
     protected Vector3 pushDirection;
 
     protected override void Start() {
         base.Start();
-
-        actorState = "idle"; // inicializa o jogador no estado "idle"
-        lastState = actorState;
-    }
-
-    // função utilizada para alterar o estado do player
-    public void SetActorState(string state) {
-        actorState = state;
     }
 
     public void SpawnProjectile(Transform projectileToSpawn, float x, float y, string firedBy) {

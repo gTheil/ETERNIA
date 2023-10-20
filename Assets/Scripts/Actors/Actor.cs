@@ -10,6 +10,8 @@ public abstract class Actor : MonoBehaviour
     
     public float moveX; // a direção no eixo X que o ator está tentando se mover (-1 = esquerda, 1 = direita)
     public float moveY; // a direção no eixo Y que o ator está tentando se mover (-1 = baixo, 1 = cima)
+    public string actorState;
+    public string lastState;
     protected LayerMask collisionMask; // a lista de layers com os quais o ator deve colidir
     protected Animator anim;
 
@@ -22,6 +24,8 @@ public abstract class Actor : MonoBehaviour
         collisionMask = LayerMask.GetMask("Actor", "Solid"); // determina que o ator irá colidir com outros atores e com elementos sólidos do cenário
         anim = GetComponent<Animator>();
         currentSpeed = baseSpeed;
+        SetActorState("idle"); // inicializa o jogador no estado "idle"
+        lastState = actorState;
     }
 
     protected virtual void UpdateMovement(Vector3 input) {
@@ -40,5 +44,18 @@ public abstract class Actor : MonoBehaviour
         if (hit.collider == null) {
             transform.Translate(0, moveDelta.y * currentSpeed * Time.deltaTime, 0);
         }
+    }
+
+    // função utilizada para alterar o estado do player
+    public void SetActorState(string state) {
+        actorState = state;
+    }
+
+    public void ActiveAnimatorLayer(string layerName) {
+        for (int i = 0; i < anim.layerCount; i++) {
+            anim.SetLayerWeight(i, 0);
+        }
+
+        anim.SetLayerWeight(anim.GetLayerIndex(layerName), 1);
     }
 }

@@ -31,4 +31,8 @@ public class Projectile : Actor
             Destroy(gameObject);
         }
     }
+
+    private void OnBecameInvisible() {
+        Destroy(gameObject);
+    }
 }

@@ -24,8 +24,6 @@ public class RangedEnemy : CombatActor
     private void FixedUpdate() {
         moveX = Mathf.Round(moveDelta.x);
         moveY = Mathf.Round(moveDelta.y);
-        lookX = (playerTransform.position - transform.position).normalized.x;
-        lookY = (playerTransform.position - transform.position).normalized.y;
 
         if (actorState == "run") {
             anim.SetFloat("x", moveX);
@@ -36,6 +34,9 @@ public class RangedEnemy : CombatActor
         }
 
         if (Vector3.Distance(playerTransform.position, transform.position) < shootDistance) {
+            lookX = (playerTransform.position - transform.position).normalized.x;
+            lookY = (playerTransform.position - transform.position).normalized.y;
+
             if (actorState != "rangedAttack" && Time.time - runTimer > maxRunTime) {
                 if (Vector3.Distance(playerTransform.position, transform.position) < runTriggerDistance) {
                     SetActorState("run");

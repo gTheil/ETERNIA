@@ -238,14 +238,6 @@ public class Player : CombatActor
         ToggleBlock();
     }
 
-    public void ActiveAnimatorLayer(string layerName) {
-        for (int i = 0; i < anim.layerCount; i++) {
-            anim.SetLayerWeight(i, 0);
-        }
-
-        anim.SetLayerWeight(anim.GetLayerIndex(layerName), 1);
-    }
-
     IEnumerator ReloadScene() {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
