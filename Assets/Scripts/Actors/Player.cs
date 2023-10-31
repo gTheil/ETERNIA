@@ -111,13 +111,13 @@ public class Player : CombatActor
     }
 
     private void CheckInput() {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (moveX != 0 || moveY != 0))
+        if (Input.GetButtonDown("Dash") && (moveX != 0 || moveY != 0))
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.Dash, Time.time));
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetButtonDown("Melee"))
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.MeleeAttack, Time.time));
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetButtonDown("Ranged"))
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));
-        if (Input.GetKeyDown(KeyCode.C) && !blockBroken)
+        if (Input.GetButtonDown("Block") && !blockBroken)
             inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));
 
         // Debug

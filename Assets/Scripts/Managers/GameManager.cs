@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private Player player;
     private FloatingTextManager floatingTextManager;
     private UIManager uiManager;
+    private InventoryManager inventoryManager;
 
     // Logic
     public float newPositionX;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         floatingTextManager = GameObject.Find("FloatingTextManager").GetComponent<FloatingTextManager>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
 
     public void SetNewScene(string sceneName, float posX, float posY) {
@@ -132,5 +134,10 @@ public class GameManager : MonoBehaviour
     // Block Bar
     public void UpdateBlockBar(float blockPoint, float blockPointMax) {
         uiManager.UpdateBlockBar(blockPoint, blockPointMax);
+    }
+
+    // Inventory
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+        inventoryManager.AddItem(itemName, quantity, itemSprite, itemDescription);
     }
 }
