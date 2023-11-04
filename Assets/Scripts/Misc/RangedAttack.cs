@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour
+public class RangedAttack : MeleeAttack
 {
-    public int attackDamage;
-    public float attackPush;
-    public AudioSource attackHitSound;
+    protected override void Start() {
+        attackDamage = transform.parent.GetComponent<Projectile>().originActor.gameObject.GetComponent<CombatActor>().rangedDamage;
+        attackPush = transform.parent.GetComponent<Projectile>().originActor.gameObject.GetComponent<CombatActor>().rangedPush;
+    }
 
-    private void OnTriggerEnter2D(Collider2D col) {
-        if (col.transform.parent.tag != transform.parent.GetComponent<Projectile>().originActor) {
+    protected override void OnTriggerEnter2D(Collider2D col) {
+        string originTag = transform.parent.GetComponent<Projectile>().originActor.gameObject.tag;
+        if (col.transform.parent.tag != originTag) {
             Damage dmg = new Damage {
             damageAmount = attackDamage,
             origin = transform.position,

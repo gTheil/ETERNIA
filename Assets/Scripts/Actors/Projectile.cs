@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : Actor
 {
-    public string originActor;
+    public Transform originActor;
 
     protected override void Start() {
         base.Start();
@@ -20,7 +20,7 @@ public class Projectile : Actor
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Hurtbox")) {
-            if (col.transform.parent.tag != originActor) {
+            if (col.transform.parent.tag != originActor.gameObject.tag) {
                 Debug.Log("Hit " + col.gameObject.name);
                 GetComponent<SpriteRenderer>().enabled = false;
                 GetComponent<Collider2D>().enabled = false;

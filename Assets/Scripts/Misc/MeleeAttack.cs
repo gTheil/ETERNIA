@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
 {
-    public int attackDamage;
-    public float attackPush;
     public AudioSource attackHitSound;
 
-    private void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log(col.gameObject.name);
+    protected int attackDamage;
+    protected float attackPush;
+
+    // Start is called before the first frame update
+    protected virtual void Start()
+    {
+        attackDamage = transform.parent.GetComponent<CombatActor>().meleeDamage;
+        attackPush = transform.parent.GetComponent<CombatActor>().meleePush;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D col) {
         if (col.transform.parent.tag != transform.parent.tag) {
             Damage dmg = new Damage {
             damageAmount = attackDamage,

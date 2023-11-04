@@ -16,7 +16,7 @@ public class Enemy : CombatActor
     protected override void Start() {
         base.Start();
 
-        playerTransform = GameManager.instance.GetPlayer();
+        playerTransform = GameManager.instance.GetPlayer().transform;
         startingPosition = transform.position;
     }
 

@@ -18,7 +18,7 @@ public class RangedEnemy : CombatActor
     {
         base.Start();
 
-        playerTransform = GameManager.instance.GetPlayer();
+        playerTransform = GameManager.instance.GetPlayer().transform;
     }
 
     private void FixedUpdate() {
@@ -62,7 +62,7 @@ public class RangedEnemy : CombatActor
 
     protected override void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, lookX, lookY, gameObject.tag);
+        SpawnProjectile(projectilePrefab, lookX, lookY, transform);
         rangedAttackSound.Play();
     }
 

@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
         newPositionY = posY;
     }
 
-    public Transform GetPlayer() {
-        return player.transform;
+    public GameObject GetPlayer() {
+        return player.gameObject;
     }
 
     public void SaveGameData() {
@@ -137,7 +137,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Inventory
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
-        inventoryManager.AddItem(itemName, quantity, itemSprite, itemDescription);
+    public void AddItem(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+        inventoryManager.AddItem(itemID, itemName, quantity, itemSprite, itemDescription);
+    }
+
+    public bool UseItem(int itemID) {
+        bool usable = inventoryManager.UseItem(itemID);
+        UpdateHealthBar(player.hitPoint, player.hitPointMax);
+        return usable;
     }
 }

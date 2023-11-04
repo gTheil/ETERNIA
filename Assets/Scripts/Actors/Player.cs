@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : CombatActor
 {
+    public int baseDamage;
     public float blockPoint;
     public float blockPointMax;
     public int blockFactor;
@@ -14,6 +15,8 @@ public class Player : CombatActor
     public float blockRecoverySpeed;
     public float blockRecoverySpeedBreakOffset;
     public int gold;
+    public int attackBonus;
+    public int defenseBonus;
 
     public GameObject meleeAttack;
     public AudioSource dashSound;
@@ -29,7 +32,6 @@ public class Player : CombatActor
     {
         base.Start();
         meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
-
         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
     }
 
@@ -84,6 +86,9 @@ public class Player : CombatActor
                 break;
         }
 
+        meleeDamage = baseDamage + attackBonus;
+        rangedDamage = baseDamage + attackBonus;
+
         if (actorState == "dash") {
             collisionMask = LayerMask.GetMask("Solid");
         } else {
@@ -97,8 +102,6 @@ public class Player : CombatActor
 
         if (actionAllowed)
             TryBufferedAction();
-
-        GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
 
         if (blockPoint < blockPointMax && Time.time - lastBlock > blockRecoveryCooldown) {
             blockPoint += (blockRecoverySpeed - blockBreakOffset) * Time.deltaTime;
@@ -184,53 +187,84 @@ public class Player : CombatActor
 
     protected override void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, anim.GetFloat("x"), anim.GetFloat("y"), gameObject.tag);
+        SpawnProjectile(projectilePrefab, anim.GetFloat("x"), anim.GetFloat("y"), transform);
         rangedAttackSound.Play();
     }
 
     protected override void TakeDamage(Damage dmg) {
+        int defense = baseDefense + defenseBonus;
         switch (actorState) {
             case "dash":
                 GameManager.instance.UpdateDebugUI("dodge");
                 break;
             case "block":
-                lastBlock = Time.time;
-                GameManager.instance.UpdateDebugUI("block");
-                int blockToHitPoint = dmg.damageAmount - blockFactor;
-                if (blockToHitPoint < 1)
-                    blockToHitPoint = 1;
-                blockPoint -= blockToHitPoint;
-                if (dmg.pushForce - blockPushResistance > 0f)
-                    pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+                if (dmg.damageAmount - defense > 0) {
+                    lastBlock = Time.time;
 
-                if (blockPoint <= 0) {
-                    blockPoint = 0;
-                    BlockBreak();
+                    int damageToBlock = (dmg.damageAmount - defense) - blockFactor;
+                    if (damageToBlock < 0)
+                        damageToBlock = 0;
+                    else if (damageToBlock > 0) {
+                        blockPoint -= damageToBlock;
+                        if (dmg.pushForce - blockPushResistance > 0f)
+                            pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+
+                        GameManager.instance.ShowText(damageToBlock.ToString(), 52, Color.black, transform.position, Vector3.up * 50f, 0.5f);
+                        GameManager.instance.UpdateDebugUI("block");
+                        GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
+                    }
+                    
+                    if (blockPoint <= 0) {
+                        blockPoint = 0;
+                        BlockBreak();
+                    }
                 }
                 break;
             default:
-                if (Time.time - lastImmune > immuneTime) {
-                    lastImmune = Time.time;
-                    hitPoint -= dmg.damageAmount;
-                    pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+                if (dmg.damageAmount - defense > 0) {
+                    if (Time.time - lastImmune > immuneTime) {
+                        lastImmune = Time.time;
+                        int damageDealt = dmg.damageAmount - defense;
+                        hitPoint -= damageDealt;
+                        if (!pushImmune)
+                            pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
-                    damageSound.Play();
-                    GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
-                    GameManager.instance.UpdateDebugUI("damage");
-                    GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
+                        damageSound.Play();
+                        GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                        GameManager.instance.UpdateDebugUI("damage");
+                        GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
 
-                    if (hitPoint <= 0) {
-                        hitPoint = 0;
-                        Death();
+                        if (hitPoint <= 0) {
+                            hitPoint = 0;
+                            Death();
+                        }
                     }
-                
                 }
                 break;
         } 
     }
 
-    protected override void OnDamageDealt() {
+    public void RestoreHealth(int amount) {
+        hitPoint += amount;
+        if (hitPoint > hitPointMax)
+            hitPoint = hitPointMax;
+    }
 
+    public void IncreaseStat(string stat, int amount, float duration) {
+        switch (stat) {
+            case "attack":
+                attackBonus = amount;
+                break;
+            case "defense":
+                defenseBonus = amount;
+                break;
+            case "pushImmune":
+                pushImmune = true;
+                break;
+            default:
+                break;
+        }
+        StartCoroutine(OnBuffActive(stat, duration));
     }
 
     protected override void Death() {
@@ -243,6 +277,28 @@ public class Player : CombatActor
         blockBroken = true;
         blockBreakOffset = blockRecoverySpeedBreakOffset;
         ToggleBlock();
+    }
+
+    IEnumerator OnBuffActive(string stat, float duration) {
+        yield return new WaitForSeconds(duration);
+        if (stat == "attack")
+            DeactivateAttackBuff();
+        else if (stat == "defense")
+            DeactivateDefenseBuff();
+        else if (stat == "pushImmune")
+            DeactivatePushImmunity();
+    }
+
+    private void DeactivateAttackBuff() {
+        attackBonus = 0; 
+    }
+
+    private void DeactivateDefenseBuff() {
+        defenseBonus = 0;
+    }
+
+    private void DeactivatePushImmunity() {
+        pushImmune = false;
     }
 
     IEnumerator ReloadScene() {

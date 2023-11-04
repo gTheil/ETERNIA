@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public int itemID;
     public string itemName;
     [TextArea]
     public string itemDescription;
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Player") {
-            GameManager.instance.AddItem(itemName, itemQuantity, itemSprite, itemDescription);
+            GameManager.instance.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription);
             Destroy(gameObject);
         }
     }

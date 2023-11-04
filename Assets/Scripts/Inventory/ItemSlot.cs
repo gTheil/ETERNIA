@@ -7,11 +7,12 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
 {
+    private int itemID;
     private string itemName;
     private int quantity;
     private Sprite itemSprite;
+    private string itemDescription;
 
-    public string itemDescription;
     public bool isFull;
     public TMP_Text quantityText;
     public Image itemImage;
@@ -20,10 +21,11 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     public TMP_Text itemDescriptionName;
     public TMP_Text itemDescriptionText;
 
-    public void FillSlot(string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+    public void FillSlot(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+        this.itemID = itemID;
         this.itemName = itemName;
-        this.itemSprite = itemSprite;
         this.quantity = quantity;
+        this.itemSprite = itemSprite;
         this.itemDescription = itemDescription;
         isFull = true;
 
@@ -31,6 +33,22 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
         quantityText.enabled = true;
         itemImage.sprite = itemSprite;
         itemImage.enabled = true;
+    }
+
+    private void EmptySlot() {
+        this.itemID = 0;
+        this.itemName = "";
+        this.quantity = 0;
+        this.itemSprite = null;
+        this.itemDescription = "";
+        isFull = false;
+
+        quantityText.enabled = false;
+        itemImage.enabled = false;
+
+        itemDescriptionName.text = itemName;
+        itemDescriptionText.text = itemDescription;
+        itemDescriptionImage.enabled = false;
     }
 
     public void OnSelect(BaseEventData eventData) {
@@ -50,6 +68,13 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     public void OnSubmit(BaseEventData eventData) {
         if (isFull) {
             Debug.Log(itemName);
+            bool usable = GameManager.instance.UseItem(itemID);
+            if (usable) {
+                this.quantity -= 1;
+                quantityText.text = this.quantity.ToString();
+                if (this.quantity <= 0)
+                    EmptySlot();
+            }
         }
     }
 

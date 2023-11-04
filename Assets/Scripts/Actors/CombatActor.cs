@@ -6,6 +6,11 @@ public abstract class CombatActor : Actor
 {
     public int hitPoint;
     public int hitPointMax;
+    public int meleeDamage;
+    public float meleePush;
+    public int rangedDamage;
+    public float rangedPush;
+    public int baseDefense;
     public bool pushImmune;
     public float pushRecoverySpeed = 0.2f;
 
@@ -23,8 +28,8 @@ public abstract class CombatActor : Actor
         base.Start();
     }
 
-    public void SpawnProjectile(Transform projectileToSpawn, float x, float y, string firedBy) {
-        Transform projectile = Instantiate(projectileToSpawn, transform.position, Quaternion.identity);
+    public void SpawnProjectile(Transform projectileToSpawn, float x, float y, Transform firedBy) {
+        Transform projectile = Instantiate(projectileToSpawn, hitbox.bounds.center, Quaternion.identity);
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), hitbox);
         projectile.GetComponent<Projectile>().moveX = x;
         projectile.GetComponent<Projectile>().moveY = y;
@@ -42,7 +47,7 @@ public abstract class CombatActor : Actor
 
     protected virtual void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, moveX, moveY, gameObject.tag);
+        SpawnProjectile(projectilePrefab, moveX, moveY, transform);
         rangedAttackSound.Play();
     }
 
@@ -68,21 +73,23 @@ public abstract class CombatActor : Actor
     }
 
     protected virtual void TakeDamage(Damage dmg) {
-        if (Time.time - lastImmune > immuneTime) {
-            lastImmune = Time.time;
-            hitPoint -= dmg.damageAmount;
-            if (!pushImmune)
-                pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+        if (dmg.damageAmount - baseDefense > 0) {
+            if (Time.time - lastImmune > immuneTime) {
+                lastImmune = Time.time;
+                int damageDealt = dmg.damageAmount - baseDefense;
+                hitPoint -= damageDealt;
+                if (!pushImmune)
+                    pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
-            damageSound.Play();
-            GameManager.instance.ShowText(dmg.damageAmount.ToString(), 25, Color.red, transform.position, Vector3.up * 50f, 0.5f);
-            GameManager.instance.UpdateDebugUI("hit");
+                damageSound.Play();
+                GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                GameManager.instance.UpdateDebugUI("hit");
 
-            if (hitPoint <= 0) {
-                hitPoint = 0;
-                Death();
+                if (hitPoint <= 0) {
+                    hitPoint = 0;
+                    Death();
+                }
             }
-                
         }
     }
 
