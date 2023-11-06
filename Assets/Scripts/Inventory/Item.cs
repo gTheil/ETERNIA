@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     [TextArea]
     public string itemDescription;
     public int itemQuantity;
+    public ItemType itemType;
 
     private Sprite itemSprite;
 
@@ -18,7 +19,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Player") {
-            GameManager.instance.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription);
+            GameManager.instance.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
             Destroy(gameObject);
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class ScriptableItem : ScriptableObject
+public class ItemSO : ScriptableObject
 {
     //public int itemID;
     public int restoreHealth;

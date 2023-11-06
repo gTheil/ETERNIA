@@ -12,6 +12,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     private int quantity;
     private Sprite itemSprite;
     private string itemDescription;
+    public ItemType itemType;
 
     public bool isFull;
     public TMP_Text quantityText;
@@ -21,16 +22,23 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     public TMP_Text itemDescriptionName;
     public TMP_Text itemDescriptionText;
 
-    public void FillSlot(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription) {
+    public void FillSlot(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.quantity = quantity;
         this.itemSprite = itemSprite;
         this.itemDescription = itemDescription;
+        this.itemType = itemType;
         isFull = true;
 
-        quantityText.text = quantity.ToString();
-        quantityText.enabled = true;
+        if (itemType == ItemType.consumable || itemType == ItemType.key) {
+            quantityText.text = quantity.ToString();
+            quantityText.enabled = true;
+        }
+        else {
+            quantityText.text = "E";
+        }
+        
         itemImage.sprite = itemSprite;
         itemImage.enabled = true;
     }
@@ -41,6 +49,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
         this.quantity = 0;
         this.itemSprite = null;
         this.itemDescription = "";
+        this.itemType = ItemType.none;
         isFull = false;
 
         quantityText.enabled = false;
@@ -68,18 +77,20 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     public void OnSubmit(BaseEventData eventData) {
         if (isFull) {
             Debug.Log(itemName);
-            bool usable = GameManager.instance.UseItem(itemID);
-            if (usable) {
-                this.quantity -= 1;
-                quantityText.text = this.quantity.ToString();
-                if (this.quantity <= 0)
-                    EmptySlot();
+            if (itemType == ItemType.consumable) {
+                bool usable = GameManager.instance.UseItem(itemID);
+                if (usable) {
+                    this.quantity -= 1;
+                    quantityText.text = this.quantity.ToString();
+                    if (this.quantity <= 0)
+                        EmptySlot();
+                }
             }
         }
     }
 
-    public string GetItemName() {
-        return itemName;
+    public int GetItemID() {
+        return itemID;
     }
 
     public int GetItemQuantity() {

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         floatingTextManager = GameObject.Find("FloatingTextManager").GetComponent<FloatingTextManager>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        inventoryManager = GameObject.Find("MenuCanvas").GetComponent<InventoryManager>();
     }
 
     public void SetNewScene(string sceneName, float posX, float posY) {
@@ -137,8 +137,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Inventory
-    public void AddItem(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription) {
-        inventoryManager.AddItem(itemID, itemName, quantity, itemSprite, itemDescription);
+    public void AddItem(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
+        inventoryManager.AddItem(itemID, itemName, quantity, itemSprite, itemDescription, itemType);
     }
 
     public bool UseItem(int itemID) {
