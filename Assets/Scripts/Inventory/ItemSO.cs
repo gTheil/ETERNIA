@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemSO : ScriptableObject
 {
-    //public int itemID;
+    public int itemID;
     public int restoreHealth;
     public int attackBonus;
     public int defenseBonus;

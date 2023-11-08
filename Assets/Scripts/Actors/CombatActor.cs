@@ -10,6 +10,7 @@ public abstract class CombatActor : Actor
     public float meleePush;
     public int rangedDamage;
     public float rangedPush;
+    public float projectileSpeed;
     public int baseDefense;
     public bool pushImmune;
     public float pushRecoverySpeed = 0.2f;
@@ -28,12 +29,13 @@ public abstract class CombatActor : Actor
         base.Start();
     }
 
-    public void SpawnProjectile(Transform projectileToSpawn, float x, float y, Transform firedBy) {
+    public void SpawnProjectile(Transform projectileToSpawn, float x, float y, Transform firedBy, float speed) {
         Transform projectile = Instantiate(projectileToSpawn, hitbox.bounds.center, Quaternion.identity);
         Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), hitbox);
         projectile.GetComponent<Projectile>().moveX = x;
         projectile.GetComponent<Projectile>().moveY = y;
         projectile.GetComponent<Projectile>().originActor = firedBy;
+        projectile.GetComponent<Projectile>().baseSpeed = speed;
     }
 
     public void PlaySound(string sound) {
@@ -47,7 +49,7 @@ public abstract class CombatActor : Actor
 
     protected virtual void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, moveX, moveY, transform);
+        SpawnProjectile(projectilePrefab, moveX, moveY, transform, projectileSpeed);
         rangedAttackSound.Play();
     }
 

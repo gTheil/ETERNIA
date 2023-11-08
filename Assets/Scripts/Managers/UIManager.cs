@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
     public TMP_Text dodgeText;
     public TMP_Text blockText;
 
+    public TMP_Text healthPointText;
+    public TMP_Text blockPointText;
+    public TMP_Text swordAtkText;
+    public TMP_Text bowAtkText;
+    public TMP_Text shieldDefText;
+
     public Image healthBar;
     public Image blockBar;
 
@@ -48,5 +54,23 @@ public class UIManager : MonoBehaviour
 
     public void UpdateBlockBar(float blockPoint, float blockPointMax) {
         blockBar.fillAmount = blockPoint / blockPointMax;
+    }
+
+    public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {
+        healthPointText.text = hitPoint + "/" + hitPointMax;
+        blockPointText.text = Mathf.Round(blockPoint) + "/" + blockPointMax;
+        swordAtkText.text = swordAtk.ToString();
+        bowAtkText.text = bowAtk.ToString();
+        shieldDefText.text = shieldDef.ToString();
+    }
+
+    public void UpdateSingleStat(string statName, float statValue, float statMax) {
+        switch (statName) {
+            case "block":
+                blockPointText.text = Mathf.Round(statValue) + "/" + statMax;
+                break;
+            default:
+                break;
+        }
     }
 }

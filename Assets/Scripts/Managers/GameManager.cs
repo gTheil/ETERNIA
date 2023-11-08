@@ -146,4 +146,17 @@ public class GameManager : MonoBehaviour
         UpdateHealthBar(player.hitPoint, player.hitPointMax);
         return usable;
     }
+
+    public bool EquipItem(int itemID) {
+        bool equippable = inventoryManager.EquipItem(itemID);
+        return equippable;
+    }
+
+    public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {
+        uiManager.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, swordAtk, bowAtk, shieldDef);
+    }
+
+    public void UpdateSingleStat(string statName, float statValue, float statMax) {
+        uiManager.UpdateSingleStat(statName, statValue, statMax);
+    }
 }

@@ -62,7 +62,7 @@ public class RangedEnemy : CombatActor
 
     protected override void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, lookX, lookY, transform);
+        SpawnProjectile(projectilePrefab, lookX, lookY, transform, projectileSpeed);
         rangedAttackSound.Play();
     }
 

@@ -85,6 +85,11 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
                     if (this.quantity <= 0)
                         EmptySlot();
                 }
+            } else if (itemType == ItemType.sword || itemType == ItemType.bow || itemType == ItemType.shield) {
+                bool equippable = GameManager.instance.EquipItem(itemID);
+                if (equippable) {
+                    quantityText.enabled = true;
+                }
             }
         }
     }

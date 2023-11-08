@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     public ItemSlot[] itemSlots;
     public ItemSlot[] equipSlots;
     public List<ItemSO> scriptableItems = new List<ItemSO>();
+    public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
 
     // Update is called once per frame
     void Update()
@@ -87,9 +88,43 @@ public class InventoryManager : MonoBehaviour
 
     public bool UseItem(int itemID) {
         for (int i = 0; i < scriptableItems.Count; i++) {
-            if (i == itemID) {
+            if (scriptableItems[i].itemID == itemID) {
                 bool usable = scriptableItems[i].UseItem();
                 return usable;
+            }
+        }
+        return false;
+    }
+
+    public bool EquipItem(int itemID) {
+        for (int i = 0; i < scriptableEquips.Count; i++) {
+            if (scriptableEquips[i].equipID == itemID) {
+                bool equippable = scriptableEquips[i].EquipItem();
+                if (equippable) {
+                    switch (scriptableEquips[i].equipType) {
+                        case EquipType.sword:
+                            for (int j = 0; j < equipSlots.Length; j++) {
+                                if (equipSlots[j].itemType == ItemType.sword)
+                                    equipSlots[j].quantityText.enabled = false;
+                            }
+                            break;
+                        case EquipType.bow:
+                            for (int j = 0; j < equipSlots.Length; j++) {
+                                if (equipSlots[j].itemType == ItemType.bow)
+                                    equipSlots[j].quantityText.enabled = false;
+                            }
+                            break;
+                        case EquipType.shield:
+                            for (int j = 0; j < equipSlots.Length; j++) {
+                                if (equipSlots[j].itemType == ItemType.shield)
+                                    equipSlots[j].quantityText.enabled = false;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return equippable;
             }
         }
         return false;

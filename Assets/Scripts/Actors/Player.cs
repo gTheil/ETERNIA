@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : CombatActor
 {
     public int baseDamage;
+    public int defense;
     public float blockPoint;
     public float blockPointMax;
     public int blockFactor;
@@ -20,6 +21,7 @@ public class Player : CombatActor
 
     public GameObject meleeAttack;
     public AudioSource dashSound;
+    public EquipmentSO equippedSword, equippedBow, equippedShield;
 
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
@@ -32,7 +34,10 @@ public class Player : CombatActor
     {
         base.Start();
         meleeAttackCollider = meleeAttack.GetComponent<BoxCollider2D>();
+        blockPoint = equippedShield.shieldBlockPoint;
+        UpdateStats();
         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     // Update is called once per frame
@@ -86,8 +91,7 @@ public class Player : CombatActor
                 break;
         }
 
-        meleeDamage = baseDamage + attackBonus;
-        rangedDamage = baseDamage + attackBonus;
+        UpdateStats();
 
         if (actorState == "dash") {
             collisionMask = LayerMask.GetMask("Solid");
@@ -105,6 +109,8 @@ public class Player : CombatActor
 
         if (blockPoint < blockPointMax && Time.time - lastBlock > blockRecoveryCooldown) {
             blockPoint += (blockRecoverySpeed - blockBreakOffset) * Time.deltaTime;
+            GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
+            GameManager.instance.UpdateSingleStat("block", blockPoint, blockPointMax);
             if (blockPoint >= blockPointMax) {
                 blockPoint = blockPointMax;
                 blockBreakOffset = 0f;
@@ -187,37 +193,35 @@ public class Player : CombatActor
 
     protected override void RangedAttack() {
         anim.SetTrigger("rangedAttack");
-        SpawnProjectile(projectilePrefab, anim.GetFloat("x"), anim.GetFloat("y"), transform);
+        SpawnProjectile(projectilePrefab, anim.GetFloat("x"), anim.GetFloat("y"), transform, projectileSpeed);
         rangedAttackSound.Play();
     }
 
     protected override void TakeDamage(Damage dmg) {
-        int defense = baseDefense + defenseBonus;
         switch (actorState) {
             case "dash":
                 GameManager.instance.UpdateDebugUI("dodge");
                 break;
             case "block":
-                if (dmg.damageAmount - defense > 0) {
-                    lastBlock = Time.time;
+                lastBlock = Time.time;
+                int damageToBlock = (dmg.damageAmount - defense) - blockFactor;
+                if (damageToBlock < 0)
+                    damageToBlock = 0;
+                else if (damageToBlock > 0) {
+                    blockPoint -= damageToBlock;
 
-                    int damageToBlock = (dmg.damageAmount - defense) - blockFactor;
-                    if (damageToBlock < 0)
-                        damageToBlock = 0;
-                    else if (damageToBlock > 0) {
-                        blockPoint -= damageToBlock;
-                        if (dmg.pushForce - blockPushResistance > 0f)
-                            pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+                    GameManager.instance.ShowText(damageToBlock.ToString(), 52, Color.black, transform.position, Vector3.up * 50f, 0.5f);
+                    GameManager.instance.UpdateDebugUI("block");
+                    GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
+                    GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+                }
 
-                        GameManager.instance.ShowText(damageToBlock.ToString(), 52, Color.black, transform.position, Vector3.up * 50f, 0.5f);
-                        GameManager.instance.UpdateDebugUI("block");
-                        GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
-                    }
+                if (dmg.pushForce - blockPushResistance > 0f)
+                        pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
                     
-                    if (blockPoint <= 0) {
-                        blockPoint = 0;
-                        BlockBreak();
-                    }
+                if (blockPoint <= 0) {
+                    blockPoint = 0;
+                    BlockBreak();
                 }
                 break;
             default:
@@ -233,6 +237,7 @@ public class Player : CombatActor
                         GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
                         GameManager.instance.UpdateDebugUI("damage");
                         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
+                        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
 
                         if (hitPoint <= 0) {
                             hitPoint = 0;
@@ -248,6 +253,7 @@ public class Player : CombatActor
         hitPoint += amount;
         if (hitPoint > hitPointMax)
             hitPoint = hitPointMax;
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     public void IncreaseStat(string stat, int amount, float duration) {
@@ -265,6 +271,54 @@ public class Player : CombatActor
                 break;
         }
         StartCoroutine(OnBuffActive(stat, duration));
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+    }
+
+    public EquipmentSO GetEquipment(EquipType equipType) {
+        EquipmentSO equipment = ScriptableObject.CreateInstance<EquipmentSO>();
+        switch (equipType) {
+            case EquipType.sword:
+                if (equippedSword != null)
+                    equipment = equippedSword;
+                else
+                    equipment = null;
+                break;
+            case EquipType.bow:
+                if (equippedBow != null)
+                    equipment = equippedBow;
+                else
+                    equipment = null;
+                break;
+            case EquipType.shield:
+                if (equippedShield != null)
+                    equipment = equippedShield;
+                else
+                    equipment = null;
+                break;
+            default:
+                break;
+        }
+        return equipment;
+    }
+
+    public void SetEquipment(EquipmentSO equip) {
+        switch (equip.equipType) {
+            case EquipType.sword:
+                equippedSword = equip;
+                break;
+            case EquipType.bow:
+                equippedBow = equip;
+                break;
+            case EquipType.shield:
+                equippedShield = equip;
+                break;
+            default:
+                break;
+        }
+        UpdateStats();
+        if (blockPoint > blockPointMax)
+            blockPoint = blockPointMax;
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     protected override void Death() {
@@ -287,6 +341,7 @@ public class Player : CombatActor
             DeactivateDefenseBuff();
         else if (stat == "pushImmune")
             DeactivatePushImmunity();
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     private void DeactivateAttackBuff() {
@@ -299,6 +354,23 @@ public class Player : CombatActor
 
     private void DeactivatePushImmunity() {
         pushImmune = false;
+    }
+
+    private void UpdateStats() {
+        meleeDamage = baseDamage + attackBonus + equippedSword.swordAtk;
+        meleePush = equippedSword.atkPush;
+
+        rangedDamage = baseDamage + attackBonus + equippedBow.bowAtk;
+        rangedPush = equippedBow.atkPush;
+        projectileSpeed = equippedBow.projectileSpeed;
+
+        defense = baseDefense + defenseBonus;
+        blockFactor = equippedShield.shieldDef;
+        blockPointMax = equippedShield.shieldBlockPoint;
+        blockRecoverySpeed = equippedShield.shieldRecoverySpeed;
+        blockRecoveryCooldown = equippedShield.shieldRecoveryCooldown;
+        blockPushResistance = equippedShield.shieldPushResistance;
+        blockRecoverySpeedBreakOffset = equippedShield.shieldBreakOffset;
     }
 
     IEnumerator ReloadScene() {

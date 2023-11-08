@@ -10,13 +10,14 @@ public class MeleeAttack : MonoBehaviour
     protected float attackPush;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected virtual void Update()
     {
         attackDamage = transform.parent.GetComponent<CombatActor>().meleeDamage;
         attackPush = transform.parent.GetComponent<CombatActor>().meleePush;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log(attackDamage);
         if (col.transform.parent.tag != transform.parent.tag) {
             Damage dmg = new Damage {
             damageAmount = attackDamage,
