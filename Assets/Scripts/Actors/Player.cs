@@ -341,19 +341,21 @@ public class Player : CombatActor
             DeactivateDefenseBuff();
         else if (stat == "pushImmune")
             DeactivatePushImmunity();
-        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     private void DeactivateAttackBuff() {
         attackBonus = 0; 
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     private void DeactivateDefenseBuff() {
         defenseBonus = 0;
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     private void DeactivatePushImmunity() {
         pushImmune = false;
+        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
     }
 
     private void UpdateStats() {
@@ -376,5 +378,35 @@ public class Player : CombatActor
     IEnumerator ReloadScene() {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+    }
+
+    // Getters
+
+    public int GetHitPoint() {
+        return hitPoint;
+    }
+
+    public int GetHitPointMax() {
+        return hitPointMax;
+    }
+
+    public float GetBlockPoint() {
+        return blockPoint;
+    }
+
+    public float GetBlockPointMax() {
+        return blockPointMax;
+    }
+
+    public int GetMeleeDamage() {
+        return meleeDamage;
+    }
+
+    public int GetRangedDamage() {
+        return rangedDamage;
+    }
+
+    public int GetBlockFactor() {
+        return blockFactor;
     }
 }

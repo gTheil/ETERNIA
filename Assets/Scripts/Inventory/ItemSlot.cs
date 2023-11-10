@@ -7,11 +7,16 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
 {
-    private int itemID;
-    private string itemName;
-    private int quantity;
-    private Sprite itemSprite;
-    private string itemDescription;
+    [SerializeField]
+    protected int itemID;
+    [SerializeField]
+    protected string itemName;
+    [SerializeField]
+    protected int quantity;
+    [SerializeField]
+    protected Sprite itemSprite;
+    [SerializeField] [TextArea]
+    protected string itemDescription;
     public ItemType itemType;
 
     public bool isFull;
@@ -43,7 +48,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
         itemImage.enabled = true;
     }
 
-    private void EmptySlot() {
+    public virtual void EmptySlot() {
         this.itemID = 0;
         this.itemName = "";
         this.quantity = 0;
@@ -74,7 +79,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
         }
     }
 
-    public void OnSubmit(BaseEventData eventData) {
+    public virtual void OnSubmit(BaseEventData eventData) {
         if (isFull) {
             Debug.Log(itemName);
             if (itemType == ItemType.consumable) {

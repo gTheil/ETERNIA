@@ -20,10 +20,16 @@ public class UIManager : MonoBehaviour
     public Image healthBar;
     public Image blockBar;
 
+    public TMP_Text goldText;
+
     private int hits;
     private int hitsTaken;
     private int hitsDodged;
     private int hitsBlocked;
+
+    void Update() {
+        goldText.text = "Gold: " + GameManager.instance.GetPlayer().GetComponent<Player>().gold;
+    }
 
     public void UpdateDebugUI(string txt) {
         switch (txt) {

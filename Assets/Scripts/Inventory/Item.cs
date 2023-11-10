@@ -10,8 +10,9 @@ public class Item : MonoBehaviour
     public string itemDescription;
     public int itemQuantity;
     public ItemType itemType;
+    public int itemPrice;
 
-    private Sprite itemSprite;
+    public Sprite itemSprite;
 
     void Start() {
         itemSprite = GetComponent<SpriteRenderer>().sprite;

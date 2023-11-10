@@ -8,8 +8,12 @@ public class InventoryManager : MonoBehaviour
 {
     public GameObject inventoryMenu;
     public GameObject equipmentMenu;
+    public GameObject shopMenu;
     public ItemSlot[] itemSlots;
     public ItemSlot[] equipSlots;
+    public ShopSlot[] shopSlots;
+    public List<ShopItemSO> equipmentShopInventory = new List<ShopItemSO>();
+    public List<ShopItemSO> consumableShopInventory = new List<ShopItemSO>();
     public List<ItemSO> scriptableItems = new List<ItemSO>();
     public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
 
@@ -21,6 +25,12 @@ public class InventoryManager : MonoBehaviour
 
         if (Input.GetButtonDown("Equipment"))
             Equipment();
+
+        if (Input.GetButtonDown("Shop1Debug"))
+            Shop("equipment");
+
+        if (Input.GetButtonDown("Shop2Debug"))
+            Shop("consumable");
     }
 
     public void Inventory() {
@@ -28,11 +38,13 @@ public class InventoryManager : MonoBehaviour
             Time.timeScale = 1;
             equipmentMenu.SetActive(false);
             inventoryMenu.SetActive(false);
+            shopMenu.SetActive(false);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
         }
         else {
             Time.timeScale = 0;
             equipmentMenu.SetActive(false);
+            shopMenu.SetActive(false);
             inventoryMenu.SetActive(true);
             for (int i = 0; i < itemSlots.Length; i++){
                 if (itemSlots[i].isFull) {
@@ -48,11 +60,13 @@ public class InventoryManager : MonoBehaviour
             Time.timeScale = 1;
             inventoryMenu.SetActive(false);
             equipmentMenu.SetActive(false);
+            shopMenu.SetActive(false);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
         }
         else {
             Time.timeScale = 0;
             inventoryMenu.SetActive(false);
+            shopMenu.SetActive(false);
             equipmentMenu.SetActive(true);
             for (int i = 0; i < equipSlots.Length; i++){
                 if (equipSlots[i].isFull) {
@@ -60,6 +74,53 @@ public class InventoryManager : MonoBehaviour
                     return;
                 }
             }
+
+            Player player = GameManager.instance.GetPlayer().GetComponent<Player>();
+            GameManager.instance.UpdateStatsUI(player.GetHitPoint(), player.GetHitPointMax(), player.GetBlockPoint(), player.GetBlockPointMax(), player.GetMeleeDamage(), player.GetRangedDamage(), player.GetBlockFactor());
+        }
+    }
+
+    public void Shop(string shopType) {
+        if (shopMenu.activeSelf) {
+            Time.timeScale = 1;
+            for (int i = 0; i < shopSlots.Length; i++){
+                shopSlots[i].EmptySlot();
+            }
+            inventoryMenu.SetActive(false);
+            equipmentMenu.SetActive(false);
+            shopMenu.SetActive(false);
+            EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        } else {
+            Time.timeScale = 0;
+            inventoryMenu.SetActive(false);
+            equipmentMenu.SetActive(false);
+            shopMenu.SetActive(true);
+
+            for (int i = 0; i < shopSlots.Length; i++){
+                shopSlots[i].EmptySlot();
+            }
+
+            if (shopType == "equipment") {
+                for (int i = 0; i < shopSlots.Length; i++) {
+                    if (i < equipmentShopInventory.Count) {
+                        shopSlots[i].FillSlot(equipmentShopInventory[i].itemID, equipmentShopInventory[i].itemName, equipmentShopInventory[i].itemQuantity,
+                        equipmentShopInventory[i].itemSprite, equipmentShopInventory[i].itemDescription, equipmentShopInventory[i].itemType, equipmentShopInventory[i].itemPrice);
+                    } else {
+                        return;
+                    }   
+                }
+            } else if (shopType == "consumable") {
+                for (int i = 0; i < shopSlots.Length; i++) {
+                    if (i < consumableShopInventory.Count) {
+                        shopSlots[i].FillSlot(consumableShopInventory[i].itemID, consumableShopInventory[i].itemName, consumableShopInventory[i].itemQuantity,
+                        consumableShopInventory[i].itemSprite, consumableShopInventory[i].itemDescription, consumableShopInventory[i].itemType, consumableShopInventory[i].itemPrice);
+                    } else {
+                        return;
+                    }   
+                }
+            }
+
+            EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(shopSlots[0].gameObject);
         }
     }
 
