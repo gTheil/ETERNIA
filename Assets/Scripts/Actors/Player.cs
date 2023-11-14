@@ -50,13 +50,10 @@ public class Player : CombatActor
             moveY = Input.GetAxisRaw("Vertical");
         }
 
-        if (Time.time - lastImmune > immuneTime)
-            UpdateMovement(new Vector3(moveX, moveY, 0));
-        else
-            UpdateMovement(Vector3.zero);
+        UpdateMovement(new Vector3(moveX, moveY, 0));
 
         if (anim != null) {
-            if (actorState != "dash" && (moveX != 0 || moveY != 0) && Time.time - lastImmune > immuneTime) {
+            if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
                 anim.SetFloat("x", moveX);
                 anim.SetFloat("y", moveY);
                 ActiveAnimatorLayer("Walk");

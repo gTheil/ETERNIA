@@ -12,8 +12,8 @@ public class InventoryManager : MonoBehaviour
     public ItemSlot[] itemSlots;
     public ItemSlot[] equipSlots;
     public ShopSlot[] shopSlots;
-    public List<ShopItemSO> equipmentShopInventory = new List<ShopItemSO>();
-    public List<ShopItemSO> consumableShopInventory = new List<ShopItemSO>();
+    public List<Item> equipmentShopInventory = new List<Item>();
+    public List<Item> consumableShopInventory = new List<Item>();
     public List<ItemSO> scriptableItems = new List<ItemSO>();
     public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
 
@@ -124,14 +124,14 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
+    public void AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
         if (itemType == ItemType.consumable || itemType == ItemType.key) {
             for (int i = 0; i < itemSlots.Length; i++) {
                 if (itemSlots[i].isFull && itemSlots[i].GetItemID() == itemID) {
-                    itemSlots[i].SetItemQuantity(itemSlots[i].GetItemQuantity() + quantity);
+                    itemSlots[i].SetItemQuantity(itemSlots[i].GetItemQuantity() + itemQuantity);
                     return;
                 } else if (!itemSlots[i].isFull) {
-                    itemSlots[i].FillSlot(itemID, itemName, quantity, itemSprite, itemDescription, itemType);
+                    itemSlots[i].FillSlot(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
                     return;
                 }
             }
@@ -140,8 +140,19 @@ public class InventoryManager : MonoBehaviour
         } else {
             for (int i = 0; i < equipSlots.Length; i++) {
                 if (!equipSlots[i].isFull) {
-                    equipSlots[i].FillSlot(itemID, itemName, quantity, itemSprite, itemDescription, itemType);
+                    equipSlots[i].FillSlot(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
                     return;
+                }
+            }
+        }
+    }
+
+    public void RemoveItem(int itemID) {
+        for (int i = 0; i < itemSlots.Length; i++) {
+            if (itemSlots[i].itemID == itemID) {
+                itemSlots[i].SetItemQuantity(itemSlots[i].GetItemQuantity() - 1);
+                if (itemSlots[i].GetItemQuantity() <= 0) {
+                    itemSlots[i].EmptySlot();
                 }
             }
         }
@@ -186,6 +197,15 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
                 return equippable;
+            }
+        }
+        return false;
+    }
+
+    public bool CheckInventory(ItemType itemType, int itemID) {
+        for (int i = 0; i < itemSlots.Length; i++) {
+            if (itemSlots[i].itemType == itemType && itemSlots[i].itemID == itemID) {
+                return true;
             }
         }
         return false;

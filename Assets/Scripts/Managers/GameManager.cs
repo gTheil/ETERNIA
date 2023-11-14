@@ -137,8 +137,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Inventory
-    public void AddItem(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
-        inventoryManager.AddItem(itemID, itemName, quantity, itemSprite, itemDescription, itemType);
+    public void AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
+        inventoryManager.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
     }
 
     public bool UseItem(int itemID) {
@@ -150,6 +150,15 @@ public class GameManager : MonoBehaviour
     public bool EquipItem(int itemID) {
         bool equippable = inventoryManager.EquipItem(itemID);
         return equippable;
+    }
+
+    public bool CheckInventory(ItemType itemType, int itemID) {
+        bool hasItem = inventoryManager.CheckInventory(itemType, itemID);
+        return hasItem;
+    }
+
+    public void RemoveItem(int itemID) {
+        inventoryManager.RemoveItem(itemID);
     }
 
     public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {

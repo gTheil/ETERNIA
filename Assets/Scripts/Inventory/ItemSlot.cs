@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
 {
     [SerializeField]
-    protected int itemID;
+    public int itemID;
     [SerializeField]
     protected string itemName;
     [SerializeField]
@@ -85,10 +85,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
             if (itemType == ItemType.consumable) {
                 bool usable = GameManager.instance.UseItem(itemID);
                 if (usable) {
-                    this.quantity -= 1;
-                    quantityText.text = this.quantity.ToString();
-                    if (this.quantity <= 0)
-                        EmptySlot();
+                    GameManager.instance.RemoveItem(itemID);
                 }
             } else if (itemType == ItemType.sword || itemType == ItemType.bow || itemType == ItemType.shield) {
                 bool equippable = GameManager.instance.EquipItem(itemID);
