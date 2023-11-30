@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private FloatingTextManager floatingTextManager;
     private UIManager uiManager;
     private InventoryManager inventoryManager;
+    private DialogueManager dialogueManager;
 
     // Logic
     public float newPositionX;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         floatingTextManager = GameObject.Find("FloatingTextManager").GetComponent<FloatingTextManager>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         inventoryManager = GameObject.Find("MenuCanvas").GetComponent<InventoryManager>();
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
     }
 
     public void SetNewScene(string sceneName, float posX, float posY) {
@@ -167,5 +169,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdateSingleStat(string statName, float statValue, float statMax) {
         uiManager.UpdateSingleStat(statName, statValue, statMax);
+    }
+
+    public void InitiateDialogue(DialogueSO conversation, NPC npc) {
+        dialogueManager.InitiateDialogue(conversation, npc);
     }
 }

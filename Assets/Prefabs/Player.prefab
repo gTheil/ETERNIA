@@ -108,10 +108,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveX: 0
   moveY: 0
+  actorState: 
+  lastState: 
   baseSpeed: 10
   currentSpeed: 0
   hitPoint: 10
   hitPointMax: 10
+  meleeDamage: 0
+  meleePush: 0
+  rangedDamage: 0
+  rangedPush: 0
+  projectileSpeed: 0
+  baseDefense: 0
   pushImmune: 0
   pushRecoverySpeed: 0.2
   projectilePrefab: {fileID: 5651962481097589185, guid: e0f86f781ec517846b0637f65b27ce97, type: 3}
@@ -119,19 +127,24 @@ MonoBehaviour:
   meleeAttackSound: {fileID: 6335452772448061330}
   rangedAttackSound: {fileID: 346580418545239642}
   hurtbox: {fileID: 47618669823849993}
-  actorState: 
-  lastState: 
-  blockPoint: 5
-  blockPointMax: 5
-  blockFactor: 10
-  blockPushResistance: 3.5
-  blockRecoveryCooldown: 2
+  baseDamage: 0
+  defense: 0
+  blockPoint: 0
+  blockPointMax: 0
+  blockFactor: 0
+  blockPushResistance: 0
+  blockRecoveryCooldown: 0
   lastBlock: 0
-  blockRecoverySpeed: 1
-  blockRecoverySpeedBreakOffset: 0.5
-  gold: 0
+  blockRecoverySpeed: 0
+  blockRecoverySpeedBreakOffset: 0
+  gold: 5000
+  attackBonus: 0
+  defenseBonus: 0
   meleeAttack: {fileID: 5954177963394139688}
   dashSound: {fileID: 6503354627115510046}
+  equippedSword: {fileID: 11400000, guid: 763711410a3cf2f4595de272725a860b, type: 2}
+  equippedBow: {fileID: 11400000, guid: cc982026dec589940a3cc663defcfe06, type: 2}
+  equippedShield: {fileID: 11400000, guid: 87084a961f30983448e2d3578df27e3a, type: 2}
 --- !u!95 &2664035101389165395
 Animator:
   serializedVersion: 5
@@ -790,6 +803,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf34c485debe0d7498ce995d421338fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackPush: 5
   attackHitSound: {fileID: 2842021512493314227}

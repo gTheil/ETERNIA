@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Hurtbox
+  - OptionButton
   layers:
   - Default
   - TransparentFX

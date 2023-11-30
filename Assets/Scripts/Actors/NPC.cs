@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class NPC : Actor
 {
+    public DialogueSO[] conversation;
+    public float interactionDistance;
+    public int dialogueSequence;
     public Vector3 startingPosition;
     public float lastMoveStart;
     public float lastMoveEnd;
@@ -12,12 +15,27 @@ public class NPC : Actor
     public float moveDuration;
     public float moveCooldown;
 
+    private Transform playerTransform;
+    public bool dialogueInitiated;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         SetActorState("cooldown");
         startingPosition = transform.position;
+        playerTransform = GameManager.instance.GetPlayer().transform;
+    }
+
+    void Update() {
+        if (Vector3.Distance(GameManager.instance.GetPlayer().transform.position, transform.position) <= interactionDistance) {
+            if (Input.GetButtonDown("Submit") && !dialogueInitiated) {
+                GameManager.instance.InitiateDialogue(conversation[dialogueSequence], this);
+                dialogueInitiated = true;
+                anim.SetFloat("x", (playerTransform.position - transform.position).normalized.x);
+                anim.SetFloat("y", (playerTransform.position - transform.position).normalized.y);
+            }
+        }
     }
 
     private void FixedUpdate() {

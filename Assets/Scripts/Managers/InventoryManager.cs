@@ -48,7 +48,8 @@ public class InventoryManager : MonoBehaviour
             inventoryMenu.SetActive(true);
             for (int i = 0; i < itemSlots.Length; i++){
                 if (itemSlots[i].isFull) {
-                    itemSlots[i].gameObject.GetComponent<Selectable>().Select();
+                    //itemSlots[i].gameObject.GetComponent<Selectable>().Select();
+                    EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(itemSlots[i].gameObject);
                     return;
                 }
             }
@@ -70,7 +71,8 @@ public class InventoryManager : MonoBehaviour
             equipmentMenu.SetActive(true);
             for (int i = 0; i < equipSlots.Length; i++){
                 if (equipSlots[i].isFull) {
-                    equipSlots[i].gameObject.GetComponent<Selectable>().Select();
+                    //equipSlots[i].gameObject.GetComponent<Selectable>().Select();
+                    EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(equipSlots[i].gameObject);
                     return;
                 }
             }
