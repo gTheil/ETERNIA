@@ -9,10 +9,10 @@ public class Chest : Interactable
     public Item item;
     public int gold;
 
-    private bool isOpen = false;
+    //private bool isOpen = false;
 
     public override void Interact() {
-        if (!isOpen) {
+        if (!state) {
             if (isLocked) {
                 bool hasKey = GameManager.instance.CheckInventory(ItemType.key, keyID);
                 if (hasKey) {
@@ -36,6 +36,7 @@ public class Chest : Interactable
         } else {
             GameManager.instance.GetPlayer().GetComponent<Player>().gold += this.gold;
         }
-        isOpen = true;
+        state = true;
+        base.Interact();
     }
 }

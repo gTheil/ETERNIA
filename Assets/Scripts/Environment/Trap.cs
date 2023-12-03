@@ -7,7 +7,9 @@ public class Trap : Interactable
     public int damage;
 
     public override void Interact() {
+        state = !state;
         col.enabled = !col.enabled;
+        base.Interact();
     }
 
     private void OnTriggerStay2D(Collider2D col) {

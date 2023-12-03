@@ -6,10 +6,11 @@ using UnityEngine.EventSystems;
 public class Interactable : MonoBehaviour
 {
     public float interactionDistance;
+    public bool state;
 
     protected Collider2D col;
 
-    void Start() {
+    protected virtual void Start() {
         col = GetComponent<Collider2D>();
     }
 
@@ -23,5 +24,6 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact() {
         Debug.Log(gameObject.name);
+        GameManager.instance.SetInteractableState(gameObject.name, state);
     }
 }

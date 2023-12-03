@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
 
         SceneManager.sceneLoaded += GetReferences;
+        SceneManager.sceneLoaded += FindInteractables;
         SceneManager.sceneLoaded += LoadGameState;
         DontDestroyOnLoad(gameObject);
     }
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private InventoryManager inventoryManager;
     private DialogueManager dialogueManager;
+    private PersistenceManager persistenceManager;
 
     // Logic
     public float newPositionX;
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         inventoryManager = GameObject.Find("MenuCanvas").GetComponent<InventoryManager>();
         dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+        persistenceManager = GameObject.Find("PersistenceManager").GetComponent<PersistenceManager>();
     }
 
     public void SetNewScene(string sceneName, float posX, float posY) {
@@ -173,5 +176,13 @@ public class GameManager : MonoBehaviour
 
     public void InitiateDialogue(DialogueSO conversation, NPC npc) {
         dialogueManager.InitiateDialogue(conversation, npc);
+    }
+
+    public void FindInteractables(Scene scene, LoadSceneMode mode) {
+        persistenceManager.FindInteractables(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    public void SetInteractableState(string name, bool state) {
+        persistenceManager.SetInteractableState(name, state);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1051335885696554465}
   - component: {fileID: 420996127730653516}
   - component: {fileID: 6039689701434732814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Warp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,5 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8d9c8a62ef32d4a8574291aa2e1912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: 
   warpPositionX: 0
   warpPositionY: 0

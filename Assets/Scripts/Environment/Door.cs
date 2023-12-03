@@ -7,6 +7,12 @@ public class Door : Interactable
     public bool isLocked;
     public int keyID;
 
+    protected override void Start() {
+        base.Start();
+        if (state)
+            col.enabled = false;
+    }
+
     public override void Interact() {
         if (isLocked) {
             bool hasKey = GameManager.instance.CheckInventory(ItemType.key, keyID);
@@ -25,6 +31,8 @@ public class Door : Interactable
 
     private void OpenDoor() {
         Debug.Log("open");
+        state = true;
         col.enabled = false;
+        base.Interact();
     }
 }
