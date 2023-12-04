@@ -142,8 +142,9 @@ public class GameManager : MonoBehaviour
     }
 
     // Inventory
-    public void AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
-        inventoryManager.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
+    public bool AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
+        bool canAdd = inventoryManager.AddItem(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
+        return canAdd;
     }
 
     public bool UseItem(int itemID) {
@@ -184,5 +185,9 @@ public class GameManager : MonoBehaviour
 
     public void SetInteractableState(string name, bool state) {
         persistenceManager.SetInteractableState(name, state);
+    }
+
+    public void Shop(string shopType) {
+        inventoryManager.Shop(shopType);
     }
 }

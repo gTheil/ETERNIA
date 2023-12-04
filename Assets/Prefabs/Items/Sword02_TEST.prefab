@@ -145,10 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 3
   itemName: Better Sword
-  itemDescription: 'Price: 200G
-
-
-    Press ENTER to buy.'
+  itemDescription: DEBUG
   itemQuantity: 1
   itemType: 1
   itemPrice: 200

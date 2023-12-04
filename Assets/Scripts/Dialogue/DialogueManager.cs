@@ -180,13 +180,19 @@ public class DialogueManager : MonoBehaviour
             optionsPanel.SetActive(false);
             dialogueCanvas.SetActive(false);
             Time.timeScale = 1;
+
+            if (initiatedBy.npcType == NPCType.Blacksmith)
+                GameManager.instance.Shop("equipment");
+            else if (initiatedBy.npcType == NPCType.Alchemist)
+                GameManager.instance.Shop("consumable");
+
         } else {
             currentConversation = startingConversation;
             stepNum = stepToReturn;
             startingConversation = null;
             stepToReturn = 0;
             PlayDialogue();
-        }  
+        }
     }
 }
 

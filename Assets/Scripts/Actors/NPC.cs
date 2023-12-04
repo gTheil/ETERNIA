@@ -17,6 +17,7 @@ public class NPC : Actor
 
     private Transform playerTransform;
     public bool dialogueInitiated;
+    public NPCType npcType;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -29,7 +30,7 @@ public class NPC : Actor
 
     void Update() {
         if (Vector3.Distance(GameManager.instance.GetPlayer().transform.position, transform.position) <= interactionDistance) {
-            if (Input.GetButtonDown("Submit") && !dialogueInitiated) {
+            if (Input.GetButtonDown("Submit") && !dialogueInitiated && Time.timeScale == 1) {
                 GameManager.instance.InitiateDialogue(conversation[dialogueSequence], this);
                 dialogueInitiated = true;
                 anim.SetFloat("x", (playerTransform.position - transform.position).normalized.x);
@@ -88,3 +89,9 @@ public class NPC : Actor
     }
 
 }
+
+public enum NPCType {
+    Blacksmith,
+    Alchemist,
+    Minor,
+};

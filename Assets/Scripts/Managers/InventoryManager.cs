@@ -126,27 +126,31 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
+    public bool AddItem(int itemID, string itemName, int itemQuantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
         if (itemType == ItemType.consumable || itemType == ItemType.key) {
             for (int i = 0; i < itemSlots.Length; i++) {
                 if (itemSlots[i].isFull && itemSlots[i].GetItemID() == itemID) {
                     itemSlots[i].SetItemQuantity(itemSlots[i].GetItemQuantity() + itemQuantity);
-                    return;
+                    return true;
                 } else if (!itemSlots[i].isFull) {
                     itemSlots[i].FillSlot(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
-                    return;
+                    return true;
                 }
             }
         } else if (itemType == ItemType.none) {
             Debug.Log("Item type not set.");
         } else {
             for (int i = 0; i < equipSlots.Length; i++) {
-                if (!equipSlots[i].isFull) {
+                if (equipSlots[i].isFull) {
+                    if (equipSlots[i].itemID == itemID)
+                        return false;
+                } else {
                     equipSlots[i].FillSlot(itemID, itemName, itemQuantity, itemSprite, itemDescription, itemType);
-                    return;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public void RemoveItem(int itemID) {
