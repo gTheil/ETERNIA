@@ -12,7 +12,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     [SerializeField]
     protected string itemName;
     [SerializeField]
-    protected int quantity;
+    public int quantity;
     [SerializeField]
     protected Sprite itemSprite;
     [SerializeField] [TextArea]

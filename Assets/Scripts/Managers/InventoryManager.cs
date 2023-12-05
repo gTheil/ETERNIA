@@ -12,10 +12,23 @@ public class InventoryManager : MonoBehaviour
     public ItemSlot[] itemSlots;
     public ItemSlot[] equipSlots;
     public ShopSlot[] shopSlots;
+    public List<Item> itemDatabase = new List<Item>();
+    public List<Item> equipDatabase = new List<Item>();
     public List<Item> equipmentShopInventory = new List<Item>();
     public List<Item> consumableShopInventory = new List<Item>();
     public List<ItemSO> scriptableItems = new List<ItemSO>();
     public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
+
+    void Awake() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Inventory");
+
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Update is called once per frame
     void Update()

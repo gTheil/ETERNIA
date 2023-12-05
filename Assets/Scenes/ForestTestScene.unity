@@ -700,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: forestChest01
       objectReference: {fileID: 0}
+    - target: {fileID: 6102914920369021853, guid: 44ea38a07a7880f468592562778522a9, type: 3}
+      propertyPath: keyID
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7263769969493889918, guid: 44ea38a07a7880f468592562778522a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -65.251274
@@ -69206,6 +69210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4194483001711675485, guid: 80ab280adf5f57c45a04d86e642d42dd, type: 3}
+      propertyPath: keyID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7587106430982267725, guid: 80ab280adf5f57c45a04d86e642d42dd, type: 3}
       propertyPath: m_Name
       value: forestDoor01
@@ -72816,7 +72824,7 @@ GameObject:
   - component: {fileID: 1938940899}
   - component: {fileID: 1938940901}
   m_Layer: 0
-  m_Name: Virtual Camera
+  m_Name: VirtualCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

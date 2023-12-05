@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b4e6df05febdf4eb53f47bc93a74c7, type: 3}
   m_Name: AttackPotion
   m_EditorClassIdentifier: 
-  itemID: 2
+  itemID: 3
   restoreHealth: 0
   attackBonus: 5
   defenseBonus: 0

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b4e6df05febdf4eb53f47bc93a74c7, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 1
   restoreHealth: 5
   attackBonus: 0
   defenseBonus: 0
+  buffDuration: 0
   pushImmune: 0

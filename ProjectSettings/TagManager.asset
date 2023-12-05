@@ -8,6 +8,9 @@ TagManager:
   - Hurtbox
   - OptionButton
   - Persistence
+  - HUD
+  - Inventory
+  - Dialogue
   layers:
   - Default
   - TransparentFX

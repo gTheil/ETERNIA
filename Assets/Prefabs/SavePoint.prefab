@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3882455315883837339}
   - component: {fileID: 4023071486733322169}
   - component: {fileID: 568831466784478156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SavePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

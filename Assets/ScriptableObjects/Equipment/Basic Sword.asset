@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0665ca21145b3341be959c3360bdad2, type: 3}
   m_Name: Basic Sword
   m_EditorClassIdentifier: 
-  equipID: 0
+  equipID: 1
   equipType: 0
   swordAtk: 2
   bowAtk: 0

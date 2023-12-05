@@ -29,6 +29,17 @@ public class Player : CombatActor
     private float blockBreakOffset;
     private bool blockBroken;
 
+    void Awake() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        if (objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {

@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     private bool canContinueText = true;
 
     private DialogueSO startingConversation;
-    private int stepToReturn; 
+    private int stepToReturn;
 
     // Start is called before the first frame update
     void Start()
