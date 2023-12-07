@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 5
-  itemName: Push Immune Potion
+  itemName: Push Potion
   itemDescription: DEBUG
   itemQuantity: 1
   itemType: 0

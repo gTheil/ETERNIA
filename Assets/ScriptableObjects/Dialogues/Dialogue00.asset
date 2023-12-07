@@ -25,7 +25,7 @@ MonoBehaviour:
   - I hope you enjoyed this test dialogue!
   optionText:
   - It's great!
-  - I don't really care.
+  - I don't care.
   option0: {fileID: 11400000, guid: 223d9070dcf74bd4caf04d8a8d4f4e8f, type: 2}
   option1: {fileID: 11400000, guid: 1e73e2b258e326e47a2881872e1e912d, type: 2}
   option2: {fileID: 0}

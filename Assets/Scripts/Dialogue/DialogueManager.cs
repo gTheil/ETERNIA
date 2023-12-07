@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueActive && Input.GetButtonDown("Submit") && canContinueText) {
+        if (dialogueActive && Input.GetButtonUp("Submit") && canContinueText) {
             if (stepNum >= currentConversation.actors.Length)
                 EndDialogue();
             else
@@ -84,6 +84,7 @@ public class DialogueManager : MonoBehaviour
                     optionButtons[i].SetActive(true);
                 }
             }
+            optionsPanel.SetActive(true);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(optionButtons[0]);
         }
 
@@ -92,8 +93,9 @@ public class DialogueManager : MonoBehaviour
 
         if (stepNum < currentConversation.dialogue.Length && currentConversation.actors[stepNum] != DialogueActor.Branch)
             typewriterRoutine = StartCoroutine(TypewriterEffect(dialogueText.text = currentConversation.dialogue[stepNum]));
-        else
+        else {
             optionsPanel.SetActive(true);
+        }
 
         dialogueCanvas.SetActive(true);
         stepNum += 1;
@@ -114,29 +116,31 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void Option(int optionNum) {
-        startingConversation = currentConversation;
-        stepToReturn = stepNum;
+        if (canContinueText) {
+            startingConversation = currentConversation;
+            stepToReturn = stepNum;
 
-        foreach (GameObject button in optionButtons)
-            button.SetActive(false);
+            foreach (GameObject button in optionButtons)
+                button.SetActive(false);
 
-        switch (optionNum) {
-            case 0:
-                currentConversation = currentConversation.option0;
-                break;
-            case 1:
-                currentConversation = currentConversation.option1;
-                break;
-            case 2:
-                currentConversation = currentConversation.option2;
-                break;
-            case 3:
-                currentConversation = currentConversation.option3;
-                break;
-            default:
-                break;
+            switch (optionNum) {
+                case 0:
+                    currentConversation = currentConversation.option0;
+                    break;
+                case 1:
+                    currentConversation = currentConversation.option1;
+                    break;
+                case 2:
+                    currentConversation = currentConversation.option2;
+                    break;
+                case 3:
+                    currentConversation = currentConversation.option3;
+                    break;
+                default:
+                    break;
+            }
+            stepNum = 0;
         }
-        stepNum = 0;
     }
 
     private IEnumerator TypewriterEffect(string line) {

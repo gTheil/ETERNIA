@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour
     //private int equippedSwordID;
     //private int equippedBowID;
     //private int equippedShieldID;
-    //private float positionX;
-    //private float positionY;
-    //private string sceneToLoad;
+    private float positionX;
+    private float positionY;
+    private string sceneToLoad;
     //private List<string> interactableNames = new List<string>();
     //private List<bool> interactableStates = new List<bool>();
 

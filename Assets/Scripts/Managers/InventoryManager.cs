@@ -33,16 +33,16 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory") && !shopMenu.activeSelf || (Input.GetButtonDown("Cancel") && inventoryMenu.activeSelf))
             Inventory();
 
-        if (Input.GetButtonDown("Equipment"))
+        if (Input.GetButtonDown("Equipment") && !shopMenu.activeSelf || (Input.GetButtonDown("Cancel") && equipmentMenu.activeSelf))
             Equipment();
 
-        if (Input.GetButtonDown("Shop1Debug"))
+        if (Input.GetButtonDown("Cancel") && shopMenu.activeSelf)
             Shop("equipment");
 
-        if (Input.GetButtonDown("Shop2Debug"))
+        if (Input.GetButtonDown("Cancel") && shopMenu.activeSelf)
             Shop("consumable");
     }
 
@@ -121,7 +121,7 @@ public class InventoryManager : MonoBehaviour
                         shopSlots[i].FillSlot(equipmentShopInventory[i].itemID, equipmentShopInventory[i].itemName, equipmentShopInventory[i].itemQuantity,
                         equipmentShopInventory[i].itemSprite, equipmentShopInventory[i].itemDescription, equipmentShopInventory[i].itemType, equipmentShopInventory[i].itemPrice);
                     } else {
-                        return;
+                        break;
                     }   
                 }
             } else if (shopType == "consumable") {
@@ -130,7 +130,7 @@ public class InventoryManager : MonoBehaviour
                         shopSlots[i].FillSlot(consumableShopInventory[i].itemID, consumableShopInventory[i].itemName, consumableShopInventory[i].itemQuantity,
                         consumableShopInventory[i].itemSprite, consumableShopInventory[i].itemDescription, consumableShopInventory[i].itemType, consumableShopInventory[i].itemPrice);
                     } else {
-                        return;
+                        break;
                     }   
                 }
             }

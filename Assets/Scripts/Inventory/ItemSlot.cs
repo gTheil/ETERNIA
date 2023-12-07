@@ -65,7 +65,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
         itemDescriptionImage.enabled = false;
     }
 
-    public void OnSelect(BaseEventData eventData) {
+    public virtual void OnSelect(BaseEventData eventData) {
         if (isFull) {
             itemDescriptionImage.enabled = true;
             itemDescriptionImage.sprite = itemSprite;
