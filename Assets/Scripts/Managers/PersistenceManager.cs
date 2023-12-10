@@ -20,6 +20,10 @@ public class PersistenceManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    void Start() {
+        FindInteractables(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
     public void FindInteractables(Scene scene, LoadSceneMode mode) {
         var interactables = FindObjectsOfType<Interactable>();
 
@@ -33,6 +37,7 @@ public class PersistenceManager : MonoBehaviour
                 for (int j = 0; j < interactableStates.Count; j++) {
                     if (j == index) {
                         i.state = interactableStates[j];
+                        Debug.Log("State set for " + i.gameObject.name + ": " + i.state);
                         break;
                     }
                 }

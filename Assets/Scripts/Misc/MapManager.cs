@@ -41,7 +41,7 @@ public class MapManager : MonoBehaviour
             else
                 mapMenu.SetActive(false);
         }
-
-        playerImage.rectTransform.anchoredPosition = new Vector3(GameManager.instance.GetPlayer().transform.position.x / coefficientX, GameManager.instance.GetPlayer().transform.position.y / coefficientY, 0);
+        if (GameManager.instance.GetPlayer() != null)
+            playerImage.rectTransform.anchoredPosition = new Vector3(GameManager.instance.GetPlayer().transform.position.x / coefficientX, GameManager.instance.GetPlayer().transform.position.y / coefficientY, 0);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : CombatActor
 {
@@ -22,6 +23,8 @@ public class Player : CombatActor
     public GameObject meleeAttack;
     public AudioSource dashSound;
     public EquipmentSO equippedSword, equippedBow, equippedShield;
+
+    public SpriteRenderer displaySprite;
 
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
@@ -49,6 +52,10 @@ public class Player : CombatActor
         UpdateStats();
         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
         GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+        if (!GameManager.instance.GetGameState()) {
+            GameManager.instance.SetUpPlayer();
+            Debug.Log("player set up");
+        }
     }
 
     // Update is called once per frame
@@ -140,9 +147,8 @@ public class Player : CombatActor
         // Debug
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-        if (Input.GetKeyDown(KeyCode.L)) {
-            GameManager.instance.LoadGameData();
-        }    
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GameManager.instance.PauseMenu();
     }
 
     private void TryBufferedAction() {
@@ -262,6 +268,7 @@ public class Player : CombatActor
         if (hitPoint > hitPointMax)
             hitPoint = hitPointMax;
         GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+        GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
     }
 
     public void IncreaseStat(string stat, int amount, float duration) {
@@ -416,5 +423,9 @@ public class Player : CombatActor
 
     public int GetBlockFactor() {
         return blockFactor;
+    }
+
+    public SpriteRenderer GetDisplaySprite() {
+        return displaySprite;
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - HUD
   - Inventory
   - Dialogue
+  - UI
   layers:
   - Default
   - TransparentFX

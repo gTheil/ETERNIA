@@ -3,80 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public TMP_Text hitsText;
-    public TMP_Text damageText;
-    public TMP_Text dodgeText;
-    public TMP_Text blockText;
+    public GameObject controlsCanvas;
+    public GameObject pauseCanvas;
 
-    public TMP_Text healthPointText;
-    public TMP_Text blockPointText;
-    public TMP_Text swordAtkText;
-    public TMP_Text bowAtkText;
-    public TMP_Text shieldDefText;
+    void Start() {
+        controlsCanvas = GameObject.Find("ControlsCanvas");
+        pauseCanvas = GameObject.Find("PauseCanvas");
 
-    public Image healthBar;
-    public Image blockBar;
-
-    public TMP_Text goldText;
-
-    private int hits;
-    private int hitsTaken;
-    private int hitsDodged;
-    private int hitsBlocked;
-
-    void Update() {
-        goldText.text = "Gold: " + GameManager.instance.GetPlayer().GetComponent<Player>().gold;
+        if (controlsCanvas != null)
+            controlsCanvas.SetActive(false);
+        if (pauseCanvas != null)
+            pauseCanvas.SetActive(false);
     }
 
-    public void UpdateDebugUI(string txt) {
-        switch (txt) {
-            case "hit":
-                hits++;
-                hitsText.text = "Golpes Acertados: " + hits;
-                break;
-            case "damage":
-                hitsTaken++;
-                damageText.text = "Golpes Sofridos: " + hitsTaken;
-                break;
-            case "dodge":
-                hitsDodged++;
-                dodgeText.text = "Golpes Desviados: " + hitsDodged;
-                break;
-            case "block":
-                hitsBlocked++;
-                blockText.text = "Golpes Bloqueados: " + hitsBlocked;
-                break;
-            default:
-                break;
-        } 
+    public void NewGame() {
+        GameManager.instance.SetNewGame(true);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("PlayerTestScene", LoadSceneMode.Single);
     }
 
-    public void UpdateHealthBar(float hitPoint, float hitPointMax) {
-        healthBar.fillAmount = hitPoint / hitPointMax;
+    public void SaveGame() {
+        GameManager.instance.SetNewScene(SceneManager.GetActiveScene().name, GameManager.instance.GetPlayer().transform.position.x, GameManager.instance.GetPlayer().transform.position.y);
+        GameManager.instance.SaveGameData();
     }
 
-    public void UpdateBlockBar(float blockPoint, float blockPointMax) {
-        blockBar.fillAmount = blockPoint / blockPointMax;
+    public void LoadGame() {
+        GameManager.instance.SetNewGame(false);
+        Time.timeScale = 1;
+        GameManager.instance.LoadGameData();
     }
 
-    public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {
-        healthPointText.text = hitPoint + "/" + hitPointMax;
-        blockPointText.text = Mathf.Round(blockPoint) + "/" + blockPointMax;
-        swordAtkText.text = swordAtk.ToString();
-        bowAtkText.text = bowAtk.ToString();
-        shieldDefText.text = shieldDef.ToString();
+    public void ShowControls() {
+        controlsCanvas.SetActive(true);
+        pauseCanvas.SetActive(false);
     }
 
-    public void UpdateSingleStat(string statName, float statValue, float statMax) {
-        switch (statName) {
-            case "block":
-                blockPointText.text = Mathf.Round(statValue) + "/" + statMax;
-                break;
-            default:
-                break;
+    public void PauseMenu() {
+        if (Time.timeScale == 1 && !GameManager.instance.IsUIOpen()) {
+            pauseCanvas.SetActive(true);
+            Time.timeScale = 0;
         }
+        else {
+            if (!controlsCanvas.activeSelf) {
+                pauseCanvas.SetActive(false);
+                Time.timeScale = 1;
+            } else {
+                controlsCanvas.SetActive(false);
+                pauseCanvas.SetActive(true);
+            }
+        }
+    }
+
+    public void MainMenu() {
+        SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 }

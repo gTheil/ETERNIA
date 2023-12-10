@@ -9,8 +9,7 @@ public class Door : Interactable
 
     protected override void Start() {
         base.Start();
-        if (state)
-            col.enabled = false;
+        StartCoroutine(SetState());
     }
 
     public override void Interact() {
@@ -34,5 +33,11 @@ public class Door : Interactable
         state = true;
         col.enabled = false;
         base.Interact();
+    }
+
+    private IEnumerator SetState() {
+        yield return new WaitForSecondsRealtime(0.1f);
+        if (state)
+            col.enabled = false;
     }
 }

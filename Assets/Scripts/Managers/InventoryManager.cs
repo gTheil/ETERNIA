@@ -19,6 +19,8 @@ public class InventoryManager : MonoBehaviour
     public List<ItemSO> scriptableItems = new List<ItemSO>();
     public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
 
+    public bool open = false;
+
     void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Inventory");
 
@@ -53,12 +55,14 @@ public class InventoryManager : MonoBehaviour
             inventoryMenu.SetActive(false);
             shopMenu.SetActive(false);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            open = false;
         }
         else {
             Time.timeScale = 0;
             equipmentMenu.SetActive(false);
             shopMenu.SetActive(false);
             inventoryMenu.SetActive(true);
+            open = true;
             for (int i = 0; i < itemSlots.Length; i++){
                 if (itemSlots[i].isFull) {
                     //itemSlots[i].gameObject.GetComponent<Selectable>().Select();
@@ -76,12 +80,14 @@ public class InventoryManager : MonoBehaviour
             equipmentMenu.SetActive(false);
             shopMenu.SetActive(false);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            open = false;
         }
         else {
             Time.timeScale = 0;
             inventoryMenu.SetActive(false);
             shopMenu.SetActive(false);
             equipmentMenu.SetActive(true);
+            open = true;
             for (int i = 0; i < equipSlots.Length; i++){
                 if (equipSlots[i].isFull) {
                     //equipSlots[i].gameObject.GetComponent<Selectable>().Select();
@@ -105,11 +111,13 @@ public class InventoryManager : MonoBehaviour
             equipmentMenu.SetActive(false);
             shopMenu.SetActive(false);
             EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            open = false;
         } else {
             Time.timeScale = 0;
             inventoryMenu.SetActive(false);
             equipmentMenu.SetActive(false);
             shopMenu.SetActive(true);
+            open = true;
 
             for (int i = 0; i < shopSlots.Length; i++){
                 shopSlots[i].EmptySlot();
@@ -228,6 +236,23 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Item SearchDatabase(ItemType itemType, int itemID) {
+        if (itemType == ItemType.consumable || itemType == ItemType.key) {
+            for (int i = 0; i < itemDatabase.Count; i++) {
+                if (itemDatabase[i].itemID == itemID) {
+                    return itemDatabase[i];
+                }
+            }
+        } else {
+            for (int i = 0; i < equipDatabase.Count; i++) {
+                if (equipDatabase[i].itemID == itemID) {
+                    return equipDatabase[i];
+                }
+            }
+        }
+        return null;
     }
 }
 
