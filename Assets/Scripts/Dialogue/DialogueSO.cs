@@ -6,6 +6,9 @@ using UnityEngine;
 public class DialogueSO : ScriptableObject
 {
     public DialogueActor[] actors;
+    public bool advanceSequence;
+    public bool returnFromBranch;
+    public bool openShop;
 
     [Tooltip("Only fill if Minor is selected as Actor Name")]
     [Header("Minor NPC Info")]

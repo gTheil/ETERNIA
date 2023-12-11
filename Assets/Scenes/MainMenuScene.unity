@@ -372,6 +372,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7707748967047d247af66b2fad81c28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1669276704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4494398831861498349, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
+  m_PrefabInstance: {fileID: 2175328785501934471}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1798853553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2828439801822945124, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
+  m_PrefabInstance: {fileID: 2175328785501934471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888692697
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +594,10 @@ PrefabInstance:
     - target: {fileID: 2020674357973666349, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828439801822945124, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
+      propertyPath: m_Name
+      value: ReturnButton
       objectReference: {fileID: 0}
     - target: {fileID: 2915247818372651686, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -838,6 +852,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2175328785501934474}
     - target: {fileID: 9003209799643535493, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
+      propertyPath: returnButton
+      value: 
+      objectReference: {fileID: 1798853553}
+    - target: {fileID: 9003209799643535493, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
       propertyPath: controlsPanel
       value: 
       objectReference: {fileID: 2175328785501934475}
@@ -845,6 +863,10 @@ PrefabInstance:
       propertyPath: mainMenuPanel
       value: 
       objectReference: {fileID: 503096324}
+    - target: {fileID: 9003209799643535493, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
+      propertyPath: newGameButton
+      value: 
+      objectReference: {fileID: 1669276704}
     m_RemovedComponents:
     - {fileID: 4186519862911867615, guid: 3b636814f8a10bf4abada22e68cb032f, type: 3}
     m_RemovedGameObjects: []

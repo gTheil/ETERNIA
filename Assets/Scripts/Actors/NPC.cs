@@ -33,38 +33,43 @@ public class NPC : Actor
             if (Input.GetButtonDown("Submit") && !dialogueInitiated && Time.timeScale == 1) {
                 GameManager.instance.InitiateDialogue(conversation[dialogueSequence], this);
                 dialogueInitiated = true;
-                anim.SetFloat("x", (playerTransform.position - transform.position).normalized.x);
-                anim.SetFloat("y", (playerTransform.position - transform.position).normalized.y);
+                if (anim != null) {
+                    anim.SetFloat("x", (playerTransform.position - transform.position).normalized.x);
+                    anim.SetFloat("y", (playerTransform.position - transform.position).normalized.y);
+                } 
             }
         }
     }
 
     private void FixedUpdate() {
-        if (actorState != "cooldown") {
-            anim.SetFloat("x", moveX);
-            anim.SetFloat("y", moveY);
-            
-            if (Vector3.Distance(transform.position, startingPosition) < roamingDistance) {
-                if (actorState != "roaming" && Time.time - lastMoveStart > moveDuration) {
-                    SetActorState("roaming");
-                    lastMoveStart = Time.time;
-                    RandomizeMovement();
+        if (baseSpeed > 0) {
+            if (actorState != "cooldown") {
+                anim.SetFloat("x", moveX);
+                anim.SetFloat("y", moveY);
+                
+                if (Vector3.Distance(transform.position, startingPosition) < roamingDistance) {
+                    if (actorState != "roaming" && Time.time - lastMoveStart > moveDuration) {
+                        SetActorState("roaming");
+                        lastMoveStart = Time.time;
+                        RandomizeMovement();
+                    }
+                } else {
+                    if (actorState != "return" && Time.time - lastMoveStart > moveDuration) {
+                        SetActorState("return");
+                        lastMoveStart = Time.time;
+                        moveX = Mathf.Round((startingPosition - transform.position).normalized.x);
+                        moveY = Mathf.Round((startingPosition - transform.position).normalized.y);
+                    }
                 }
+                HandleMovement();
             } else {
-                if (actorState != "return" && Time.time - lastMoveStart > moveDuration) {
-                    SetActorState("return");
-                    lastMoveStart = Time.time;
-                    moveX = Mathf.Round((startingPosition - transform.position).normalized.x);
-                    moveY = Mathf.Round((startingPosition - transform.position).normalized.y);
-                }
+                if (Time.time - lastMoveEnd < moveCooldown)
+                    UpdateMovement(Vector3.zero);
+                else
+                    SetActorState("idle");
             }
-            HandleMovement();
-        } else {
-            if (Time.time - lastMoveEnd < moveCooldown)
-                UpdateMovement(Vector3.zero);
-            else
-                SetActorState("idle");
         }
+        
     }
 
     private void RandomizeMovement() {

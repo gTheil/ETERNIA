@@ -976,8 +976,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 891297954572022129}
-  - {fileID: 3797980751202302180}
   - {fileID: 1576732574659558530}
+  - {fileID: 3797980751202302180}
   - {fileID: 2801308989026218146}
   - {fileID: 8073380785269130724}
   - {fileID: 4715514847579462626}
@@ -1069,11 +1069,6 @@ MonoBehaviour:
   damageText: {fileID: 8242420438727254749}
   dodgeText: {fileID: 5646161999673564966}
   blockText: {fileID: 3573689716572548205}
-  healthPointText: {fileID: 0}
-  blockPointText: {fileID: 0}
-  swordAtkText: {fileID: 0}
-  bowAtkText: {fileID: 0}
-  shieldDefText: {fileID: 0}
   healthBar: {fileID: 3146138341638411492}
   blockBar: {fileID: 5974445326630525889}
   goldText: {fileID: 3466602621413798012}

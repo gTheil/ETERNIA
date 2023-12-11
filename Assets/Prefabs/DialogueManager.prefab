@@ -47,6 +47,9 @@ MonoBehaviour:
   scriptableActors:
   - {fileID: 11400000, guid: d7cfc1e60720a1045a643cc6ab89981f, type: 2}
   - {fileID: 11400000, guid: 2e1a030b3a0304c40b61f06c2055ceed, type: 2}
+  - {fileID: 11400000, guid: 3dfb15c41abbeea45987529fb0733991, type: 2}
+  - {fileID: 11400000, guid: a612ed4fc882afc47a0a90ac8a4c1283, type: 2}
+  dialogueActive: 0
   optionButtons:
   - {fileID: 0}
   - {fileID: 0}

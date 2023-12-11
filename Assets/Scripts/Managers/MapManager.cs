@@ -16,31 +16,34 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tilemapSize = tilemap.GetComponent<Renderer>().bounds.size;
-
-        coefficientX = tilemapSize.x / mapImage.rectTransform.rect.width;
-        coefficientY = tilemapSize.y / mapImage.rectTransform.rect.height;
-
-        /*
-        Debug.Log("Scene Center: " + b.center);
-        Debug.Log("Scene Extents X: " + b.extents.x);
-        Debug.Log("Scene Extents Y: " + b.extents.y);
-        Debug.Log("Scene minX: " + b.min.x);
-        Debug.Log("Scene maxX: " + b.max.x);
-        Debug.Log("Scene minY: " + b.min.y);
-        Debug.Log("Scene maxY: " + b.max.y);
-        */
+        if (tilemap != null && mapImage != null) {
+            tilemapSize = tilemap.GetComponent<Renderer>().bounds.size;
+            coefficientX = tilemapSize.x / mapImage.rectTransform.rect.width;
+            coefficientY = tilemapSize.y / mapImage.rectTransform.rect.height;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M)) {
-            if (!mapMenu.activeSelf)
+        if (Input.GetButtonDown("Map") && !GameManager.instance.IsUIOpen() && !GameManager.instance.IsDialogueActive()) {
+            if (!mapMenu.activeSelf) {
                 mapMenu.SetActive(true);
-            else
+                Time.timeScale = 0;
+            }
+            else {
                 mapMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
+
+        if (Input.GetButtonDown("Cancel")) {
+            if (mapMenu.activeSelf) {
+                mapMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+
         if (GameManager.instance.GetPlayer() != null)
             playerImage.rectTransform.anchoredPosition = new Vector3(GameManager.instance.GetPlayer().transform.position.x / coefficientX, GameManager.instance.GetPlayer().transform.position.y / coefficientY, 0);
     }

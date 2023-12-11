@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
     public GameObject inventoryMenu;
     public GameObject equipmentMenu;
     public GameObject shopMenu;
+
     public ItemSlot[] itemSlots;
     public ItemSlot[] equipSlots;
     public ShopSlot[] shopSlots;
+
     public List<Item> itemDatabase = new List<Item>();
     public List<Item> equipDatabase = new List<Item>();
     public List<Item> equipmentShopInventory = new List<Item>();
     public List<Item> consumableShopInventory = new List<Item>();
     public List<ItemSO> scriptableItems = new List<ItemSO>();
     public List<EquipmentSO> scriptableEquips = new List<EquipmentSO>();
+
+    public TMP_Text healthPointText;
+    public TMP_Text blockPointText;
+    public TMP_Text swordAtkText;
+    public TMP_Text bowAtkText;
+    public TMP_Text shieldDefText;
 
     public bool open = false;
 
@@ -35,10 +44,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory") && !shopMenu.activeSelf || (Input.GetButtonDown("Cancel") && inventoryMenu.activeSelf))
+        if (Input.GetButtonDown("Inventory") && !shopMenu.activeSelf && !GameManager.instance.IsDialogueActive() || (Input.GetButtonDown("Cancel") && inventoryMenu.activeSelf))
             Inventory();
 
-        if (Input.GetButtonDown("Equipment") && !shopMenu.activeSelf || (Input.GetButtonDown("Cancel") && equipmentMenu.activeSelf))
+        if (Input.GetButtonDown("Equipment") && !shopMenu.activeSelf && !GameManager.instance.IsDialogueActive() || (Input.GetButtonDown("Cancel") && equipmentMenu.activeSelf))
             Equipment();
 
         if (Input.GetButtonDown("Cancel") && shopMenu.activeSelf)
@@ -253,6 +262,24 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {
+        healthPointText.text = hitPoint + "/" + hitPointMax;
+        blockPointText.text = Mathf.Round(blockPoint) + "/" + blockPointMax;
+        swordAtkText.text = swordAtk.ToString();
+        bowAtkText.text = bowAtk.ToString();
+        shieldDefText.text = shieldDef.ToString();
+    }
+
+    public void UpdateSingleStat(string statName, float statValue, float statMax) {
+        switch (statName) {
+            case "block":
+                blockPointText.text = Mathf.Round(statValue) + "/" + statMax;
+                break;
+            default:
+                break;
+        }
     }
 }
 

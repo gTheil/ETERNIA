@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueSO currentConversation;
     private int stepNum;
-    private bool dialogueActive;
+    public bool dialogueActive;
 
     private GameObject dialogueCanvas;
     private TMP_Text actorName;
@@ -117,23 +117,36 @@ public class DialogueManager : MonoBehaviour
 
     public void Option(int optionNum) {
         if (canContinueText) {
-            startingConversation = currentConversation;
-            stepToReturn = stepNum;
-
             foreach (GameObject button in optionButtons)
                 button.SetActive(false);
 
             switch (optionNum) {
                 case 0:
+                    if (currentConversation.option0.returnFromBranch) {
+                        startingConversation = currentConversation;
+                        stepToReturn = stepNum;
+                    }    
                     currentConversation = currentConversation.option0;
                     break;
                 case 1:
+                    if (currentConversation.option1.returnFromBranch) {
+                        startingConversation = currentConversation;
+                        stepToReturn = stepNum;
+                    }
                     currentConversation = currentConversation.option1;
                     break;
                 case 2:
+                    if (currentConversation.option2.returnFromBranch) {
+                        startingConversation = currentConversation;
+                        stepToReturn = stepNum;
+                    }
                     currentConversation = currentConversation.option2;
                     break;
                 case 3:
+                    if (currentConversation.option3.returnFromBranch) {
+                        startingConversation = currentConversation;
+                        stepToReturn = stepNum;
+                    }
                     currentConversation = currentConversation.option3;
                     break;
                 default:
@@ -185,10 +198,12 @@ public class DialogueManager : MonoBehaviour
             dialogueCanvas.SetActive(false);
             Time.timeScale = 1;
 
-            if (initiatedBy.npcType == NPCType.Blacksmith)
-                GameManager.instance.Shop("equipment");
-            else if (initiatedBy.npcType == NPCType.Alchemist)
-                GameManager.instance.Shop("consumable");
+            if (currentConversation.openShop) {
+                if (initiatedBy.npcType == NPCType.Blacksmith)
+                    GameManager.instance.Shop("equipment");
+                else if (initiatedBy.npcType == NPCType.Alchemist)
+                    GameManager.instance.Shop("consumable");
+            }
 
         } else {
             currentConversation = startingConversation;
@@ -196,6 +211,10 @@ public class DialogueManager : MonoBehaviour
             startingConversation = null;
             stepToReturn = 0;
             PlayDialogue();
+        }
+        if (currentConversation.advanceSequence) {
+            initiatedBy.dialogueSequence += 1;
+            GameManager.instance.SetDialogueSequence(initiatedBy.gameObject.name, initiatedBy.dialogueSequence);
         }
     }
 }

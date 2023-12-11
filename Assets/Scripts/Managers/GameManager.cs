@@ -28,6 +28,8 @@ class PlayerData {
     public string sceneToLoad;
     public List<string> interactableNames = new List<string>();
     public List<bool> interactableStates = new List<bool>();
+    public List<string> npcNames = new List<string>();
+    public List<int> npcSequences = new List<int>();
 }
 
 public class GameManager : MonoBehaviour
@@ -64,6 +66,8 @@ public class GameManager : MonoBehaviour
     private string sceneToLoad;
     private List<string> interactableNames = new List<string>();
     private List<bool> interactableStates = new List<bool>();
+    private List<string> npcNames = new List<string>();
+    private List<int> npcSequences = new List<int>();
 
     public string filePath;
     private bool newGame = true;
@@ -79,6 +83,7 @@ public class GameManager : MonoBehaviour
 
         SceneManager.sceneLoaded += GetReferences;
         SceneManager.sceneLoaded += FindInteractables;
+        SceneManager.sceneLoaded += FindNPCs;
         SceneManager.sceneLoaded += LoadGameState;
         DontDestroyOnLoad(gameObject);
 
@@ -97,6 +102,8 @@ public class GameManager : MonoBehaviour
             virtualCamera = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
             if (virtualCamera != null)
                 virtualCamera.Follow = player.transform;
+            UpdateHealthBar(player.hitPoint, player.hitPointMax);
+            UpdateBlockBar(player.blockPoint, player.blockPointMax);
         } else {
             if (player != null)
                 Destroy(player.gameObject);
@@ -138,6 +145,8 @@ public class GameManager : MonoBehaviour
         data.sceneToLoad = sceneToLoad;
         data.interactableNames = persistenceManager.interactableNames;
         data.interactableStates = persistenceManager.interactableStates;
+        data.npcNames = persistenceManager.npcNames;
+        data.npcSequences = persistenceManager.npcSequences;
 
         data.equippedSwordID = player.GetEquipment(EquipType.sword).equipID;
         data.equippedBowID = player.GetEquipment(EquipType.bow).equipID;
@@ -210,6 +219,8 @@ public class GameManager : MonoBehaviour
             sceneToLoad = data.sceneToLoad;
             interactableNames = data.interactableNames;
             interactableStates = data.interactableStates;
+            npcNames = data.npcNames;
+            npcSequences = data.npcSequences;
 
             Debug.Log(sceneToLoad);
             SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
@@ -247,80 +258,104 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetUpPlayer() {
-        player.hitPoint = hitPoint;
-        player.hitPointMax = hitPointMax;
-        player.blockPoint = blockPoint;
-        player.blockPointMax = blockPointMax;
-        player.baseDamage = baseDamage;
-        player.baseDefense = baseDefense;
-        player.gold = gold;
-        player.transform.position = new Vector3(positionX, positionY, 0f);
-        persistenceManager.interactableNames = interactableNames;
-        persistenceManager.interactableStates = interactableStates;
+        if (newGame) {
+            equippedSwordID = player.GetEquipment(EquipType.sword).equipID;
+            equippedBowID = player.GetEquipment(EquipType.bow).equipID;
+            equippedShieldID = player.GetEquipment(EquipType.shield).equipID;
 
-        if (File.Exists(filePath)) {
-            for (int i = 0; i < inventoryManager.itemSlots.Length; i++) {
-                inventoryManager.itemSlots[i].EmptySlot();
+            for(int i = 0; i < inventoryManager.equipDatabase.Count; i++) {
+                if (equippedSwordID == inventoryManager.equipDatabase[i].itemID)
+                    AddItem(inventoryManager.equipDatabase[i].itemID, inventoryManager.equipDatabase[i].itemName, inventoryManager.equipDatabase[i].itemQuantity,
+                            inventoryManager.equipDatabase[i].itemSprite, inventoryManager.equipDatabase[i].itemDescription, inventoryManager.equipDatabase[i].itemType);
+                else if (equippedBowID == inventoryManager.equipDatabase[i].itemID)
+                    AddItem(inventoryManager.equipDatabase[i].itemID, inventoryManager.equipDatabase[i].itemName, inventoryManager.equipDatabase[i].itemQuantity,
+                            inventoryManager.equipDatabase[i].itemSprite, inventoryManager.equipDatabase[i].itemDescription, inventoryManager.equipDatabase[i].itemType);
+                else if (equippedShieldID == inventoryManager.equipDatabase[i].itemID)
+                    AddItem(inventoryManager.equipDatabase[i].itemID, inventoryManager.equipDatabase[i].itemName, inventoryManager.equipDatabase[i].itemQuantity,
+                            inventoryManager.equipDatabase[i].itemSprite, inventoryManager.equipDatabase[i].itemDescription, inventoryManager.equipDatabase[i].itemType);
             }
+        } else {
+            player.hitPoint = hitPoint;
+            player.hitPointMax = hitPointMax;
+            player.blockPoint = blockPoint;
+            player.blockPointMax = blockPointMax;
+            player.baseDamage = baseDamage;
+            player.baseDefense = baseDefense;
+            player.gold = gold;
+            player.transform.position = new Vector3(positionX, positionY, 0f);
+            persistenceManager.interactableNames = interactableNames;
+            persistenceManager.interactableStates = interactableStates;
+            persistenceManager.npcNames = npcNames;
+            persistenceManager.npcSequences = npcSequences;
 
-            for (int i = 0; i < inventoryManager.equipSlots.Length; i++) {
-                inventoryManager.equipSlots[i].EmptySlot();
-            }
-
-            // Player Inventory
-            for (int i = 0; i < inventoryIDs.Length; i++) {
-                for (int j = 0; j < inventoryManager.itemDatabase.Count; j++) {
-                    if (inventoryIDs[i] == inventoryManager.itemDatabase[j].itemID) {
-                        AddItem(inventoryManager.itemDatabase[j].itemID, inventoryManager.itemDatabase[j].itemName, inventoryQuantities[i],
-                            inventoryManager.itemDatabase[j].itemSprite, inventoryManager.itemDatabase[j].itemDescription, inventoryManager.itemDatabase[j].itemType);
-                        break;
-                    }
+            if (File.Exists(filePath)) {
+                for (int i = 0; i < inventoryManager.itemSlots.Length; i++) {
+                    inventoryManager.itemSlots[i].EmptySlot();
                 }
-            }
 
-            // Player Equipment
-            for (int i = 0; i < equipmentIDs.Length; i++) {
-                for (int j = 0; j < inventoryManager.equipDatabase.Count; j++) {
-                    if (equipmentIDs[i] == inventoryManager.equipDatabase[j].itemID) {
-                        AddItem(inventoryManager.equipDatabase[j].itemID, inventoryManager.equipDatabase[j].itemName, inventoryManager.equipDatabase[j].itemQuantity,
-                            inventoryManager.equipDatabase[j].itemSprite, inventoryManager.equipDatabase[j].itemDescription, inventoryManager.equipDatabase[j].itemType);
-                        break;
-                    }
+                for (int i = 0; i < inventoryManager.equipSlots.Length; i++) {
+                    inventoryManager.equipSlots[i].EmptySlot();
                 }
-            }
 
-            // Player Equipped Weapons
-            for (int i = 0; i < inventoryManager.scriptableEquips.Count; i++) {
-                if (inventoryManager.scriptableEquips[i].equipID == equippedSwordID) {
-                    player.SetEquipment(inventoryManager.scriptableEquips[i]);
-                    for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
-                        if (inventoryManager.equipSlots[j].itemID == equippedSwordID) {
-                            inventoryManager.equipSlots[j].quantityText.text = "E";
-                            inventoryManager.equipSlots[j].quantityText.enabled = true;
+                // Player Inventory
+                for (int i = 0; i < inventoryIDs.Length; i++) {
+                    for (int j = 0; j < inventoryManager.itemDatabase.Count; j++) {
+                        if (inventoryIDs[i] == inventoryManager.itemDatabase[j].itemID) {
+                            AddItem(inventoryManager.itemDatabase[j].itemID, inventoryManager.itemDatabase[j].itemName, inventoryQuantities[i],
+                                inventoryManager.itemDatabase[j].itemSprite, inventoryManager.itemDatabase[j].itemDescription, inventoryManager.itemDatabase[j].itemType);
                             break;
                         }
                     }
-                } else if (inventoryManager.scriptableEquips[i].equipID == equippedBowID) {
-                    player.SetEquipment(inventoryManager.scriptableEquips[i]);
-                    for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
-                        if (inventoryManager.equipSlots[j].itemID == equippedBowID) {
-                            inventoryManager.equipSlots[j].quantityText.text = "E";
-                            inventoryManager.equipSlots[j].quantityText.enabled = true;
-                            break;
-                        }
-                    }
-                } else if (inventoryManager.scriptableEquips[i].equipID == equippedShieldID) {
-                    player.SetEquipment(inventoryManager.scriptableEquips[i]);
-                    for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
-                        if (inventoryManager.equipSlots[j].itemID == equippedShieldID) {
-                            inventoryManager.equipSlots[j].quantityText.text = "E";
-                            inventoryManager.equipSlots[j].quantityText.enabled = true;
+                }
+
+                // Player Equipment
+                for (int i = 0; i < equipmentIDs.Length; i++) {
+                    for (int j = 0; j < inventoryManager.equipDatabase.Count; j++) {
+                        if (equipmentIDs[i] == inventoryManager.equipDatabase[j].itemID) {
+                            AddItem(inventoryManager.equipDatabase[j].itemID, inventoryManager.equipDatabase[j].itemName, inventoryManager.equipDatabase[j].itemQuantity,
+                                inventoryManager.equipDatabase[j].itemSprite, inventoryManager.equipDatabase[j].itemDescription, inventoryManager.equipDatabase[j].itemType);
                             break;
                         }
                     }
                 }
             }
         }
+
+        // Player Equipped Weapons
+        for (int i = 0; i < inventoryManager.scriptableEquips.Count; i++) {
+            if (inventoryManager.scriptableEquips[i].equipID == equippedSwordID) {
+                player.SetEquipment(inventoryManager.scriptableEquips[i]);
+                for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
+                    if (inventoryManager.equipSlots[j].itemID == equippedSwordID) {
+                        inventoryManager.equipSlots[j].quantityText.text = "E";
+                        inventoryManager.equipSlots[j].quantityText.enabled = true;
+                        break;
+                    }
+                }
+            } else if (inventoryManager.scriptableEquips[i].equipID == equippedBowID) {
+                player.SetEquipment(inventoryManager.scriptableEquips[i]);
+                for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
+                    if (inventoryManager.equipSlots[j].itemID == equippedBowID) {
+                        inventoryManager.equipSlots[j].quantityText.text = "E";
+                        inventoryManager.equipSlots[j].quantityText.enabled = true;
+                        break;
+                    }
+                }
+            } else if (inventoryManager.scriptableEquips[i].equipID == equippedShieldID) {
+                player.SetEquipment(inventoryManager.scriptableEquips[i]);
+                for (int j = 0; j < inventoryManager.equipSlots.Length; j++) {
+                    if (inventoryManager.equipSlots[j].itemID == equippedShieldID) {
+                        inventoryManager.equipSlots[j].quantityText.text = "E";
+                        inventoryManager.equipSlots[j].quantityText.enabled = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        UpdateHealthBar(player.hitPoint, player.hitPointMax);
+        UpdateBlockBar(player.blockPoint, player.blockPointMax);
+        
     }
 
     // Floating Text
@@ -374,11 +409,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdateStatsUI(float hitPoint, float hitPointMax, float blockPoint, float blockPointMax, int swordAtk, int bowAtk, int shieldDef) {
-        hudManager.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, swordAtk, bowAtk, shieldDef);
+        inventoryManager.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, swordAtk, bowAtk, shieldDef);
     }
 
     public void UpdateSingleStat(string statName, float statValue, float statMax) {
-        hudManager.UpdateSingleStat(statName, statValue, statMax);
+        inventoryManager.UpdateSingleStat(statName, statValue, statMax);
     }
 
     public void InitiateDialogue(DialogueSO conversation, NPC npc) {
@@ -392,6 +427,15 @@ public class GameManager : MonoBehaviour
 
     public void SetInteractableState(string name, bool state) {
         persistenceManager.SetInteractableState(name, state);
+    }
+
+    public void FindNPCs(Scene scene, LoadSceneMode mode) {
+        if (SceneManager.GetActiveScene().name != "MainMenuScene")
+            persistenceManager.FindNPCs(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    public void SetDialogueSequence(string name, int sequence) {
+        persistenceManager.SetDialogueSequence(name, sequence);
     }
 
     public void Shop(string shopType) {
@@ -444,6 +488,10 @@ public class GameManager : MonoBehaviour
 
     public bool IsUIOpen() {
         return inventoryManager.open;
+    }
+
+    public bool IsDialogueActive() {
+        return dialogueManager.dialogueActive;
     }
 
     public void SetNewGame(bool newGame) {

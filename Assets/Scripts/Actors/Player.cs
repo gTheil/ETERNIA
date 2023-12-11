@@ -52,10 +52,8 @@ public class Player : CombatActor
         UpdateStats();
         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
         GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
-        if (!GameManager.instance.GetGameState()) {
-            GameManager.instance.SetUpPlayer();
-            Debug.Log("player set up");
-        }
+        GameManager.instance.SetUpPlayer();
+        Debug.Log("player set up");
     }
 
     // Update is called once per frame
@@ -135,20 +133,16 @@ public class Player : CombatActor
     }
 
     private void CheckInput() {
-        if (Input.GetButtonDown("Dash") && (moveX != 0 || moveY != 0))
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Dash, Time.time));
-        if (Input.GetButtonDown("Melee"))
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.MeleeAttack, Time.time));
-        if (Input.GetButtonDown("Ranged"))
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));
-        if (Input.GetButtonDown("Block") && !blockBroken)
-            inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));
-
-        // Debug
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-        if (Input.GetKeyDown(KeyCode.Escape))
-            GameManager.instance.PauseMenu();
+        if (Time.timeScale == 1) {
+            if (Input.GetButtonDown("Dash") && (moveX != 0 || moveY != 0))
+                inputBuffer.Add(new ActionItem(ActionItem.InputAction.Dash, Time.time));
+            if (Input.GetButtonDown("Melee"))
+                inputBuffer.Add(new ActionItem(ActionItem.InputAction.MeleeAttack, Time.time));
+            if (Input.GetButtonDown("Ranged"))
+                inputBuffer.Add(new ActionItem(ActionItem.InputAction.RangedAttack, Time.time));
+            if (Input.GetButtonDown("Block") && !blockBroken)
+                inputBuffer.Add(new ActionItem(ActionItem.InputAction.Block, Time.time));
+        }
     }
 
     private void TryBufferedAction() {
