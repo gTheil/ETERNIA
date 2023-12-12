@@ -6,11 +6,6 @@ public class Trap : Interactable
 {
     public int damage;
 
-    protected override void Start() {
-        base.Start();
-        StartCoroutine(SetState());
-    }
-
     public override void Interact() {
         state = !state;
         col.enabled = !col.enabled;
@@ -24,12 +19,6 @@ public class Trap : Interactable
         pushForce = 0f
         };
         col.transform.parent.SendMessage("TakeDamage", dmg);
-    }
-
-    private IEnumerator SetState() {
-        yield return new WaitForSecondsRealtime(0.1f);
-        if (state)
-            col.enabled = false;
     }
 
 }

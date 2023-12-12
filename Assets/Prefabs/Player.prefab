@@ -284,11 +284,11 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.065841675, y: 0.42}
+  m_Offset: {x: -0.065841675, y: -0.5546646}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.47, y: 0.12}
-    oldSize: {x: 1.875, y: 2.75}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.875, y: 2.625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -734,7 +734,7 @@ Transform:
   m_GameObject: {fileID: 7438927320151230095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.023, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.15, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -793,10 +793,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3266841416676316367}
     m_Modifications:
-    - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3270657044939395929, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: attackPush
       value: 5
