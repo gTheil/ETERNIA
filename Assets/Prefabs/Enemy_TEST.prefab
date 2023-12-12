@@ -123,11 +123,11 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010268688, y: -0.63083696}
+  m_Offset: {x: -0.0010268688, y: 0.42}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.75}
+    pivot: {x: 0.5, y: 0.12}
+    oldSize: {x: 1.75, y: 2.625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -181,8 +181,14 @@ MonoBehaviour:
   lastState: 
   baseSpeed: 5
   currentSpeed: 0
-  hitPoint: 10
-  hitPointMax: 10
+  hitPoint: 5
+  hitPointMax: 5
+  meleeDamage: 2
+  meleePush: 3
+  rangedDamage: 0
+  rangedPush: 0
+  projectileSpeed: 0
+  baseDefense: 0
   pushImmune: 0
   pushRecoverySpeed: 0.2
   projectilePrefab: {fileID: 0}
@@ -191,7 +197,7 @@ MonoBehaviour:
   rangedAttackSound: {fileID: 0}
   hurtbox: {fileID: 3814331763962730888}
   triggerDistance: 5
-  chaseDistance: 20
+  chaseDistance: 10
   chaseCooldown: 1
   chasing: 0
   startingPosition: {x: 0, y: 0, z: 0}
@@ -299,7 +305,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450155235202384745}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0b120d7a709fbbc42be7f068ab8da3d2, type: 2}
   m_CullingMode: 0
@@ -338,7 +344,7 @@ Transform:
   m_GameObject: {fileID: 7277865580965195328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.168, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -455,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: 0.968
       objectReference: {fileID: 0}
     - target: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -570,8 +576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf34c485debe0d7498ce995d421338fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackPush: 5
   attackHitSound: {fileID: 9211515572647045018}
 --- !u!4 &1331584282208526850 stripped
 Transform:

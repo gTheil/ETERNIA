@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : Interactable
+public class Wall : Interactable
 {
-    public int damage;
-
     protected override void Start() {
         base.Start();
         StartCoroutine(SetState());
@@ -17,19 +15,9 @@ public class Trap : Interactable
         base.Interact();
     }
 
-    private void OnTriggerStay2D(Collider2D col) {
-        Damage dmg = new Damage {
-        damageAmount = damage,
-        origin = transform.position,
-        pushForce = 0f
-        };
-        col.transform.parent.SendMessage("TakeDamage", dmg);
-    }
-
     private IEnumerator SetState() {
         yield return new WaitForSecondsRealtime(0.1f);
         if (state)
             col.enabled = false;
     }
-
 }

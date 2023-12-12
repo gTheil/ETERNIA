@@ -126,12 +126,12 @@ TextureImporter:
       name: NPC_test_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 100
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: NPC_test_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 100
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: NPC_test_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 100
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: NPC_test_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 49
         y: 100
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: NPC_test_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 68
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 13
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: NPC_test_5
       rect:
         serializedVersion: 2
-        x: 16
+        x: 18
         y: 68
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 13
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: NPC_test_6
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 68
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 13
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,12 +273,12 @@ TextureImporter:
       name: NPC_test_7
       rect:
         serializedVersion: 2
-        x: 48
+        x: 50
         y: 68
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 13
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -294,12 +294,12 @@ TextureImporter:
       name: NPC_test_8
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 36
-        width: 16
+        width: 14
         height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -315,12 +315,12 @@ TextureImporter:
       name: NPC_test_9
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 36
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,12 +336,12 @@ TextureImporter:
       name: NPC_test_10
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 36
-        width: 16
+        width: 14
         height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -357,12 +357,12 @@ TextureImporter:
       name: NPC_test_11
       rect:
         serializedVersion: 2
-        x: 48
+        x: 49
         y: 36
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 14
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -378,12 +378,12 @@ TextureImporter:
       name: NPC_test_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1
+        y: 4
+        width: 13
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -399,12 +399,12 @@ TextureImporter:
       name: NPC_test_13
       rect:
         serializedVersion: 2
-        x: 16
-        y: 3
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 17
+        y: 4
+        width: 13
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -420,12 +420,12 @@ TextureImporter:
       name: NPC_test_14
       rect:
         serializedVersion: 2
-        x: 32
-        y: 3
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 33
+        y: 4
+        width: 13
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,12 +441,12 @@ TextureImporter:
       name: NPC_test_15
       rect:
         serializedVersion: 2
-        x: 48
-        y: 3
-        width: 16
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 49
+        y: 4
+        width: 13
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7599177042973928731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.137, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,11 +201,11 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010268688, y: -0.63083696}
+  m_Offset: {x: -0.0010268688, y: 0.42}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.75}
+    pivot: {x: 0.5, y: 0.12}
+    oldSize: {x: 1.75, y: 2.625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -351,10 +351,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveX: 0
   moveY: 0
+  actorState: 
+  lastState: 
   baseSpeed: 5
   currentSpeed: 0
   hitPoint: 10
   hitPointMax: 10
+  meleeDamage: 0
+  meleePush: 0
+  rangedDamage: 0
+  rangedPush: 0
+  projectileSpeed: 0
+  baseDefense: 0
   pushImmune: 0
   pushRecoverySpeed: 0.2
   projectilePrefab: {fileID: 0}
@@ -362,8 +370,6 @@ MonoBehaviour:
   meleeAttackSound: {fileID: 7091547558773258136}
   rangedAttackSound: {fileID: 0}
   hurtbox: {fileID: 9097087758847871159}
-  actorState: 
-  lastState: 
   triggerDistance: 5
   chaseDistance: 20
   chaseCooldown: 2
@@ -673,8 +679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf34c485debe0d7498ce995d421338fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackPush: 5
   attackHitSound: {fileID: 1748763270615918002}
 --- !u!4 &8497033211000168490 stripped
 Transform:
