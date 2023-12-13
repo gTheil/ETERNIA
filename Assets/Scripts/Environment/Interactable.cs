@@ -26,4 +26,10 @@ public class Interactable : MonoBehaviour
         Debug.Log(gameObject.name);
         GameManager.instance.SetInteractableState(gameObject.name, state);
     }
+
+    protected IEnumerator SetState() {
+        yield return new WaitForSecondsRealtime(0.1f);
+        if (state)
+            col.enabled = false;
+    }
 }

@@ -148,5 +148,5 @@ MonoBehaviour:
   itemDescription: DEBUG
   itemQuantity: 1
   itemType: 0
-  itemPrice: 100
+  itemPrice: 50
   itemSprite: {fileID: -654788613, guid: 022bcdaeefaa20b49996073a824638db, type: 3}

@@ -181,8 +181,14 @@ MonoBehaviour:
   lastState: 
   baseSpeed: 5
   currentSpeed: 0
-  hitPoint: 10
-  hitPointMax: 10
+  hitPoint: 5
+  hitPointMax: 5
+  meleeDamage: 2
+  meleePush: 3
+  rangedDamage: 0
+  rangedPush: 0
+  projectileSpeed: 0
+  baseDefense: 0
   pushImmune: 0
   pushRecoverySpeed: 0.2
   projectilePrefab: {fileID: 0}
@@ -191,8 +197,8 @@ MonoBehaviour:
   rangedAttackSound: {fileID: 0}
   hurtbox: {fileID: 3814331763962730888}
   triggerDistance: 5
-  chaseDistance: 20
-  chaseCooldown: 1
+  chaseDistance: 10
+  chaseCooldown: 1.5
   chasing: 0
   startingPosition: {x: 0, y: 0, z: 0}
 --- !u!82 &4214522645765532264
@@ -570,8 +576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf34c485debe0d7498ce995d421338fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  attackPush: 5
   attackHitSound: {fileID: 9211515572647045018}
 --- !u!4 &1331584282208526850 stripped
 Transform:
