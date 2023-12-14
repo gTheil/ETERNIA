@@ -478,6 +478,10 @@ public class GameManager : MonoBehaviour
         return player.GetDisplaySprite();
     }
 
+    public TMP_Text GetNoItemText() {
+        return player.GetNoItemText();
+    }
+
     public bool GetGameState() {
         return newGame;
     }

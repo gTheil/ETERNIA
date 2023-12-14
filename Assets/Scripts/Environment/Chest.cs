@@ -11,14 +11,19 @@ public class Chest : Interactable
     public int gold;
     public Sprite goldSprite;
     public float displayTimer;
+    public Sprite openSprite;
+
+    private SpriteRenderer spr;
 
     private SpriteRenderer displaySprite;
-
-    //private bool isOpen = false;
+    private TMP_Text noItemText;
 
     protected override void Start() {
         base.Start();
         displaySprite = GameManager.instance.GetDisplaySprite();
+        noItemText = GameManager.instance.GetNoItemText();
+        spr = GetComponent<SpriteRenderer>();
+        StartCoroutine(SetState());
     }
 
     public override void Interact() {
@@ -48,6 +53,7 @@ public class Chest : Interactable
             GameManager.instance.GetPlayer().GetComponent<Player>().gold += this.gold;
         }
         state = true;
+        spr.sprite = openSprite;
         StartCoroutine(DisplayItem(true));
         base.Interact();
     }
@@ -62,10 +68,20 @@ public class Chest : Interactable
         } else {
             Item keyNeeded = GameManager.instance.SearchDatabase(ItemType.key, keyID);
             displaySprite.sprite = keyNeeded.itemSprite;
+            noItemText.text = "X";
             //play wrong sound
         }
         displaySprite.enabled = true;
+        noItemText.enabled = true;
         yield return new WaitForSecondsRealtime(displayTimer);
+        noItemText.text = "";
         displaySprite.enabled = false;
+        noItemText.enabled = false;
+    }
+
+    protected override IEnumerator SetState() {
+        yield return new WaitForSecondsRealtime(0.1f);
+        if (state)
+            spr.sprite = openSprite;
     }
 }

@@ -25,12 +25,14 @@ public class Player : CombatActor
     public EquipmentSO equippedSword, equippedBow, equippedShield;
 
     public SpriteRenderer displaySprite;
+    public TMP_Text noItemText;
 
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
     private bool actionAllowed; //set to true whenever we want to process actions from the input buffer, set to false when an action has to wait in the buffer
     private float blockBreakOffset;
     private bool blockBroken;
+    private bool dead;
 
     void Awake() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
@@ -66,7 +68,8 @@ public class Player : CombatActor
             moveY = Input.GetAxisRaw("Vertical");
         }
 
-        UpdateMovement(new Vector3(moveX, moveY, 0));
+        if (!dead)
+            UpdateMovement(new Vector3(moveX, moveY, 0));
 
         if (anim != null) {
             if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
@@ -331,6 +334,7 @@ public class Player : CombatActor
     }
 
     protected override void Death() {
+        dead = true;
         GetComponent<SpriteRenderer>().enabled = false;
         hitbox.enabled = false;
         StartCoroutine(GameOver());
@@ -421,5 +425,9 @@ public class Player : CombatActor
 
     public SpriteRenderer GetDisplaySprite() {
         return displaySprite;
+    }
+
+    public TMP_Text GetNoItemText() {
+        return noItemText;
     }
 }
