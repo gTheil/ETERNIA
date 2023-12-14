@@ -75,14 +75,17 @@ public class Player : CombatActor
             if (actorState != "dash" && (moveX != 0 || moveY != 0)) {
                 anim.SetFloat("x", moveX);
                 anim.SetFloat("y", moveY);
-                ActiveAnimatorLayer("Walk");
+                if (actorState == "block")
+                    ActiveAnimatorLayer("BlockWalk");
+                else
+                    ActiveAnimatorLayer("Walk");
             } else {
                 switch (actorState) {
                     case "idle":
                         ActiveAnimatorLayer("Idle");
                         break;
                     case "block":
-                        ActiveAnimatorLayer("Block");
+                        ActiveAnimatorLayer("BlockIdle");
                         break;
                     default:
                         break;
