@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class RangedAttack : MeleeAttack
 {
+    private string originTag;
+
     private void Start() {
         attackDamage = transform.parent.GetComponent<Projectile>().originActor.gameObject.GetComponent<CombatActor>().rangedDamage;
         attackPush = transform.parent.GetComponent<Projectile>().originActor.gameObject.GetComponent<CombatActor>().rangedPush;
+        originTag = transform.parent.GetComponent<Projectile>().originActor.gameObject.tag;
     }
 
     protected override void Update() {
@@ -14,7 +17,6 @@ public class RangedAttack : MeleeAttack
     }
 
     protected override void OnTriggerEnter2D(Collider2D col) {
-        string originTag = transform.parent.GetComponent<Projectile>().originActor.gameObject.tag;
         if (col.transform.parent.tag != originTag) {
             Damage dmg = new Damage {
             damageAmount = attackDamage,

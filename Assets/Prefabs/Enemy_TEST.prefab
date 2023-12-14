@@ -179,12 +179,12 @@ MonoBehaviour:
   moveY: 0
   actorState: 
   lastState: 
-  baseSpeed: 5
+  baseSpeed: 7.5
   currentSpeed: 0
   hitPoint: 5
   hitPointMax: 5
   meleeDamage: 2
-  meleePush: 3
+  meleePush: 2
   rangedDamage: 0
   rangedPush: 0
   projectileSpeed: 0
@@ -196,8 +196,8 @@ MonoBehaviour:
   meleeAttackSound: {fileID: 0}
   rangedAttackSound: {fileID: 0}
   hurtbox: {fileID: 3814331763962730888}
-  triggerDistance: 5
-  chaseDistance: 10
+  triggerDistance: 10
+  chaseDistance: 15
   chaseCooldown: 1.5
   chasing: 0
   startingPosition: {x: 0, y: 0, z: 0}

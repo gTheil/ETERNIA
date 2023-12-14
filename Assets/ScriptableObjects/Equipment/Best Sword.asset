@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0665ca21145b3341be959c3360bdad2, type: 3}
+  m_Name: Best Sword
+  m_EditorClassIdentifier: 
+  equipID: 7
+  equipType: 0
+  swordAtk: 6
+  bowAtk: 0
+  shieldDef: 0
+  shieldBlockPoint: 0
+  atkPush: 8
+  projectileSpeed: 0
+  shieldRecoverySpeed: 0
+  shieldRecoveryCooldown: 0
+  shieldPushResistance: 0
+  shieldBreakOffset: 0

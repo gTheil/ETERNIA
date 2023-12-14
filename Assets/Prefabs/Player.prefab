@@ -195,7 +195,7 @@ MonoBehaviour:
   moveY: 0
   actorState: 
   lastState: 
-  baseSpeed: 10
+  baseSpeed: 15
   currentSpeed: 0
   hitPoint: 10
   hitPointMax: 10
@@ -222,7 +222,7 @@ MonoBehaviour:
   lastBlock: 0
   blockRecoverySpeed: 0
   blockRecoverySpeedBreakOffset: 0
-  gold: 5000
+  gold: 50
   attackBonus: 0
   defenseBonus: 0
   meleeAttack: {fileID: 5954177963394139688}

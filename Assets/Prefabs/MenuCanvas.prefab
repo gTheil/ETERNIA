@@ -2434,10 +2434,13 @@ MonoBehaviour:
   - {fileID: 5744293964352786364, guid: be19e8d5784eb88489a7bd68fdd0d641, type: 3}
   - {fileID: 377774361774208717, guid: 7c5d6f9f751cd22419dab8bc42229a61, type: 3}
   - {fileID: 1700259013845693691, guid: f577c9c28e50b8e4da875229097b02ea, type: 3}
+  - {fileID: 5270907590240990363, guid: 9915892fe8eb13b4984f2f746101c6c6, type: 3}
+  - {fileID: 6555065974661890667, guid: 64e5bef532e875d408621bbb154a3d0e, type: 3}
+  - {fileID: 6181175425608210475, guid: dd1bf5baffaa9544783f9709dffed847, type: 3}
   equipmentShopInventory:
-  - {fileID: 5744293964352786364, guid: be19e8d5784eb88489a7bd68fdd0d641, type: 3}
-  - {fileID: 377774361774208717, guid: 7c5d6f9f751cd22419dab8bc42229a61, type: 3}
-  - {fileID: 1700259013845693691, guid: f577c9c28e50b8e4da875229097b02ea, type: 3}
+  - {fileID: 5270907590240990363, guid: 9915892fe8eb13b4984f2f746101c6c6, type: 3}
+  - {fileID: 6555065974661890667, guid: 64e5bef532e875d408621bbb154a3d0e, type: 3}
+  - {fileID: 6181175425608210475, guid: dd1bf5baffaa9544783f9709dffed847, type: 3}
   consumableShopInventory:
   - {fileID: 5363513914311809284, guid: 3fa9d5f4f19d68a46a734e3b3192632c, type: 3}
   - {fileID: 7007838316069583659, guid: ea139ee34dafe894a91500648e9bad9d, type: 3}
@@ -2457,6 +2460,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72a4afaa89a31a2479252cf14c5c89ee, type: 2}
   - {fileID: 11400000, guid: 49adfbbcf3672a64e89096b350064bee, type: 2}
   - {fileID: 11400000, guid: bd26e9ec678286a429d2660a4e6178ef, type: 2}
+  - {fileID: 11400000, guid: ed171df0b9ea8604cb280c56f34411cd, type: 2}
+  - {fileID: 11400000, guid: f010bea439d3c15438f8c7cc0f276c3c, type: 2}
+  - {fileID: 11400000, guid: ed171df0b9ea8604cb280c56f34411cd, type: 2}
   healthPointText: {fileID: 4982164167824397429}
   blockPointText: {fileID: 6541851544055740894}
   swordAtkText: {fileID: 1223164667683104521}

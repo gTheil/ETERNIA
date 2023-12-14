@@ -333,7 +333,7 @@ public class Player : CombatActor
     protected override void Death() {
         GetComponent<SpriteRenderer>().enabled = false;
         hitbox.enabled = false;
-        StartCoroutine(ReloadScene());
+        StartCoroutine(GameOver());
     }
 
     protected virtual void BlockBreak() {
@@ -384,9 +384,9 @@ public class Player : CombatActor
         blockRecoverySpeedBreakOffset = equippedShield.shieldBreakOffset;
     }
 
-    IEnumerator ReloadScene() {
+    IEnumerator GameOver() {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
 
     // Getters

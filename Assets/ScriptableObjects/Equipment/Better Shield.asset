@@ -21,6 +21,6 @@ MonoBehaviour:
   atkPush: 0
   projectileSpeed: 0
   shieldRecoverySpeed: 2
-  shieldRecoveryCooldown: 1
-  shieldPushResistance: 5
+  shieldRecoveryCooldown: 2
+  shieldPushResistance: 1.5
   shieldBreakOffset: 0.25

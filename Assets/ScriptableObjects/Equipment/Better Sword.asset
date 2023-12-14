@@ -18,7 +18,7 @@ MonoBehaviour:
   bowAtk: 0
   shieldDef: 0
   shieldBlockPoint: 0
-  atkPush: 8
+  atkPush: 6
   projectileSpeed: 0
   shieldRecoverySpeed: 0
   shieldRecoveryCooldown: 0
