@@ -27,6 +27,9 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
     public TMP_Text itemDescriptionName;
     public TMP_Text itemDescriptionText;
 
+    public AudioSource slotHover;
+    public AudioSource slotClick;
+
     public void FillSlot(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType) {
         this.itemID = itemID;
         this.itemName = itemName;
@@ -77,6 +80,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
             itemDescriptionName.text = "";
             itemDescriptionText.text = "";
         }
+        slotHover.Play();
     }
 
     public virtual void OnSubmit(BaseEventData eventData) {
@@ -93,6 +97,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler, ISubmitHandler
                     quantityText.enabled = true;
                 }
             }
+            slotClick.Play();
         }
     }
 

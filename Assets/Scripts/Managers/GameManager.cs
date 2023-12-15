@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     // Instance
     public static GameManager instance;
 
+    public AudioSource saveAudio;
+
     // References
     private Player player;
     private FloatingTextManager floatingTextManager;
@@ -190,6 +192,7 @@ public class GameManager : MonoBehaviour
         
         */
         Debug.Log("Game data saved.");
+        saveAudio.Play();
         
     }
 
@@ -500,6 +503,10 @@ public class GameManager : MonoBehaviour
 
     public void SetNewGame(bool newGame) {
         this.newGame = newGame;
+    }
+
+    public bool IsPlayerDead() {
+        return player.IsDead();
     }
 }
 

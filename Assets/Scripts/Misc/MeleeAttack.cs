@@ -26,7 +26,7 @@ public class MeleeAttack : MonoBehaviour
             };
             transform.parent.SendMessage("OnDamageDealt");
             col.transform.parent.SendMessage("TakeDamage", dmg);
-            attackHitSound.Play();
+            //attackHitSound.Play();
         }
     }
 }

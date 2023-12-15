@@ -19,6 +19,8 @@ public class NPC : Actor
     public bool dialogueInitiated;
     public NPCType npcType;
 
+    public AudioSource dialogueAudio;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -31,6 +33,7 @@ public class NPC : Actor
     void Update() {
         if (Vector3.Distance(GameManager.instance.GetPlayer().transform.position, transform.position) <= interactionDistance) {
             if (Input.GetButtonDown("Submit") && !dialogueInitiated && Time.timeScale == 1) {
+                dialogueAudio.Play();
                 GameManager.instance.InitiateDialogue(conversation[dialogueSequence], this);
                 dialogueInitiated = true;
                 if (anim != null) {

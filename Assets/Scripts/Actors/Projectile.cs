@@ -12,10 +12,8 @@ public class Projectile : Actor
 
     private void FixedUpdate() {
         UpdateMovement(new Vector3(moveX, moveY, 0));
-        if (originActor.gameObject.tag == "Player") {
-            anim.SetFloat("x", moveX);
-            anim.SetFloat("y", moveY);
-        }
+        anim.SetFloat("x", moveX);
+        anim.SetFloat("y", moveY);
     }
 
     protected override void UpdateMovement(Vector3 input) {

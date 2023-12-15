@@ -12,53 +12,57 @@ public class Enemy : CombatActor
     private float lastHit;
     protected Transform playerTransform;
     public Vector3 startingPosition;
+    protected SpriteRenderer spr;
 
     protected override void Start() {
         base.Start();
 
         playerTransform = GameManager.instance.GetPlayer().transform;
         startingPosition = transform.position;
+        spr = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void FixedUpdate() {
         moveX = Mathf.Round(moveDelta.x);
         moveY = Mathf.Round(moveDelta.y);
 
-        if (actorState != "cooldown") {
-            if (Vector3.Distance(playerTransform.position, startingPosition) < chaseDistance) {
-                if (Vector3.Distance(playerTransform.position, transform.position) < triggerDistance)
-                    SetActorState("chase");
-            } else {
-                if (actorState == "chase") {
-                    SetActorState("return");
+        if (!GameManager.instance.IsPlayerDead()) {
+            if (actorState != "cooldown") {
+                if (Vector3.Distance(playerTransform.position, startingPosition) < chaseDistance) {
+                    if (Vector3.Distance(playerTransform.position, transform.position) < triggerDistance)
+                        SetActorState("chase");
+                } else {
+                    if (actorState == "chase") {
+                        SetActorState("return");
+                    }
                 }
-            }
-        } else {
-            UpdateMovement(Vector3.zero);
-        }
-
-        switch(actorState) {
-            case "idle":
+            } else {
                 UpdateMovement(Vector3.zero);
-                break;
-            case "chase":
-                UpdateMovement((playerTransform.position - transform.position).normalized);
-                break;
-            case "return":
-                UpdateMovement((startingPosition - transform.position).normalized);
-                if (Vector3.Distance(transform.position, startingPosition) <= 0.1f)
-                    SetActorState("idle");
-                break;
-            case "cooldown":
-                if (Time.time - lastHit > chaseCooldown)
-                    SetActorState("chase");
-                break;
-            default:
-            UpdateMovement(Vector3.zero);
-                break;
+            }
+
+            switch(actorState) {
+                case "idle":
+                    UpdateMovement(Vector3.zero);
+                    break;
+                case "chase":
+                    UpdateMovement((playerTransform.position - transform.position).normalized);
+                    break;
+                case "return":
+                    UpdateMovement((startingPosition - transform.position).normalized);
+                    if (Vector3.Distance(transform.position, startingPosition) <= 0.1f)
+                        SetActorState("idle");
+                    break;
+                case "cooldown":
+                    if (Time.time - lastHit > chaseCooldown)
+                        SetActorState("chase");
+                    break;
+                default:
+                UpdateMovement(Vector3.zero);
+                    break;
+            }
         }
 
-        if ((moveX != 0 || moveY != 0) && Time.time - lastImmune > immuneTime) {
+        if (Time.time - lastImmune > immuneTime) {
             anim.SetFloat("x", moveX);
             anim.SetFloat("y", moveY);
         }
@@ -77,6 +81,7 @@ public class Enemy : CombatActor
     }
 
     protected override void Death() {
+        deathAudio.Play();
         Destroy(gameObject);
     }
 }

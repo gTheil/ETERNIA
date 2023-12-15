@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 1185466451
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1725973261, guid: 96423fe271515374992fb0ab6f948d29, type: 3}
+  m_Sprite: {fileID: 1016942316, guid: 6d30208216d13db4b9298353c666493f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,18 +123,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010268688, y: -0.63083696}
+  m_Offset: {x: -0.0057296753, y: 0.3268547}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.75}
+    pivot: {x: 0.5, y: 0.2}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0103574, y: 1.0072093}
+  m_Size: {x: 1.5080109, y: 0.9508743}
   m_EdgeRadius: 0
 --- !u!50 &1696493157394488008
 Rigidbody2D:
@@ -173,7 +173,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3a13be44208fb2d4faeb215ec6198a61, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1f89e89108dfb04cbc9ead2d686fcbe, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1.5
@@ -290,7 +290,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5651962481097589185, guid: e0f86f781ec517846b0637f65b27ce97, type: 3}
   damageSound: {fileID: 8780254374694241926}
   meleeAttackSound: {fileID: 0}
-  rangedAttackSound: {fileID: 4111617534334077837}
+  rangedAttackSound: {fileID: 8780254374694241926}
+  deathAudio: {fileID: 4111617534334077837}
   hurtbox: {fileID: 2984652954920361706}
   shootDistance: 10
   runTriggerDistance: 5
@@ -308,7 +309,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d78f25e96dc93fb44be84ab903190033, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1aa0d396900ac7e45b7c960b57752096, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 2.5
@@ -441,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 6126241332766883142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.9799957, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -479,7 +480,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0048867464}
+  m_Offset: {x: 0.000007867813, y: -0.09408116}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -490,5 +491,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 2.2902267}
+  m_Size: {x: 1.720006, y: 2.1118379}
   m_EdgeRadius: 0

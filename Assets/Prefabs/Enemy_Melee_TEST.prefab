@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7599177042973928731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.9799957, z: 0}
   m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,7 +64,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0048867464}
+  m_Offset: {x: 0.000007867813, y: -0.09408116}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -75,7 +75,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 2.2902267}
+  m_Size: {x: 1.720006, y: 2.1118379}
   m_EdgeRadius: 0
 --- !u!1 &7704639152248058383
 GameObject:
@@ -90,9 +90,9 @@ GameObject:
   - component: {fileID: 1434879173486499613}
   - component: {fileID: 2988830553480686869}
   - component: {fileID: 6089731921491712856}
-  - component: {fileID: 3324611153105284797}
   - component: {fileID: 6945130967660511007}
   - component: {fileID: 7091547558773258136}
+  - component: {fileID: 8756866765323986231}
   m_Layer: 6
   m_Name: Enemy_Melee_TEST
   m_TagString: Enemy
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 1185466451
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1725973261, guid: 96423fe271515374992fb0ab6f948d29, type: 3}
+  m_Sprite: {fileID: 1976291000, guid: cbe07412ef406fe4a89b263d3c37e305, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -201,18 +201,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010268688, y: -0.63083696}
+  m_Offset: {x: -0.0057296753, y: 0.3268547}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2.75}
+    pivot: {x: 0.5, y: 0.2}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0103574, y: 1.0072093}
+  m_Size: {x: 1.5080109, y: 0.9508743}
   m_EdgeRadius: 0
 --- !u!50 &2988830553480686869
 Rigidbody2D:
@@ -251,7 +251,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3a13be44208fb2d4faeb215ec6198a61, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c1f89e89108dfb04cbc9ead2d686fcbe, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1.5
@@ -337,45 +337,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3324611153105284797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7704639152248058383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f5d386cc60ab1247af2b26c8557343c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveX: 0
-  moveY: 0
-  actorState: 
-  lastState: 
-  baseSpeed: 7.5
-  currentSpeed: 0
-  hitPoint: 10
-  hitPointMax: 10
-  meleeDamage: 5
-  meleePush: 3
-  rangedDamage: 0
-  rangedPush: 0
-  projectileSpeed: 0
-  baseDefense: 0
-  pushImmune: 0
-  pushRecoverySpeed: 0.2
-  projectilePrefab: {fileID: 0}
-  damageSound: {fileID: 6089731921491712856}
-  meleeAttackSound: {fileID: 7091547558773258136}
-  rangedAttackSound: {fileID: 0}
-  hurtbox: {fileID: 9097087758847871159}
-  triggerDistance: 10
-  chaseDistance: 20
-  chaseCooldown: 2
-  chasing: 0
-  startingPosition: {x: 0, y: 0, z: 0}
-  meleeDistance: 2
 --- !u!95 &6945130967660511007
 Animator:
   serializedVersion: 5
@@ -386,7 +347,7 @@ Animator:
   m_GameObject: {fileID: 7704639152248058383}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c35665fdec4ea074b928602782555600, type: 2}
+  m_Controller: {fileID: 22100000, guid: 295abb123d8ceea48bd514d5620fe8d6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -407,7 +368,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f551b531eade4034099ad01859494ef2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1aa0d396900ac7e45b7c960b57752096, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 2.5
@@ -493,6 +454,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8756866765323986231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704639152248058383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3929b17b75a840429a4935dda529da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveX: 0
+  moveY: 0
+  actorState: 
+  lastState: 
+  baseSpeed: 10
+  currentSpeed: 0
+  hitPoint: 10
+  hitPointMax: 10
+  meleeDamage: 5
+  meleePush: 3
+  rangedDamage: 0
+  rangedPush: 0
+  projectileSpeed: 0
+  baseDefense: 0
+  pushImmune: 0
+  pushRecoverySpeed: 0.2
+  projectilePrefab: {fileID: 0}
+  damageSound: {fileID: 6089731921491712856}
+  meleeAttackSound: {fileID: 0}
+  rangedAttackSound: {fileID: 0}
+  deathAudio: {fileID: 7091547558773258136}
+  hurtbox: {fileID: 9097087758847871159}
+  triggerDistance: 10
+  chaseDistance: 20
+  chaseCooldown: 1
+  chasing: 0
+  startingPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &3084701727477494126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -502,8 +502,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 2244841190088547242}
     m_Modifications:
     - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6078157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.82449406
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.011259675
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08775297
       objectReference: {fileID: 0}
     - target: {fileID: 1088074021795672112, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -559,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 6855755505596944708, guid: ec2e7bf8c6fc16f40b329c80cfc66fe6, type: 3}
       propertyPath: m_LocalPosition.z

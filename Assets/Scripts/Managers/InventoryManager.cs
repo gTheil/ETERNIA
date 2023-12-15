@@ -28,6 +28,8 @@ public class InventoryManager : MonoBehaviour
     public TMP_Text bowAtkText;
     public TMP_Text shieldDefText;
 
+    public AudioSource openAudio;
+
     public bool open = false;
 
     void Awake() {

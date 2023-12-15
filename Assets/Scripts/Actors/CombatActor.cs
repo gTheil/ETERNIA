@@ -19,6 +19,7 @@ public abstract class CombatActor : Actor
     public AudioSource damageSound;
     public AudioSource meleeAttackSound;
     public AudioSource rangedAttackSound;
+    public AudioSource deathAudio;
     public Collider2D hurtbox;
 
     protected float immuneTime = 0.5f;

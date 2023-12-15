@@ -27,6 +27,10 @@ public class Player : CombatActor
     public SpriteRenderer displaySprite;
     public TMP_Text noItemText;
 
+    public AudioSource shieldHitAudio;
+    public AudioSource shieldBreakAudio;
+    public AudioSource gameOverAudio;
+
     private Collider2D meleeAttackCollider;
     private List<ActionItem> inputBuffer = new List<ActionItem>(); //The input buffer
     private bool actionAllowed; //set to true whenever we want to process actions from the input buffer, set to false when an action has to wait in the buffer
@@ -228,6 +232,7 @@ public class Player : CombatActor
                     GameManager.instance.UpdateDebugUI("block");
                     GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
                     GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+                    shieldHitAudio.Play();
                 }
 
                 if (dmg.pushForce - blockPushResistance > 0f)
@@ -340,12 +345,14 @@ public class Player : CombatActor
         dead = true;
         GetComponent<SpriteRenderer>().enabled = false;
         hitbox.enabled = false;
+        deathAudio.Play();
         StartCoroutine(GameOver());
     }
 
     protected virtual void BlockBreak() {
         blockBroken = true;
         blockBreakOffset = blockRecoverySpeedBreakOffset;
+        shieldBreakAudio.Play();
         ToggleBlock();
     }
 
@@ -392,7 +399,9 @@ public class Player : CombatActor
     }
 
     IEnumerator GameOver() {
-        yield return new WaitForSeconds(1f);
+        Camera.main.GetComponent<AudioSource>().Stop();
+        gameOverAudio.Play();
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
 
@@ -432,5 +441,9 @@ public class Player : CombatActor
 
     public TMP_Text GetNoItemText() {
         return noItemText;
+    }
+
+    public bool IsDead() {
+        return dead;
     }
 }

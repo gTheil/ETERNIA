@@ -8,6 +8,8 @@ public class Interactable : MonoBehaviour
     public float interactionDistance;
     public bool state;
 
+    public AudioSource interactAudio;
+
     protected Collider2D col;
 
     protected virtual void Start() {
@@ -24,6 +26,8 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact() {
         Debug.Log(gameObject.name);
+        if (interactAudio != null)
+            interactAudio.Play();
         GameManager.instance.SetInteractableState(gameObject.name, state);
     }
 
