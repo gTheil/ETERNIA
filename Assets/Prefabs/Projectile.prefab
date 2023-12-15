@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2719799465748675073}
   - component: {fileID: 402392932781958260}
   - component: {fileID: -7818776445328234772}
+  - component: {fileID: 8556676710934262172}
   m_Layer: 6
   m_Name: Projectile
   m_TagString: Untagged
@@ -152,7 +153,7 @@ MonoBehaviour:
   lastState: 
   baseSpeed: 10
   currentSpeed: 0
-  originActor: 
+  originActor: {fileID: 0}
 --- !u!50 &402392932781958260
 Rigidbody2D:
   serializedVersion: 4
@@ -276,6 +277,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &8556676710934262172
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451258145159236803}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd8bbe2fda68fe74186931a6fcb3caaa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3673244984117504768
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +388,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cadf9777f3f6945ba5acb5b1a4eba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
-  attackPush: 3
   attackHitSound: {fileID: -7818776445328234772}

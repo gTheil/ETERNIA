@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Alchemist
   m_EditorClassIdentifier: 
   actorName: Alchemist
-  actorPortrait: {fileID: -1994203890, guid: 022bcdaeefaa20b49996073a824638db, type: 3}
+  actorPortrait: {fileID: 1305306889, guid: 36c44cd4f22a1f3419e5dd87b53bb14b, type: 3}

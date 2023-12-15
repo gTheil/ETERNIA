@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Blacksmith
   m_EditorClassIdentifier: 
   actorName: Blacksmith
-  actorPortrait: {fileID: 1227664882, guid: 222d8b39c19fe45478518a92e585299f, type: 3}
+  actorPortrait: {fileID: -667680195, guid: f8917d0d5ff9fe04c9443259cda66f81, type: 3}

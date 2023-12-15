@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada5901b71a9b9c4ebfb29ccb1cf18c2, type: 3}
   m_Name: Elder
   m_EditorClassIdentifier: 
-  actorID: 1
   actorName: Elder
-  actorPortrait: {fileID: 1725973261, guid: 96423fe271515374992fb0ab6f948d29, type: 3}
+  actorPortrait: {fileID: -1842306737, guid: 3faf2e32e06cd084fbbd050bf315e8b7, type: 3}

@@ -12,10 +12,15 @@ public class Projectile : Actor
 
     private void FixedUpdate() {
         UpdateMovement(new Vector3(moveX, moveY, 0));
+        if (originActor.gameObject.tag == "Player") {
+            anim.SetFloat("x", moveX);
+            anim.SetFloat("y", moveY);
+        }
     }
 
-    protected override void UpdateMovement(Vector3 direction) {
-        transform.Translate(direction.x * currentSpeed * Time.deltaTime, direction.y * currentSpeed * Time.deltaTime, 0);
+    protected override void UpdateMovement(Vector3 input) {
+        moveDelta = new Vector3(input.x, input.y, 0).normalized;
+        transform.Translate(moveDelta.x * currentSpeed * Time.deltaTime, moveDelta.y * currentSpeed * Time.deltaTime, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
