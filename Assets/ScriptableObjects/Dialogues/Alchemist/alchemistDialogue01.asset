@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
   m_Name: alchemistDialogue01
   m_EditorClassIdentifier: 
-  actors: 030000000500000003000000
+  actors: 0300000005000000
   advanceSequence: 0
   returnFromBranch: 0
   openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - bloh bloh
+  - "Sauda\xE7\xF5es meu caro, seja bem-vindo \xE0 Aurora Alquimias Celestiais."
   - 
-  - return
   optionText:
-  - Shop
-  - Goodbye
-  - Branch
-  option0: {fileID: 11400000, guid: ced2ef4431dd0684789d5ea0a4265d25, type: 2}
-  option1: {fileID: 11400000, guid: 94578280b374e5f46a94f1f119a46ec8, type: 2}
-  option2: {fileID: 11400000, guid: d6c1f06d21f056440a8be39ba3da066b, type: 2}
+  - "Ru\xEDnas"
+  - Comprar
+  option0: {fileID: 11400000, guid: 6b1ba0675bc42854990c7c412c07099e, type: 2}
+  option1: {fileID: 11400000, guid: ced2ef4431dd0684789d5ea0a4265d25, type: 2}
+  option2: {fileID: 0}
   option3: {fileID: 0}

@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 2
-  itemName: Basic Bow
-  itemDescription: DEBUG
+  itemName: Arco de Madeira
+  itemDescription: "Um arco b\xE1sico para exploradores iniciantes."
   itemQuantity: 1
   itemType: 2
   itemPrice: 0

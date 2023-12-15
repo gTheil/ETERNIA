@@ -10,6 +10,8 @@ public class Door : Interactable
     public float displayTimer;
     public Sprite openSprite;
 
+    public AudioSource wrongSound;
+
     private SpriteRenderer spr;
 
     private SpriteRenderer displaySprite;
@@ -34,7 +36,7 @@ public class Door : Interactable
                 }
                 else {
                     Debug.Log("need key");
-                    StartCoroutine(DisplayItem());
+                    wrongSound.Play();
                 }
             } else {
                 OpenDoor();
@@ -55,7 +57,7 @@ public class Door : Interactable
         if (keyNeeded != null) {
             displaySprite.sprite = keyNeeded.itemSprite;
             noItemText.text = "X";
-            //play wrong sound
+            wrongSound.Play();
             displaySprite.enabled = true;
             noItemText.enabled = true;
             yield return new WaitForSecondsRealtime(displayTimer);

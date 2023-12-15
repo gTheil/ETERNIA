@@ -22,12 +22,16 @@ public class Trap : Interactable
     }
 
     private void OnTriggerStay2D(Collider2D col) {
-        Damage dmg = new Damage {
-        damageAmount = damage,
-        origin = transform.position,
-        pushForce = 0f
-        };
-        col.transform.parent.SendMessage("TakeDamage", dmg);
+        if (col.transform.parent.gameObject.tag == "Player") {
+            Damage dmg = new Damage {
+            damageAmount = damage,
+            origin = transform.position,
+            pushForce = 0f,
+            originTag = gameObject.tag
+            };
+            col.transform.parent.SendMessage("TakeDamage", dmg);
+        }
+        
     }
 
     protected override IEnumerator SetState() {

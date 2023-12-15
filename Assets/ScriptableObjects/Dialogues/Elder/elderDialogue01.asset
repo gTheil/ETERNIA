@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
   m_Name: elderDialogue01
   m_EditorClassIdentifier: 
-  actors: 01000000
+  actors: 010000000000000001000000
   advanceSequence: 0
+  returnFromBranch: 0
+  openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - blah blah
+  - "Ol\xE1, caro explorador."
+  - Para que lado fica a casa de Emeric mesmo?
+  - A casa de Emeric fica ao nordeste.
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

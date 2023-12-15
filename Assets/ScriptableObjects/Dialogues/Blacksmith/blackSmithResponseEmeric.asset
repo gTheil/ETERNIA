@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
-  m_Name: Dialogue00
+  m_Name: blackSmithResponseEmeric
   m_EditorClassIdentifier: 
-  actors: 01000000000000000100000001000000050000000100000001000000
+  actors: 000000000200000002000000
+  advanceSequence: 0
+  returnFromBranch: 0
+  openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - Hello!
-  - Hi there!
-  - This is a test dialogue.
-  - What do you think of it?
-  - 
-  - You have returned from a branch.
-  - I hope you enjoyed this test dialogue!
-  optionText:
-  - It's great!
-  - I don't care.
-  option0: {fileID: 11400000, guid: 223d9070dcf74bd4caf04d8a8d4f4e8f, type: 2}
-  option1: {fileID: 11400000, guid: 1e73e2b258e326e47a2881872e1e912d, type: 2}
+  - Para que lado fica a casa de Emeric mesmo?
+  - "V\xE1 para o leste, cruzando o riacho."
+  - "Siga o fedor da gosma m\xE1gica e logo o encontrar\xE1."
+  optionText: []
+  option0: {fileID: 0}
+  option1: {fileID: 0}
   option2: {fileID: 0}
   option3: {fileID: 0}

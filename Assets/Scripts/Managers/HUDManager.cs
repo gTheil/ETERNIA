@@ -35,7 +35,7 @@ public class HUDManager : MonoBehaviour
 
     void Update() {
         if (goldText != null)
-            goldText.text = "Gold: " + GameManager.instance.GetPlayer().GetComponent<Player>().gold;
+            goldText.text = "" + GameManager.instance.GetPlayer().GetComponent<Player>().gold;
     }
 
     public void UpdateDebugUI(string txt) {

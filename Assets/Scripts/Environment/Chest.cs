@@ -13,6 +13,9 @@ public class Chest : Interactable
     public float displayTimer;
     public Sprite openSprite;
 
+    public AudioSource itemGetSound;
+    public AudioSource wrongSound;
+
     private SpriteRenderer spr;
 
     private SpriteRenderer displaySprite;
@@ -37,7 +40,7 @@ public class Chest : Interactable
                 }
                 else {
                     Debug.Log("need key");
-                    StartCoroutine(DisplayItem(false));
+                    wrongSound.Play();
                 }
             } else {
                 OpenChest();
@@ -64,12 +67,12 @@ public class Chest : Interactable
                 displaySprite.sprite = goldSprite;
             else
                 displaySprite.sprite = item.itemSprite;
-            //play item get sound
+            itemGetSound.Play();
         } else {
             Item keyNeeded = GameManager.instance.SearchDatabase(ItemType.key, keyID);
             displaySprite.sprite = keyNeeded.itemSprite;
             noItemText.text = "X";
-            //play wrong sound
+            wrongSound.Play();
         }
         displaySprite.enabled = true;
         noItemText.enabled = true;

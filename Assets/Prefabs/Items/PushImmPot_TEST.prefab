@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 5
-  itemName: Push Potion
-  itemDescription: DEBUG
+  itemName: "Po\xE7\xE3o de Pedra"
+  itemDescription: "Uma po\xE7\xE3o que temporariamente impede que inimigos lhe empurrem."
   itemQuantity: 1
   itemType: 0
   itemPrice: 50

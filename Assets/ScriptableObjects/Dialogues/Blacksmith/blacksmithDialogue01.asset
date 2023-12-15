@@ -19,12 +19,12 @@ MonoBehaviour:
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - bleh bleh
+  - Ferros e Forjas, em que posso ajudar?
   - 
   optionText:
-  - Shop
-  - Goodbye
-  option0: {fileID: 11400000, guid: ced2ef4431dd0684789d5ea0a4265d25, type: 2}
-  option1: {fileID: 11400000, guid: 94578280b374e5f46a94f1f119a46ec8, type: 2}
+  - Emeric
+  - Comprar
+  option0: {fileID: 11400000, guid: b3570d332351635448cd012befd16818, type: 2}
+  option1: {fileID: 11400000, guid: ced2ef4431dd0684789d5ea0a4265d25, type: 2}
   option2: {fileID: 0}
   option3: {fileID: 0}

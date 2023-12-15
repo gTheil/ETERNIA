@@ -220,10 +220,10 @@ public class DialogueManager : MonoBehaviour
 }
 
 public enum DialogueActor {
-    Player,
-    Elder,
-    Blacksmith,
-    Alchemist,
+    Explorador,
+    Estelara,
+    Elara,
+    Emeric,
     Minor,
     Branch
 };

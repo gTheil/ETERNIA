@@ -12,6 +12,7 @@ TagManager:
   - Inventory
   - Dialogue
   - UI
+  - Trap
   layers:
   - Default
   - TransparentFX

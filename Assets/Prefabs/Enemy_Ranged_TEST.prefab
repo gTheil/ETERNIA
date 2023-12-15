@@ -287,7 +287,7 @@ MonoBehaviour:
   baseDefense: 0
   pushImmune: 0
   pushRecoverySpeed: 0.5
-  projectilePrefab: {fileID: 5651962481097589185, guid: e0f86f781ec517846b0637f65b27ce97, type: 3}
+  projectilePrefab: {fileID: 5461156407947922907, guid: b4e257f81a12a784cb533aa9c026f37a, type: 3}
   damageSound: {fileID: 8780254374694241926}
   meleeAttackSound: {fileID: 0}
   rangedAttackSound: {fileID: 8780254374694241926}

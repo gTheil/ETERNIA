@@ -19,7 +19,7 @@ MonoBehaviour:
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - buy
+  - Gostaria de comprar.
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

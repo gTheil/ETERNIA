@@ -12,12 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
   m_Name: elderDialogue00
   m_EditorClassIdentifier: 
-  actors: 01000000
+  actors: 010000000000000000000000010000000100000001000000000000000100000001000000010000000100000000000000010000000000000001000000000000000100000001000000
   advanceSequence: 1
+  returnFromBranch: 0
+  openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - blah
+  - "Sauda\xE7\xF5es, forasteiro. O que te tr\xE1s a estas terras?"
+  - "Estou apenas de passagem, mas acho que me perdi da rota que estava tra\xE7ando."
+  - Saberia me informar onde estou?
+  - "Ent\xE3o seja muito bem vindo \xE0 Ast\xE9ria. Eu sou Estelara Miriandor, a
+    l\xEDder desta simp\xE1tica aldeia."
+  - "Sinto em voc\xEA a ess\xEAncia de um aventureiro em busca de descobertas antigas."
+  - "Se voc\xEA gosta de explorar, vai gostar de ouvir sobre as Ru\xEDnas da Estrela
+    Cadente."
+  - "Ru\xEDnas da Estrela Cadente?"
+  - "Dizem que as Ru\xEDnas guardam tesouros esquecidos h\xE1 muito tempo."
+  - "Mas devo alert\xE1-lo, h\xE1 monstros por toda parte."
+  - "De tempos em tempos, eles saem de controle e cruzam a floresta at\xE9 chegar
+    \xE0 aldeia e causar um enorme caos entre os habitantes."
+  - "Tenho buscado incessantemente por algu\xE9m que possa dar um jeito neles\u2026"
+  - Eu posso fazer isso...
+  - "Ooh, voc\xEA faria isso?"
+  - Claro, se puder ficar com todos os tesouros que eu encontrar!
+  - Me parece um acordo justo.
+  - "Ent\xE3o, por onde come\xE7o?"
+  - "Converse com Emeric, o Alquimista, ele poder\xE1 te dar instru\xE7\xF5es mais
+    claras. Sua casa fica ao nordeste daqui."
+  - Boa sorte!
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

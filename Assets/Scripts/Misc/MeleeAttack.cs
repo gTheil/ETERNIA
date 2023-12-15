@@ -22,7 +22,8 @@ public class MeleeAttack : MonoBehaviour
             Damage dmg = new Damage {
             damageAmount = attackDamage,
             origin = transform.parent.position,
-            pushForce = attackPush
+            pushForce = attackPush,
+            originTag = transform.parent.gameObject.tag
             };
             transform.parent.SendMessage("OnDamageDealt");
             col.transform.parent.SendMessage("TakeDamage", dmg);

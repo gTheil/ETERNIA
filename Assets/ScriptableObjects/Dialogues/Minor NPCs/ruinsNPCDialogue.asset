@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
+  m_Name: ruinsNPCDialogue
+  m_EditorClassIdentifier: 
+  actors: 04000000040000000400000004000000
+  advanceSequence: 0
+  returnFromBranch: 0
+  openShop: 0
+  minorActorName: ???
+  minorActorPortrait: {fileID: -1573263874, guid: 3c71158283bcd224fbc774fda6dce537, type: 3}
+  dialogue:
+  - "Sauda\xE7\xF5es, explorador."
+  - "Saiba que as \xE1guas destas Ru\xEDnas possuem uma magia potente."
+  - "Quando encontrar uma po\xE7a d'\xE1gua, tente interagir com ela."
+  - "A magia o trar\xE1 de volta a este lago em um piscar de olhos."
+  optionText: []
+  option0: {fileID: 0}
+  option1: {fileID: 0}
+  option2: {fileID: 0}
+  option3: {fileID: 0}

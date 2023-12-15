@@ -12,7 +12,7 @@ public class ShopSlot : ItemSlot
 
     public void FillSlot(int itemID, string itemName, int quantity, Sprite itemSprite, string itemDescription, ItemType itemType, int itemPrice) {
         this.itemPrice = itemPrice;
-        itemPriceText.text = "Price: " + itemPrice + "G\nPress Z to buy.";
+        itemPriceText.text = "Preço: " + itemPrice + "G";
         base.FillSlot(itemID, itemName, quantity, itemSprite, itemDescription, itemType);
         quantityText.enabled = false;
         itemPriceText.enabled = false;
@@ -37,12 +37,14 @@ public class ShopSlot : ItemSlot
             itemDescriptionName.text = "";
             itemDescriptionText.text = "";
         }
+        slotHover.Play();
     }
 
     public override void OnSubmit(BaseEventData eventData) {
         if (GameManager.instance.GetPlayer().GetComponent<Player>().gold >= itemPrice) {
             if (GameManager.instance.AddItem(itemID, itemName, quantity, itemSprite, itemDescription, itemType))
                 GameManager.instance.GetPlayer().GetComponent<Player>().gold -= itemPrice;
+            slotClick.Play();
         }
     }
 }

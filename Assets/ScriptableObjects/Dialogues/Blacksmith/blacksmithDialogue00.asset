@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
   m_Name: blacksmithDialogue00
   m_EditorClassIdentifier: 
-  actors: 02000000
+  actors: 020000000000000002000000020000000200000002000000
   advanceSequence: 1
+  returnFromBranch: 0
+  openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - bleh
+  - Ferros e Forjas, em que posso ajudar?
+  - Estou procurando o Alquimista Emeric.
+  - Sou Elara Ferros, a Ferreira.
+  - "O sabich\xE3o m\xE1gico vive ao leste daqui, cruzando o riacho."
+  - "Siga o fedor daquela gosma m\xE1gica e logo o encontrar\xE1."
+  - Se estiver interessado, posso vender todo tipo de arma e escudo que puder imaginar.
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

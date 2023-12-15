@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 1
-  itemName: Basic Sword
-  itemDescription: DEBUG
+  itemName: Espada de Madeira
+  itemDescription: "Uma espada b\xE1sica para exploradores iniciantes."
   itemQuantity: 1
   itemType: 1
   itemPrice: 0

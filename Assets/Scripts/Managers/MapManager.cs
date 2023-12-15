@@ -40,6 +40,7 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetButtonDown("Map") && !GameManager.instance.IsUIOpen() && !GameManager.instance.IsDialogueActive()) {
             if (!mapMenu.activeSelf) {
                 mapMenu.SetActive(true);
@@ -63,5 +64,6 @@ public class MapManager : MonoBehaviour
 
         if (GameManager.instance.GetPlayer() != null)
             playerImage.rectTransform.anchoredPosition = new Vector3(GameManager.instance.GetPlayer().transform.position.x / coefficientX, GameManager.instance.GetPlayer().transform.position.y / coefficientY, 0);
+        */
     }
 }

@@ -27,6 +27,7 @@ public class Player : CombatActor
     public SpriteRenderer displaySprite;
     public TMP_Text noItemText;
 
+    public AudioSource shieldAudio;
     public AudioSource shieldHitAudio;
     public AudioSource shieldBreakAudio;
     public AudioSource gameOverAudio;
@@ -195,6 +196,7 @@ public class Player : CombatActor
     }
 
     private void ToggleBlock() {
+        shieldAudio.Play();
         if (actorState == "idle") {
             actorState = "block";
             lastState = "block";
@@ -221,26 +223,49 @@ public class Player : CombatActor
                 GameManager.instance.UpdateDebugUI("dodge");
                 break;
             case "block":
-                lastBlock = Time.time;
-                int damageToBlock = (dmg.damageAmount - defense) - blockFactor;
-                if (damageToBlock < 0)
-                    damageToBlock = 0;
-                else if (damageToBlock > 0) {
-                    blockPoint -= damageToBlock;
+                if (dmg.originTag == "Enemy") {
+                    lastBlock = Time.time;
+                    int damageToBlock = (dmg.damageAmount - defense) - blockFactor;
+                    if (damageToBlock < 0)
+                        damageToBlock = 0;
+                    else if (damageToBlock > 0) {
+                        blockPoint -= damageToBlock;
 
-                    GameManager.instance.ShowText(damageToBlock.ToString(), 52, Color.black, transform.position, Vector3.up * 50f, 0.5f);
-                    GameManager.instance.UpdateDebugUI("block");
-                    GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
-                    GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
-                    shieldHitAudio.Play();
-                }
+                        //GameManager.instance.ShowText(damageToBlock.ToString(), 52, Color.black, transform.position, Vector3.up * 50f, 0.5f);
+                        GameManager.instance.UpdateDebugUI("block");
+                        GameManager.instance.UpdateBlockBar(blockPoint, blockPointMax);
+                        GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+                        shieldHitAudio.Play();
+                    }
 
-                if (dmg.pushForce - blockPushResistance > 0f)
-                        pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
-                    
-                if (blockPoint <= 0) {
-                    blockPoint = 0;
-                    BlockBreak();
+                    if (dmg.pushForce - blockPushResistance > 0f)
+                            pushDirection = (transform.position - dmg.origin).normalized * (dmg.pushForce - blockPushResistance);
+                        
+                    if (blockPoint <= 0) {
+                        blockPoint = 0;
+                        BlockBreak();
+                    }
+                } else {
+                    if (dmg.damageAmount - defense > 0) {
+                        if (Time.time - lastImmune > immuneTime) {
+                            lastImmune = Time.time;
+                            int damageDealt = dmg.damageAmount - defense;
+                            hitPoint -= damageDealt;
+                            if (!pushImmune)
+                                pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+
+                            damageSound.Play();
+                            //GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                            GameManager.instance.UpdateDebugUI("damage");
+                            GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
+                            GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);
+
+                            if (hitPoint <= 0) {
+                                hitPoint = 0;
+                                Death();
+                            }
+                        }
+                    }
                 }
                 break;
             default:
@@ -253,7 +278,7 @@ public class Player : CombatActor
                             pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
                         damageSound.Play();
-                        GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                        //GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
                         GameManager.instance.UpdateDebugUI("damage");
                         GameManager.instance.UpdateHealthBar(hitPoint, hitPointMax);
                         GameManager.instance.UpdateStatsUI(hitPoint, hitPointMax, blockPoint, blockPointMax, meleeDamage, rangedDamage, blockFactor);

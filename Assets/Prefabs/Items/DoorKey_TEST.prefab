@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 6
-  itemName: Door Key
-  itemDescription: DEBUG
+  itemName: Chave de Porta
+  itemDescription: "Uma chave cujo formato indica que abrir\xE1 uma porta."
   itemQuantity: 1
   itemType: 4
   itemPrice: 0

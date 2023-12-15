@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada5901b71a9b9c4ebfb29ccb1cf18c2, type: 3}
   m_Name: Blacksmith
   m_EditorClassIdentifier: 
-  actorName: Blacksmith
+  actorName: Elara
   actorPortrait: {fileID: -667680195, guid: f8917d0d5ff9fe04c9443259cda66f81, type: 3}

@@ -81,7 +81,7 @@ public class Enemy : CombatActor
     }
 
     protected override void Death() {
-        deathAudio.Play();
+        GameManager.instance.EnemyDeath();
         Destroy(gameObject);
     }
 }

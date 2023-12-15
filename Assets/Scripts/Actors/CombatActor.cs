@@ -85,7 +85,7 @@ public abstract class CombatActor : Actor
                     pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
                 damageSound.Play();
-                GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
+                //GameManager.instance.ShowText(damageDealt.ToString(), 52, Color.red, transform.position, Vector3.up * 50f, 0.5f);
                 GameManager.instance.UpdateDebugUI("hit");
 
                 if (hitPoint <= 0) {

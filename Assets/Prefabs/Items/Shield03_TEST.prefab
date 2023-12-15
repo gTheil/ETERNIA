@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 9
-  itemName: Best Shield
-  itemDescription: DEBUG
+  itemName: "Escudo Mete\xF3rico"
+  itemDescription: Um escudo que dizem ter sido feito de uma estrela cadente.
   itemQuantity: 1
   itemType: 3
-  itemPrice: 0
+  itemPrice: 200
   itemSprite: {fileID: -31539356, guid: 222d8b39c19fe45478518a92e585299f, type: 3}

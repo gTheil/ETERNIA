@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 2
-  itemName: Big Health Potion
-  itemDescription: DEBUG
+  itemName: "Po\xE7\xE3o de Vida G"
+  itemDescription: "Uma po\xE7\xE3o que recupera uma grande quantidade de vida."
   itemQuantity: 1
   itemType: 0
   itemPrice: 100

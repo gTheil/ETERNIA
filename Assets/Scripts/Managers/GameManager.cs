@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public AudioSource saveAudio;
+    public AudioSource enemyDeathSound;
 
     // References
     private Player player;
@@ -507,6 +508,10 @@ public class GameManager : MonoBehaviour
 
     public bool IsPlayerDead() {
         return player.IsDead();
+    }
+
+    public void EnemyDeath() {
+        enemyDeathSound.Play();
     }
 }
 

@@ -60,6 +60,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void Inventory() {
+        openAudio.Play();
         if (inventoryMenu.activeSelf) {
             Time.timeScale = 1;
             equipmentMenu.SetActive(false);
@@ -85,6 +86,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void Equipment() {
+        openAudio.Play();
         if (equipmentMenu.activeSelf) {
             Time.timeScale = 1;
             inventoryMenu.SetActive(false);
@@ -113,6 +115,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void Shop(string shopType) {
+        openAudio.Play();
         if (shopMenu.activeSelf) {
             Time.timeScale = 1;
             for (int i = 0; i < shopSlots.Length; i++){

@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 4
-  itemName: Better Sword
-  itemDescription: DEBUG
+  itemName: "Espada de A\xE7o"
+  itemDescription: "Uma espada refor\xE7ada encontrada nas Ru\xEDnas."
   itemQuantity: 1
   itemType: 1
   itemPrice: 200

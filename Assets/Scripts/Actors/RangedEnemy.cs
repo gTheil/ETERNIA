@@ -67,6 +67,7 @@ public class RangedEnemy : CombatActor
     }
 
     protected override void Death() {
+        GameManager.instance.EnemyDeath();
         Destroy(gameObject);
     }
 

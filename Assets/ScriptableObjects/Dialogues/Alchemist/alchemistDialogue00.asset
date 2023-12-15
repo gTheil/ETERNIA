@@ -12,12 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9748d4e0f2d0a41a0b2cdb08306044, type: 3}
   m_Name: alchemistDialogue00
   m_EditorClassIdentifier: 
-  actors: 03000000
+  actors: 030000000000000003000000000000000300000003000000030000000300000003000000000000000300000003000000000000000300000003000000000000000300000003000000
   advanceSequence: 1
+  returnFromBranch: 0
+  openShop: 0
   minorActorName: 
   minorActorPortrait: {fileID: 0}
   dialogue:
-  - bloh
+  - "Sauda\xE7\xF5es meu caro, seja bem-vindo \xE0 Aurora Alquimias Celestiais."
+  - Procuro pelo Alquimista Emeric.
+  - "Hoje voc\xEA est\xE1 com sorte, pois acaba de encontr\xE1-lo. Emeric \xC1lvaro
+    ao seu dispor."
+  - "Gostaria de saber mais sobre as Ru\xEDnas da Estrela Cadente e me disseram que
+    voc\xEA era a pessoa certa."
+  - "Ahh, sim, as Ru\xEDnas de fato s\xE3o uma atra\xE7\xE3o por aqui, encantam a
+    todo explorador que passa por nossa aldeia."
+  - "Contudo, s\xE3o muito perigosas. Foram poucos os exploradores que se atreveram
+    a adentr\xE1-las. "
+  - "Acredito que j\xE1 tenham se passado algumas d\xE9cadas desde o \xFAltimo explorador
+    que vi retornar inteiro\u2026"
+  - "As Ru\xEDnas existem h\xE1 muitos s\xE9culos. Acreditamos que tenham pertencido
+    \xE0 uma antiga civiliza\xE7\xE3o."
+  - "Os monstros surgiram a pouco mais de 100 anos, e v\xEAm nos atormentando cada
+    vez mais desde de ent\xE3o."
+  - Como posso derrotar esses monstros?
+  - "Estive buscando uma maneira de combat\xEA-los com po\xE7\xF5es \xE1cidas, mas
+    meus estudos ainda n\xE3o tiveram resultado."
+  - "Aposte na for\xE7a bruta. Quem sabe voc\xEA n\xE3o derrota alguns monstros para
+    eu descobrir do que s\xE3o feitos?"
+  - "Como posso chegar \xE0s Ru\xEDnas?"
+  - "Voc\xEA dever\xE1 cruzar a Floresta Estrelar, um emaranhado de labir\xEDnticas
+    \xE1rvores e riachos."
+  - "Mas tenha cuidado. Alguns monstros v\xE3o at\xE9 a Floresta, na tentativa de
+    chegarem at\xE9 a aldeia."
+  - "Como posso chegar at\xE9 essa Floresta?"
+  - "Siga ao sul e voc\xEA ver\xE1 um caminho estreito de \xE1rvores que o levar\xE1
+    at\xE9 a entrada da Floresta."
+  - "Se precisar de ajuda, tenho todo tipo de po\xE7\xE3o \xE0 venda. Boa sorte!"
   optionText: []
   option0: {fileID: 0}
   option1: {fileID: 0}

@@ -19,7 +19,7 @@ MonoBehaviour:
   shieldDef: 0
   shieldBlockPoint: 0
   atkPush: 2
-  projectileSpeed: 10
+  projectileSpeed: 15
   shieldRecoverySpeed: 0
   shieldRecoveryCooldown: 0
   shieldPushResistance: 0

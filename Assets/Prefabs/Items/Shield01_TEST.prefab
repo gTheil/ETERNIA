@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 3
-  itemName: Basic Shield
-  itemDescription: DEBUG
+  itemName: Escudo de Madeira
+  itemDescription: "Um escudo b\xE1sico para exploradores iniciantes."
   itemQuantity: 1
   itemType: 3
   itemPrice: 0

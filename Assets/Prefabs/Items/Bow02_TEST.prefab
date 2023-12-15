@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 5
-  itemName: Better Bow
-  itemDescription: DEBUG
+  itemName: "Arco de A\xE7o"
+  itemDescription: "Um arco refor\xE7ado encontrado nas Ru\xEDnas."
   itemQuantity: 1
   itemType: 2
   itemPrice: 200

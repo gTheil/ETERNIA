@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 6
-  itemName: Better Shield
-  itemDescription: DEBUG
+  itemName: "Escudo de A\xE7o"
+  itemDescription: "Um escudo refor\xE7ado encontrado nas Ru\xEDnas."
   itemQuantity: 1
   itemType: 3
   itemPrice: 200
